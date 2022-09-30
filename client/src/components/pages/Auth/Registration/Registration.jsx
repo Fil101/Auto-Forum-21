@@ -94,6 +94,7 @@ function Registration() {
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
+        <img src="/Logo/Lexus.png" />
         <Box
           sx={{
             marginTop: 8,
