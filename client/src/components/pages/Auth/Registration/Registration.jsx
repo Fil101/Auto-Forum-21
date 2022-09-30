@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -8,37 +8,72 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import MinorCrashRoundedIcon from '@mui/icons-material/MinorCrashRounded';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setAuth } from '../../../../redux/actions/authActions';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        AutoForum
-      </Link>
-      {' '}
-      {new Date().getFullYear()}
-      .
-    </Typography>
-  );
-}
+// function Copyright(props) {
+//   return (
+//     <Typography variant="body2" color="text.secondary" align="center" {...props}>
+//       {'Copyright © '}
+//       <Link color="inherit" href="https://mui.com/">
+//         AutoForum
+//       </Link>
+//       {' '}
+//       {new Date().getFullYear()}
+//       .
+//     </Typography>
+//   );
+// }
 
 const theme = createTheme();
 
 function Registration() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  const [inputs, setInputs] = useState({
+    name: '',
+    email: '',
+    password: '',
+    about: '',
+    tg: '',
+    img: '',
+  });
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch('http://localhost:3001/auth', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify(inputs),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        // navigate('');
+        dispatch(setAuth(res));
+      });
+  };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const data = new FormData(event.currentTarget);
+  //   console.log({
+  //     email: data.get('email'),
+  //     password: data.get('password'),
+  //   });
+  // };
 
   return (
     <ThemeProvider theme={theme}>
@@ -58,15 +93,20 @@ function Registration() {
           <Typography component="h1" variant="h5">
             Регистрация
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}
+          >
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="name"
                   required
                   fullWidth
-                  id="firstName"
+                  id="name"
                   label="Имя"
                   autoFocus
                 />
@@ -96,10 +136,10 @@ function Registration() {
                 <TextField
                   // required
                   fullWidth
-                  name="telegram"
+                  name="tg"
                   label="Telegram"
-                  type="telegram"
-                  id="telegram"
+                  type="tg"
+                  id="tg"
                   autoComplete="new-telegram"
                 />
               </Grid>
@@ -114,7 +154,6 @@ function Registration() {
                   autoComplete="new-about"
                 />
               </Grid>
-
             </Grid>
             <Button
               type="submit"
@@ -145,7 +184,7 @@ function Registration() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 5 }} />
+        {/* <Copyright sx={{ mt: 5 }} /> */}
       </Container>
     </ThemeProvider>
   );
