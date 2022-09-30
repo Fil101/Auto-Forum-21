@@ -18,10 +18,10 @@ function App() {
       <Routes>
         <Route path="/brands" element={<Brands />} />
         <Route path="/brands/:brandId" element={<Models />} />
-        <Route path="/brands/:brandId/:modelId" element={<Community />} />
-        <Route path="/brands/:brandId/:modelId/photos" element={<PhotoAlbum />} />
-        <Route path="/brands/:brandId/:modelId/articles" element={<ArticleList />} />
-        <Route path="/brands/:brandId/:modelId/articles/:id" element={<Article />} />
+        <Route path="/models/:modelId" element={<Community />} />
+        <Route path="/models/:modelId/photos" element={<PhotoAlbum />} />
+        <Route path="/models/:modelId/articles" element={<ArticleList />} />
+        <Route path="/models/:modelId/articles/:id" element={<Article />} />
         <Route path="/personal/:userId" element={<Personal />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/login" element={<Login />} />
