@@ -13,6 +13,8 @@ module.exports = {
           model: 'Users',
           key: 'id',
         },
+        allowNull: false,
+        onDelete: 'CASCADE',
       },
       comment_id: {
         type: Sequelize.INTEGER,
@@ -20,14 +22,18 @@ module.exports = {
           model: 'Comments',
           key: 'id',
         },
+        allowNull: false,
+        onDelete: 'cascade',
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW'),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW'),
       },
     });
   },

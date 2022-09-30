@@ -12,7 +12,7 @@ import Tooltip from '@mui/material/Tooltip';
 import AdbIcon from '@mui/icons-material/Adb';
 import { NavLink } from 'react-router-dom';
 
-function ResponsiveAppBar() {
+function Navbar() {
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -103,4 +103,4 @@ function ResponsiveAppBar() {
     </AppBar>
   );
 }
-export default ResponsiveAppBar;
+export default Navbar;
