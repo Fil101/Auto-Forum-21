@@ -12,6 +12,7 @@ module.exports = {
       },
       img: {
         type: Sequelize.TEXT,
+        defaultValue: '/NotCarPic.jpg',
       },
       description: {
         type: Sequelize.TEXT,
