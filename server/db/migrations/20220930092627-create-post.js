@@ -22,6 +22,7 @@ module.exports = {
           model: 'Car_models',
           key: 'id',
         },
+        allowNull: false,
       },
       user_id: {
         type: Sequelize.INTEGER,
@@ -29,14 +30,17 @@ module.exports = {
           model: 'Users',
           key: 'id',
         },
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW'),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW'),
       },
     });
   },

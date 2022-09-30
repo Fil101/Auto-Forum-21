@@ -12,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.belongsTo(models.User, { foreignKey: 'user_id' });
+      this.belongsTo(models.Car_model, { foreignKey: 'car_model_id' });
       this.hasMany(models.Comment, { foreignKey: 'post_id' });
       this.hasMany(models.Like_post, { foreignKey: 'post_id' });
-      this.belongsTo(models.Car_model, { foreignKey: 'car_model_id' });
       this.hasMany(models.Post_tag, { foreignKey: 'post_id' });
-      this.belongsTo(models.Favorite_post, { foreignKey: 'post_id' });
+      this.hasMany(models.Favorite_post, { foreignKey: 'post_id' });
     }
   }
   Post.init({
