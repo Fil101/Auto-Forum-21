@@ -14,6 +14,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import MinorCrashRoundedIcon from '@mui/icons-material/MinorCrashRounded';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { setAuth } from '../../../../redux/actions/authActions';
 
 // function Copyright(props) {
@@ -33,36 +34,50 @@ import { setAuth } from '../../../../redux/actions/authActions';
 const theme = createTheme();
 
 function Registration() {
-  const [inputs, setInputs] = useState({
+  const [input, setInput] = useState({
     name: '',
     email: '',
     password: '',
     about: '',
     tg: '',
-    img: '',
+    avatar: null,
   });
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   fetch('http://localhost:3001/auth', {
+  //     method: 'post',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     credentials: 'include',
+  //     body: JSON.stringify(inputs),
+  //   })
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       // navigate('');
+  //       dispatch(setAuth(res));
+  //     });
+  // };
+
+  const handleSubmit = (e, input) => {
     e.preventDefault();
-    fetch('http://localhost:3001/auth', {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-      body: JSON.stringify(inputs),
-    })
-      .then((res) => res.json())
+    const data = new FormData();
+    data.append('name', input.name);
+    data.append('category', input.category);
+    data.append('avatar', input.avatar);
+
+    axios.post('/api/v1/', data)
       .then((res) => {
-        // navigate('');
-        dispatch(setAuth(res));
+        // setProducts(res.data);
+        // navigate('/');
       });
   };
 
