@@ -16,9 +16,11 @@ module.exports = {
       },
       description: {
         type: Sequelize.TEXT,
+        defaultValue: 'Тут будет описание!',
       },
       banner: {
         type: Sequelize.TEXT,
+        defaultValue: 'Тут будет баннер!',
       },
       car_brand_id: {
         type: Sequelize.INTEGER,
