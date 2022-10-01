@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
+const brandsRouter = require('./routers/brandsRouter');
 
 require('dotenv').config();
 
@@ -28,4 +29,5 @@ app.use(session({
   },
 }));
 
+app.use('/api/brands', brandsRouter);
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));
