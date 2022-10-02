@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import articlesReducer from './reducers/articlesReducer';
 import authReducer from './reducers/authReducer';
 import brandsReducer from './reducers/brandsReducer';
 import postsReducer from './reducers/postsReducer';
@@ -13,6 +14,6 @@ export default configureStore({
     comments: '[]', // Слайс хранит комментарии только открытого поста
     users: usersReducer, // Слайс хранит всех юзеров, которые подписаны на открытое сообщество
     photos: '[]', // Слайс хранит фотографии только открытого сообщества
-    articles: '[]', // Слайс хранит статьи только открытого сообщества
+    articles: articlesReducer, // Слайс хранит статьи только открытого сообщества
   },
 });

@@ -54,6 +54,9 @@ const deskListArr = {
           Шкода Фабиа Комби Скаут - 5-дверный универсал класса «В». Внедорожная версия автомобиля Skoda Fabia Combi.
           Шкода Фабиа RS - 5-дверный хэтчбек класса «В». Спортивная версия модели Skoda Fabia.
           Шкода Фабиа Комби RS - 5-дверный универсал класса «В». Спортивная версия модели Skoda Fabia Combi.`,
+  'CR-Z': `HONDA CR-Z CLUB™
+          Official Russian community!
+          Клуб любителей Honda CR-Z`,
 };
 
 module.exports = deskListArr;
