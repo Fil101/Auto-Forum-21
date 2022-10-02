@@ -1,3 +1,5 @@
+// import currentSessionUser from './middleWares/currentSessionUser';
+
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
@@ -5,6 +7,10 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const postsRouter = require('./routers/postsRouter');
 const usersRouter = require('./routers/usersRouter');
+
+const apiRouter = require('./routes/apiRouter');
+const brandsRouter = require('./routers/brandsRouter');
+
 
 require('dotenv').config();
 
@@ -30,7 +36,13 @@ app.use(session({
   },
 }));
 
+
 app.use('/api/posts', postsRouter);
 app.use('/api/users', usersRouter);
+
+
+app.use('/api/v1', apiRouter);
+app.use('/api/brands', brandsRouter);
+
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));
