@@ -1,0 +1,15 @@
+.box{
+    background-color: black;
+    width: 750px;
+    height: 500px;
+    position: center;
+    top: 30%;
+    left: 50%;
+
+    /* margin: -50px 0 0 -250px; */
+}
+
+.logoBrand {
+    width: 120px;
+    height: 80px;
+}
