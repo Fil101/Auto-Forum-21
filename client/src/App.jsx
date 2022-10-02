@@ -22,6 +22,7 @@ function App() {
     <div>
       <Navbar />
       <Routes>
+        <Route path="/" element={<Brands />} />
         <Route path="/brands" element={<Brands />} />
         <Route path="/brands/:brandId" element={<Models />} />
         <Route path="/models/:modelId" element={<Community />} />

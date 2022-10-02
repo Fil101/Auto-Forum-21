@@ -1,12 +1,18 @@
-// import React from 'react';
+import { CardMedia, Grid } from '@mui/material';
+import React from 'react';
 
-// function BrandsItem({ brand }) {
-//   return (
-//     <div>
-//       {brand.logo}
-//     </div>
+function BrandItem({ brand }) {
+  return (
+    <div className="logoBrand">
+      <img
+        src={brand.logo}
+        alt=""
+        style={{ width: '120px', height: '80px' }}
+      />
+    </div>
+  );
+}
 
-//   );
-// }
+export default BrandItem;
 
-// export default BrandsItem;
+/* <CardMedia sx={{ height: '60px', width: '90px' }}></CardMedia> */

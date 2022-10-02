@@ -1,32 +1,22 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Card from '@mui/joy/Card';
-import CardCover from '@mui/joy/CardCover';
-import Box from '@mui/joy/Box';
+import './style.css';
+import BrandItem from './BrandsItem';
 
 function Brands() {
   const brands = useSelector((state) => state.brands);
-  console.log('===>', brands);
   return (
-    <Box sx={{ minHeight: 350 }}>
+    <div className="box">
       {brands && brands?.map((el) => (
-        <Card sx={{ height: '60px', width: '90px' }}>
-          <CardCover>
-            <img
-              src={el.logo}
-              alt=""
-            />
-          </CardCover>
-        </Card>
+        <BrandItem key={el.id} brand={el} />
       ))}
-    </Box>
-
+    </div>
   );
 }
 
 export default Brands;
 
-{ /* <ImageList sx={{ width: 250, height: 250 }} cols={4} rowHeight={4}>
+/* <ImageList sx={{ width: 250, height: 250 }} cols={4} rowHeight={4}>
 {brands && brands?.map((el) => (
   <ImageListItem key={el.logo}>
     <img
@@ -36,4 +26,21 @@ export default Brands;
     />
   </ImageListItem>
 ))}
-</ImageList> */ }
+</ImageList> */
+
+// <Box sx={{ minHeight: 350 }}>
+//   {brands && brands?.map((el) => (
+//     <Card sx={{ height: '60px', width: '90px' }}>
+//       <CardCover>
+//         <img
+//           src={el.logo}
+//           alt=""
+//         />
+//       </CardCover>
+//     </Card>
+//   ))}
+// </Box>;
+
+// container
+// spacing={2}
+// sx={{ backgroundColor: 'black', width: '450px', height: '320px' }}
