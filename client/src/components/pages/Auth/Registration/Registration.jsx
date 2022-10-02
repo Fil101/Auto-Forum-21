@@ -1,35 +1,40 @@
-import { useState } from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import MinorCrashRoundedIcon from '@mui/icons-material/MinorCrashRounded';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { setAuth } from '../../../../redux/actions/authActions';
+import { useState } from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import MinorCrashRoundedIcon from "@mui/icons-material/MinorCrashRounded";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { setAuth } from "../../../../redux/actions/authActions";
 
-// function Copyright(props) {
-//   return (
-//     <Typography variant="body2" color="text.secondary" align="center" {...props}>
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://mui.com/">
-//         AutoForum
-//       </Link>
-//       {' '}
-//       {new Date().getFullYear()}
-//       .
-//     </Typography>
-//   );
-// }
+function Copyright(props) {
+  return (
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
+      <Link color="inherit" href="https://mui.com/">
+        AutoForum
+      </Link>
+      {" "}
+      {new Date().getFullYear()}
+      .
+    </Typography>
+  );
+}
 
 const theme = createTheme();
 
@@ -38,9 +43,6 @@ function Registration() {
     name: '',
     email: '',
     password: '',
-    about: '',
-    tg: '',
-    avatar: null,
   });
 
   const dispatch = useDispatch();
@@ -50,59 +52,29 @@ function Registration() {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   fetch('http://localhost:3001/auth', {
-  //     method: 'post',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     credentials: 'include',
-  //     body: JSON.stringify(inputs),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((res) => {
-  //       // navigate('');
-  //       dispatch(setAuth(res));
-  //     });
-  // };
-
-  const handleSubmit = (e, input) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const data = new FormData();
-    data.append('name', input.name);
-    data.append('category', input.category);
-    data.append('avatar', input.avatar);
-
-    axios.post('/api/v1/', data)
+    axios.post("http://localhost:3001/api/v1/user/", input)
       .then((res) => {
-        // setProducts(res.data);
-        // navigate('/');
+        navigate('/');
+        dispatch(setAuth(res.data));
       });
   };
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const data = new FormData(event.currentTarget);
-  //   console.log({
-  //     email: data.get('email'),
-  //     password: data.get('password'),
-  //   });
-  // };
 
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
+        {/* <img src="/Logo/Lexus.png" /> */}
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.grey' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.grey" }}>
             <MinorCrashRoundedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -123,6 +95,7 @@ function Registration() {
                   fullWidth
                   id="name"
                   label="Имя"
+                  onChange={handleChange}
                   autoFocus
                 />
               </Grid>
@@ -134,6 +107,7 @@ function Registration() {
                   label="Email"
                   name="email"
                   autoComplete="email"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -145,9 +119,10 @@ function Registration() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={handleChange}
                 />
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}>
                 <TextField
                   // required
                   fullWidth
@@ -157,8 +132,8 @@ function Registration() {
                   id="tg"
                   autoComplete="new-telegram"
                 />
-              </Grid>
-              <Grid item xs={12}>
+              </Grid> */}
+              {/* <Grid item xs={12}>
                 <TextField
                   // required
                   fullWidth
@@ -168,9 +143,9 @@ function Registration() {
                   id="about"
                   autoComplete="new-about"
                 />
-              </Grid>
+              </Grid> */}
             </Grid>
-            <Button
+            {/* <Button
               type="submit"
               color="grey"
               fullWidth
@@ -178,7 +153,7 @@ function Registration() {
               sx={{ mt: 0.1, mb: 2 }}
             >
               Выбрать фото
-            </Button>
+            </Button> */}
 
             <Button
               type="submit"
@@ -192,7 +167,7 @@ function Registration() {
 
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/http://localhost:3001/login" variant="body2">
                   Уже зарегистрирован? Войти
                 </Link>
               </Grid>

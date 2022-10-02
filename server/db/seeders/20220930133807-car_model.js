@@ -1,14 +1,25 @@
+const bazaAuto = require('../marks_json');
+const deskListArr = require('../description');
+const { brandList } = require('../brandList');
+
 module.exports = {
   async up(queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+    const temp = await brandList();
+    const modelList = temp.map((brand) => (bazaAuto[brand.name].map((model) => (
+      {
+        name: model,
+        img: `/IMG/Models/${brand.name}-${model}.jpeg`,
+        description: deskListArr[model],
+        banner: `/IMG/Banner/${brand.name}-${model}.png`,
+        car_brand_id: brand.id,
+      }
+    ))));
+
+    await queryInterface.bulkInsert(
+      'Car_models',
+      modelList.flat(),
+      {},
+    );
   },
 
   async down(queryInterface, Sequelize) {

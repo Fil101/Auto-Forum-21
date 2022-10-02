@@ -1,9 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-// import Card from '@mui/joy/Card';
-// import CardCover from '@mui/joy/CardCover';
-// import Box from '@mui/joy/Box';
-// import { Grid } from '@mui/material';
 import './style.css';
 import BrandItem from './BrandsItem';
 
