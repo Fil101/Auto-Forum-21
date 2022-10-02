@@ -40,15 +40,15 @@ function Add() {
     <>
       <Tooltip
         onClick={(e) => setOpen(true)}
-        title="Delete"
-        sx={{
-          position: 'fixed',
-          bottom: 20,
-          left: { xs: 'calc(50% - 25px)', md: 30 },
-        }}
+        title="Создать пост"
+        // sx={{
+        //   position: 'fixed',
+        //   bottom: 20,
+        //   left: { xs: 'calc(50% - 25px)', md: 30 },
+        // }}
       >
-        <Fab color="primary" aria-label="add">
-          <AddIcon />
+        <Fab variant="extended" size="medium" color="primary" aria-label="add">
+          <AddIcon sx={{ mr: 30 }} />
         </Fab>
       </Tooltip>
       <SytledModal
@@ -58,8 +58,8 @@ function Add() {
         aria-describedby="modal-modal-description"
       >
         <Box
-          width={400}
-          height={280}
+          width={700}
+          height={400}
           bgcolor="background.default"
           color="text.primary"
           p={3}
@@ -81,7 +81,7 @@ function Add() {
             sx={{ width: '100%' }}
             id="standard-multiline-static"
             multiline
-            rows={3}
+            rows={6}
             placeholder="What's on your mind?"
             variant="standard"
           />
