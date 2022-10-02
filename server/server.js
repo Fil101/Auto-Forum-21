@@ -1,8 +1,11 @@
+// import currentSessionUser from './middleWares/currentSessionUser';
+
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
+const apiRouter = require('./routes/apiRouter');
 
 require('dotenv').config();
 
@@ -27,5 +30,7 @@ app.use(session({
     httpOnly: true,
   },
 }));
+
+app.use('/api/v1', apiRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));
