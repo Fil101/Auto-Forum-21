@@ -18,19 +18,20 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setAuth } from '../../../../redux/actions/authActions';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        AutoForum
-      </Link>
-      {' '}
-      {new Date().getFullYear()}
-      .
-    </Typography>
-  );
-}
+// function Copyright(props) {
+//   return (
+//     <Typography variant="body2" color="text.secondary" align="center" {...props}>
+//       {'Copyright © '}
+//       <Link color="inherit" href="https://mui.com/">
+//         AutoForum
+//       </Link>
+//       {' '}
+//       {new Date().getFullYear()}
+//       .
+//     </Typography>
+//   );
+// }
+
 
 const theme = createTheme();
 
@@ -125,4 +126,4 @@ function Login() {
   );
 }
 
-export default Login;
+// export default Login;
