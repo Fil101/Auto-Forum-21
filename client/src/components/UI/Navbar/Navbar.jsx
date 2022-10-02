@@ -14,6 +14,7 @@ import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/actions/authActions";
 
+
 function Navbar() {
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />

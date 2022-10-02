@@ -14,34 +14,30 @@ import {
   Typography,
 } from '@mui/material';
 
-function Post() {
+function Post({ post }) {
   return (
-    <Card sx={{ margin: 'auto', maxWidth: '60%' }}>
+    <Card sx={{ width: '60%', margin: '1%' }}>
       <CardHeader
         avatar={(
-          <Avatar sx={{ bgcolor: 'red' }} aria-label="recipe">
-            R
-          </Avatar>
+          <Avatar src={post.User.img} aria-label="recipe" />
         )}
         action={(
           <IconButton aria-label="settings">
             <MoreVert />
           </IconButton>
         )}
-        title="John Doe"
-        subheader="September 14, 2022"
+        title={post.User.name}
+        subheader={new Date(post.updatedAt).toLocaleString()}
       />
       <CardMedia
         component="img"
-        height="20%"
-        image="https://лада.онлайн/uploads/posts/2021-07/1625552584_1625552612.jpg"
+        height="500vh"
+        image={post.img}
         alt="Paella dish"
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+          {post.text}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
