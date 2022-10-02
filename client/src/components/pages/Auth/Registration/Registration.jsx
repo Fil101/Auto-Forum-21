@@ -36,9 +36,7 @@ function Copyright(props) {
   );
 }
 
-
-// const theme = createTheme();
-
+const theme = createTheme();
 
 function Registration() {
   const [input, setInput] = useState({
@@ -47,13 +45,12 @@ function Registration() {
     password: '',
   });
 
-//   const dispatch = useDispatch();
-//   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-//   const handleChange = (e) => {
-//     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-//   };
-
+  const handleChange = (e) => {
+    setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -68,9 +65,7 @@ function Registration() {
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-
         {/* <img src="/Logo/Lexus.png" /> */}
-
         <Box
           sx={{
             marginTop: 8,
@@ -160,29 +155,29 @@ function Registration() {
               Выбрать фото
             </Button> */}
 
-//             <Button
-//               type="submit"
-//               color="grey"
-//               fullWidth
-//               variant="contained"
-//               sx={{ mt: 5, mb: 2 }}
-//             >
-//               Зарегистрироваться
-//             </Button>
+            <Button
+              type="submit"
+              color="grey"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 5, mb: 2 }}
+            >
+              Зарегистрироваться
+            </Button>
 
-//             <Grid container justifyContent="flex-end">
-//               <Grid item>
-//                 <Link href="#" variant="body2">
-//                   Уже зарегистрирован? Войти
-//                 </Link>
-//               </Grid>
-//             </Grid>
-//           </Box>
-//         </Box>
-//         {/* <Copyright sx={{ mt: 5 }} /> */}
-//       </Container>
-//     </ThemeProvider>
-//   );
-// }
+            <Grid container justifyContent="flex-end">
+              <Grid item>
+                <Link href="/http://localhost:3001/login" variant="body2">
+                  Уже зарегистрирован? Войти
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+        {/* <Copyright sx={{ mt: 5 }} /> */}
+      </Container>
+    </ThemeProvider>
+  );
+}
 
-// export default Registration;
+export default Registration;
