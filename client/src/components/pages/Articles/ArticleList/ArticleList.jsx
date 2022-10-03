@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+<<<<<<< HEAD
   Box, CardMedia, createTheme, Divider, Stack, ThemeProvider, Typography,
 } from '@mui/material';
 import Paper from '@mui/material/Paper';
@@ -9,6 +10,15 @@ import { useParams } from 'react-router-dom';
 import Article from '../Article';
 import { fetchArticles } from '../../../../redux/actions/articlesActions';
 import { fetchModels } from '../../../../redux/actions/modelsActions';
+=======
+  Box, Button, CardMedia, createTheme, Divider, Stack, ThemeProvider, Typography,
+} from '@mui/material';
+import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
+import { NavLink, useParams } from 'react-router-dom';
+// import Article from '../Article';
+import { fetchArticles } from '../../../../redux/actions/articlesActions';
+>>>>>>> 1034ec9bb75866f5c42466e0fe0b26b7708cfdb8
 
 function ArticleList() {
   const { modelId } = useParams();
@@ -18,6 +28,12 @@ function ArticleList() {
     dispatch(fetchArticles());
   }, []);
   const articles = useSelector((state) => state.articles);
+<<<<<<< HEAD
+=======
+  const models = useSelector((state) => state.models);
+  const model = models.find(el => el.id === modelId).name;
+
+>>>>>>> 1034ec9bb75866f5c42466e0fe0b26b7708cfdb8
   const [mode, setMode] = useState('dark');
   const darkTheme = createTheme({
     palette: {
@@ -37,7 +53,13 @@ function ArticleList() {
     <ThemeProvider theme={darkTheme}>
       <Box bgcolor="background.default" color="text.primary">
         <Stack spacing={2} justifyContent="space-between" sx={{ borderRadius: "15px" }} divider={<Divider orientation="horizontal" flexItem />}>
+<<<<<<< HEAD
           {console.log('\x1b[34m%s\x1b[0m', '32', articles)}
+=======
+          {console.log('\x1b[34m%s\x1b[0m', '42', articles)}
+          {console.log('\x1b[34m%s\x1b[0m', '43', models)}
+          {console.log('\x1b[34m%s\x1b[0m', '44', model)}
+>>>>>>> 1034ec9bb75866f5c42466e0fe0b26b7708cfdb8
           <Item sx={{ borderRadius: "15px", width: '100%' }}>
             <Typography gutterBottom variant="h5" component="div">
               {modelId}
@@ -61,17 +83,36 @@ function ArticleList() {
                   {el.text}
                 </Item>
               </Stack>
+<<<<<<< HEAD
+=======
+              {/* <Stack direction="row" spacing={2}> */}
+>>>>>>> 1034ec9bb75866f5c42466e0fe0b26b7708cfdb8
               <Item sx={{ borderRadius: "15px" }}>
                 Дата публикации:
                 {' '}
                 {new Date(el.createdAt).toLocaleString()}
               </Item>
+<<<<<<< HEAD
+=======
+              <Item
+                component={NavLink}
+                to="/models/:modelId"
+                sx={{ my: 1, color: 'white', display: 'block', borderRadius: "15px" }}
+              >
+                Назад
+              </Item>
+              {/* </Stack> */}
+>>>>>>> 1034ec9bb75866f5c42466e0fe0b26b7708cfdb8
             </Item>
           ))}
           {/* <Article /> */}
         </Stack>
       </Box>
     </ThemeProvider>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1034ec9bb75866f5c42466e0fe0b26b7708cfdb8
   );
 }
 

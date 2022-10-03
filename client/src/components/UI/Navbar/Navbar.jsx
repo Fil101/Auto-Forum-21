@@ -99,10 +99,10 @@ function Navbar() {
               <Tooltip title="Перейти в личный кабинет">
                 <IconButton
                   component={NavLink}
-                  to="/users/:userId"
+                  to="/personal"
                   sx={{ p: 0 }}
                 >
-                  <Avatar alt="Remy Sharp" src="/elDar.jpg" />
+                  <Avatar alt="text" src="/elDar.jpg" />
                 </IconButton>
               </Tooltip>
               <Button onClick={logoutHandler} sx={{ color: "white" }} component={NavLink} to="/login">
