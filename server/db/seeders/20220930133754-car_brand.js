@@ -1,22 +1,22 @@
 const brendTopArr = [
   'Audi', 'BMW', 'Chery',
   'Chevrolet', 'Citroen', 'Daewoo',
-  'EXEED', 'Ford', 'Geely',
+  'Ford', 'Geely',
   'Haval', 'Honda', 'Hyundai',
   'Infiniti', 'Jeep', 'Kia',
-  'LADA (ВАЗ)', 'Land-Rover', 'Lexus',
+  'VAZ (Lada)', 'Land Rover', 'Lexus',
   'Mazda', 'Mercedes-Benz',
   'Mitsubishi', 'Nissan', 'Opel',
   'Peugeot', 'Porsche', 'Renault',
   'Skoda', 'Subaru', 'Suzuki',
   'Toyota', 'Volkswagen',
-  'Volvo', 'ГАЗ', 'УАЗ'];
+  'Volvo', 'GAZ', 'UAZ'];
 
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Car_brands', brendTopArr.map((brand) => ({
       name: brand,
-      logo: `/Logo/${brand}.png`,
+      logo: `/IMG/Logo/${brand}.png`,
     })), {});
   },
 

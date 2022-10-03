@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,6 +12,11 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import MinorCrashRoundedIcon from '@mui/icons-material/MinorCrashRounded';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setAuth } from '../../../../redux/actions/authActions';
 
 function Copyright(props) {
   return (
@@ -29,14 +33,26 @@ function Copyright(props) {
 }
 
 const theme = createTheme();
+
 function Login() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [input, setInput] = useState({
+    email: '',
+    password: '',
+  });
+  const submitHandler = (e) => {
+    e.preventDefault();
+    axios.post('/api/v1/login', input)
+      .then((res) => {
+        dispatch(setAuth(res.data));
+        navigate('/');
+      })
+      .catch(() => setError(true));
+  };
+  const changeHandler = (e) => {
+    setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   return (
@@ -57,7 +73,7 @@ function Login() {
           <Typography component="h1" variant="h5">
             Вход
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={submitHandler} noValidate sx={{ mt: 1 }}>
             <Grid item xs={12}>
               <TextField
                 required
@@ -66,6 +82,7 @@ function Login() {
                 label="Email"
                 name="email"
                 autoComplete="email"
+                onChange={changeHandler}
               />
             </Grid>
             <TextField
@@ -77,6 +94,7 @@ function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={changeHandler}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -91,9 +109,10 @@ function Login() {
             >
               Войти
             </Button>
+            {error && <div style={{ color: 'red', background: 'white' }}>Password is incorrect</div>}
             <Grid container>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/http://localhost:3001/registration" variant="body2">
                   Нет аккаунта? Зарегистрируйся
                 </Link>
               </Grid>

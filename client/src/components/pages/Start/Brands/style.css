@@ -1,0 +1,50 @@
+.box{
+    background-color: #ffffff2c;
+    width: 650px;
+    height: 450px;
+    flex-wrap: wrap;
+    border-radius: 25px;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+}
+
+.logoBrand {
+    background-color: rgba(0, 0, 0, 0.759);
+    width: 130px;
+    height: 90px;
+    margin: 10px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.asd{
+    background-color: rgb(58, 15, 15);
+    width: 100vw;
+    height: 100vw;
+    /* margin-top: 5rem; */
+    padding-top: 5rem;
+    justify-content: center;
+    display: flex;
+}
+
+.paginationBttns{
+    margin-top: 20px;
+    width: 100%;
+    height: 40px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+
+}
+
+.paginationBttns a {
+    padding: 10px;
+    margin: 8px;
+    border-radius: 5x;
+    border: 1px solid rgb(30, 30, 30);
+    color:rgb(0, 0, 0);
+    cursor: pointer;
+}

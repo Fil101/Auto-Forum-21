@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import Article from './components/pages/Articles/Article';
 import ArticleList from './components/pages/Articles/ArticleList/ArticleList';
@@ -10,12 +11,21 @@ import PhotoAlbum from './components/pages/PhotoAlbum';
 import Brands from './components/pages/Start/Brands';
 import Models from './components/pages/Start/Models';
 import Navbar from './components/UI/Navbar';
+import { auth } from './redux/actions/authActions';
+import { fetchBrands } from './redux/actions/brandsActions';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(auth());
+    dispatch(fetchBrands());
+  }, []);
+
   return (
-    <div>
+    <>
       <Navbar />
       <Routes>
+        <Route path="/" element={<Brands />} />
         <Route path="/brands" element={<Brands />} />
         <Route path="/brands/:brandId" element={<Models />} />
         <Route path="/models/:modelId" element={<Community />} />
@@ -26,7 +36,7 @@ function App() {
         <Route path="/registration" element={<Registration />} />
         <Route path="/login" element={<Login />} />
       </Routes>
-    </div>
+    </>
   );
 }
 
