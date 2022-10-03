@@ -39,12 +39,12 @@ function ArticleList() {
     <ThemeProvider theme={darkTheme}>
       <Box bgcolor="background.default" color="text.primary">
         <Stack spacing={2} justifyContent="space-between" sx={{ borderRadius: "15px" }} divider={<Divider orientation="horizontal" flexItem />}>
-          {console.log('\x1b[34m%s\x1b[0m', '42', articles)}
-          {/* {console.log('\x1b[34m%s\x1b[0m', '43', models)} */}
-          {/* {console.log('\x1b[34m%s\x1b[0m', '44', model)} */}
+          {console.log('\x1b[34m%s\x1b[0m', 'ArticleList.42', articles)}
+          {/* {console.log('\x1b[34m%s\x1b[0m', 'ArticleList.43', models)} */}
+          {/* {console.log('\x1b[34m%s\x1b[0m', 'ArticleList.44', model)} */}
           <Item sx={{ borderRadius: "15px", width: '100%' }}>
             <Typography gutterBottom variant="h5" component="div">
-              {/* {articles[0]['Car_model.name']} */}
+              {articles[0] && articles[0]['Car_model.name']}
             </Typography>
           </Item>
           {articles && articles?.map((el) => (
