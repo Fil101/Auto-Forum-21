@@ -34,4 +34,3 @@ export const addPostAsync = (modelId, inputs, img) => async (dispatch) => {
   })
     .then(res => dispatch(addPost(res.data)));
 };
-
