@@ -19,7 +19,7 @@ function Brands() {
         <img
           src={brand.logo}
           alt=""
-          style={{ width: '120px', height: '80px' }}
+          style={{ width: '90px', height: '60px' }}
         />
       </div>
     ));
@@ -37,9 +37,9 @@ function Brands() {
         <ReactPaginate
           marginPagesDisplayed={2}
           // eslint-disable-next-line react/jsx-curly-brace-presence
-          previousLabel={"Назад"}
+          previousLabel={"<--"}
           // eslint-disable-next-line react/jsx-curly-brace-presence
-          nextLabel={"Вперед"}
+          nextLabel={"-->"}
           pageCount={pageCount}
           onPageChange={changeBrands}
           containerClassName="paginationBttns"
@@ -47,6 +47,7 @@ function Brands() {
           nextLinkClassName="nextBttn"
           disabledClassName="paginationDisabled"
           activeClassName="paginationActive"
+          pageLinkClassName="count"
         />
       </div>
     </div>
