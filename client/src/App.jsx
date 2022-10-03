@@ -13,12 +13,14 @@ import Models from './components/pages/Start/Models';
 import Navbar from './components/UI/Navbar';
 import { auth } from './redux/actions/authActions';
 import { fetchBrands } from './redux/actions/brandsActions';
+import { fetchModels } from './redux/actions/modelsActions';
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(auth());
     dispatch(fetchBrands());
+    dispatch(fetchModels());
   }, []);
 
   return (
