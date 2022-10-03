@@ -15,7 +15,6 @@ import { fetchBrands } from './redux/actions/brandsActions';
 import Profile from './components/pages/Profile';
 import { fetchModels } from './redux/actions/modelsActions';
 
-
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
