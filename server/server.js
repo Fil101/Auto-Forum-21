@@ -11,7 +11,6 @@ const usersRouter = require('./routers/usersRouter');
 const apiRouter = require('./routes/apiRouter');
 const brandsRouter = require('./routers/brandsRouter');
 
-
 require('dotenv').config();
 
 const app = express();
@@ -36,13 +35,10 @@ app.use(session({
   },
 }));
 
-
 app.use('/api/posts', postsRouter);
 app.use('/api/users', usersRouter);
 
-
 app.use('/api/v1', apiRouter);
 app.use('/api/brands', brandsRouter);
-
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));
