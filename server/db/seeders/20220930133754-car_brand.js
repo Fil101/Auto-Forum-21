@@ -4,13 +4,13 @@ const brendTopArr = [
   'Ford', 'Geely',
   'Haval', 'Honda', 'Hyundai',
   'Infiniti', 'Jeep', 'Kia',
-  'ВАЗ (Lada)', 'Land Rover', 'Lexus',
+  'VAZ (Lada)', 'Land Rover', 'Lexus',
   'Mazda', 'Mercedes-Benz',
   'Mitsubishi', 'Nissan', 'Opel',
   'Peugeot', 'Porsche', 'Renault',
   'Skoda', 'Subaru', 'Suzuki',
   'Toyota', 'Volkswagen',
-  'Volvo', 'ГАЗ', 'УАЗ'];
+  'Volvo', 'GAZ', 'UAZ'];
 
 module.exports = {
   async up(queryInterface, Sequelize) {
