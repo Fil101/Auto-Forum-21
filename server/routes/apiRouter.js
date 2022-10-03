@@ -17,11 +17,12 @@ router.post('/user', async (req, res) => {
   });
   if (!created) res.sendStatus(500);
   else {
-    const { name, email, id } = currentUser.dataValues;
+    const { name, email, id, img } = currentUser.dataValues;
     req.session.userName = name;
     req.session.email = email;
     req.session.userId = id;
-    res.json({ name, email, id });
+    req.session.img = img;
+    res.json({ name, email, id, img });
   }
 });
 
@@ -45,8 +46,8 @@ router.post('/login', async (req, res) => {
     req.session.userName = databaseUser.name;
     req.session.email = databaseUser.email;
     req.session.userId = databaseUser.id;
-    req.session.userImg = databaseUser.img;
     req.session.userAbout = databaseUser.about;
+    req.session.img = databaseUser.img;
     res.json(sessionData);
   } else res.sendStatus(401);
 });
@@ -60,13 +61,17 @@ router.get('/logout', (req, res) => {
 router.get('/auth', (req, res) => {
   if (!req.session.userId) {
     res.sendStatus(401);
+  } else {
+    const currUser = User.findByPk(req.session.userId);
+    res.json(currUser);
   }
+
   const sessionData = {
     name: req.session.userName,
     email: req.session.email,
     id: req.session.userId,
-    img: req.session.userImg,
     about: req.session.userAbout,
+    img: req.session.img,
   };
   res.json(sessionData);
 });
