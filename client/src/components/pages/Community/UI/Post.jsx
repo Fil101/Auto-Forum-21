@@ -20,12 +20,7 @@ import {
 import Add from './Add';
 import ShowPost from './ShowPost';
 
-<<<<<<< HEAD
-function Post({ post }) {
-  console.log(post?.img);
-=======
 function Post({ post, addFavoritePost }) {
->>>>>>> 1034ec9bb75866f5c42466e0fe0b26b7708cfdb8
   return (
     <Card sx={{ width: '60%', margin: '1%' }}>
       <CardHeader
@@ -43,13 +38,8 @@ function Post({ post, addFavoritePost }) {
       <CardMedia
         component="img"
         height="500vh"
-<<<<<<< HEAD
-        image={`http://localhost:3001/${post?.img}`}
-        alt="Paella dish"
-=======
         image={`http://localhost:3001/${post.img}`}
         alt="Post Photo"
->>>>>>> 1034ec9bb75866f5c42466e0fe0b26b7708cfdb8
       />
       <CardContent>
         <Typography variant="h4" color="text.secondary">
