@@ -34,3 +34,13 @@ export const addPostAsync = (modelId, inputs, img) => async (dispatch) => {
   })
     .then(res => dispatch(addPost(res.data)));
 };
+
+// export const addPostAsync = (modelId, postId) => async (dispatch) => {
+  
+//   await axios.post(`/api/posts/${modelId}`, data, {
+//     headers: {
+//       'Content-Type': 'multipart/form-data',
+//     },
+//   })
+//     .then(res => dispatch(addPost(res.data)));
+// };

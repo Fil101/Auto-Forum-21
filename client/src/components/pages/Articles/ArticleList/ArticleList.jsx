@@ -6,7 +6,7 @@ import {
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import { NavLink, useParams } from 'react-router-dom';
-import Article from '../Article';
+// import Article from '../Article';
 import { fetchArticles } from '../../../../redux/actions/articlesActions';
 
 function ArticleList() {
@@ -85,6 +85,7 @@ function ArticleList() {
         </Stack>
       </Box>
     </ThemeProvider>
+
   );
 }
 
