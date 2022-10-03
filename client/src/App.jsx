@@ -12,19 +12,25 @@ import Models from './components/pages/Start/Models';
 import Navbar from './components/UI/Navbar';
 import { auth } from './redux/actions/authActions';
 import { fetchBrands } from './redux/actions/brandsActions';
+<<<<<<< HEAD
 import Profile from './components/pages/Profile';
+=======
+import { fetchModels } from './redux/actions/modelsActions';
+>>>>>>> cfeaa7c4cbf493e93cbf78116129475abb5dcd42
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(auth());
     dispatch(fetchBrands());
+    dispatch(fetchModels());
   }, []);
 
   return (
-    <div>
+    <>
       <Navbar />
       <Routes>
+        <Route path="/" element={<Brands />} />
         <Route path="/brands" element={<Brands />} />
         <Route path="/brands/:brandId" element={<Models />} />
         <Route path="/models/:modelId" element={<Community />} />
@@ -35,7 +41,7 @@ function App() {
         <Route path="/registration" element={<Registration />} />
         <Route path="/login" element={<Login />} />
       </Routes>
-    </div>
+    </>
   );
 }
 
