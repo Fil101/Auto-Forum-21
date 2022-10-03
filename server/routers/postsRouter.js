@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable camelcase */
 const express = require('express');
+
 const { Post, Like_post, User, Favorite_post } = require('../db/models');
 const fileMiddleware = require('../middleWares/multerByFil');
 
@@ -21,6 +22,7 @@ router.post('/:modelId', fileMiddleware.single('post-photo'), async (req, res) =
   console.log('это путь', fixPath);
   try {
     const newPost = await Post.create({ title, text, img: fixPath, car_model_id: modelId, user_id: userId });
+
     res.json(newPost);
   } catch (error) {
     console.log(error);
