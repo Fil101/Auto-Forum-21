@@ -1,9 +1,12 @@
 import React from 'react';
+import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
+import ForumIcon from '@mui/icons-material/Forum';
 import {
-  Favorite, FavoriteBorder, MoreVert, Share,
+  Favorite, FavoriteBorder, MoreVert,
 } from '@mui/icons-material';
 import {
   Avatar,
+  Badge,
   Card,
   CardActions,
   CardContent,
@@ -47,9 +50,14 @@ function Post({ post }) {
             checkedIcon={<Favorite sx={{ color: 'red' }} />}
           />
         </IconButton>
-        <IconButton aria-label="share">
-          <Share />
+        <IconButton aria-label="favorite">
+          <BookmarkAddIcon />
         </IconButton>
+        <Badge badgeContent={4} color="primary">
+          <IconButton aria-label="comments">
+            <ForumIcon color="action" />
+          </IconButton>
+        </Badge>
       </CardActions>
     </Card>
   );

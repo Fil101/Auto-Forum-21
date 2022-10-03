@@ -19,4 +19,3 @@ export const SET_MODELS = 'SET_MODELS';
 
 // ARTICLES
 export const SET_ARTICLES = 'SET_ARTICLES';
-
