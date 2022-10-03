@@ -13,6 +13,8 @@ import Navbar from './components/UI/Navbar';
 import { auth } from './redux/actions/authActions';
 import { fetchBrands } from './redux/actions/brandsActions';
 import Profile from './components/pages/Profile';
+import { fetchModels } from './redux/actions/modelsActions';
+
 
 function App() {
   const dispatch = useDispatch();
