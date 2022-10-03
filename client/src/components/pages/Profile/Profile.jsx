@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Avatar,
   Box,
@@ -12,17 +12,18 @@ import {
   Input,
 } from "@mui/material";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import { changeAbout } from "../../../redux/actions/authActions";
 
 function Profile() {
   const [value, setValue] = useState(0);
 
-  const initialText = `Заполните информацию о себе`;
-
-  const [info, setInfo] = useState(initialText);
+  // const initialText = `Заполните информацию о себе`;
+  const about = useSelector(state => state.auth?.about);
+  const [info, setInfo] = useState(about);
   const [isEdit, setIsEdit] = useState(false);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -41,8 +42,10 @@ function Profile() {
   };
 
   const infoInputHandler = () => {
-    axios.put("/api/users/about", { about: info })
-      .then(setIsEdit(state => !state));
+    dispatch(changeAbout(info));
+    // axios.put("/api/users/about", { about })
+    // .then(setIsEdit(state => !state));
+    setIsEdit(state => !state);
   };
 
   const infoHandler = () => {
@@ -110,7 +113,7 @@ function Profile() {
               />
             </Box>
           )
-            : (<Box>{info}</Box>)}
+            : (<Box>{about}</Box>)}
           {isEdit ? (
             <Button
               onClick={infoInputHandler}
