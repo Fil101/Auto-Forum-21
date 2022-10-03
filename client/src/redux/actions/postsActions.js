@@ -36,7 +36,6 @@ export const addPostAsync = (modelId, inputs, img) => async (dispatch) => {
 };
 
 // export const addPostAsync = (modelId, postId) => async (dispatch) => {
-  
 //   await axios.post(`/api/posts/${modelId}`, data, {
 //     headers: {
 //       'Content-Type': 'multipart/form-data',
