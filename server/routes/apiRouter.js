@@ -18,6 +18,9 @@ router.post('/user', async (req, res) => {
   if (!created) res.sendStatus(500);
   else {
     const { name, email, id } = currentUser.dataValues;
+    req.session.userName = name;
+    req.session.email = email;
+    req.session.userId = id;
     res.json({ name, email, id });
   }
 });
