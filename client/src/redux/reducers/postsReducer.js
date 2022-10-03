@@ -1,4 +1,4 @@
-import { SET_POSTS } from '../types';
+import { SET_POSTS, ADD_POST } from '../types';
 
 /* eslint-disable default-param-last */
 export default function postsReducer(state = [], action) {
@@ -6,6 +6,8 @@ export default function postsReducer(state = [], action) {
   switch (type) {
     case SET_POSTS:
       return payload;
+    case ADD_POST:
+      return [...state, payload];
     default:
       return state;
   }

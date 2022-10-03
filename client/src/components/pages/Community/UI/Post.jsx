@@ -15,29 +15,33 @@ import {
 } from '@mui/material';
 
 function Post({ post }) {
+  console.log(post?.img);
   return (
     <Card sx={{ width: '60%', margin: '1%' }}>
       <CardHeader
         avatar={(
-          <Avatar src={post.User.img} aria-label="recipe" />
+          <Avatar src={post?.User?.img} aria-label="recipe" />
         )}
         action={(
           <IconButton aria-label="settings">
             <MoreVert />
           </IconButton>
         )}
-        title={post.User.name}
-        subheader={new Date(post.updatedAt).toLocaleString()}
+        title={post?.User?.name}
+        subheader={new Date(post?.updatedAt).toLocaleString()}
       />
       <CardMedia
         component="img"
         height="500vh"
-        image={post.img}
+        image={`http://localhost:3001/${post?.img}`}
         alt="Paella dish"
       />
       <CardContent>
+        <Typography variant="h4" color="text.secondary">
+          {post?.title}
+        </Typography>
         <Typography variant="body2" color="text.secondary">
-          {post.text}
+          {post?.text}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
