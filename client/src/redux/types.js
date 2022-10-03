@@ -16,4 +16,3 @@ export const SET_BRANDS = 'SET_BRANDS';
 
 // ARTICLES
 export const SET_ARTICLES = 'SET_ARTICLES';
-
