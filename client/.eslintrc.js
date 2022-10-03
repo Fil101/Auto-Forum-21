@@ -34,6 +34,7 @@ module.exports = {
     'react/no-unescaped-entities': 0,
     'arrow-parens': 'off',
     'no-restricted-exports': 0,
+    'no-console': 0,
     quotes: 0,
 
   },
