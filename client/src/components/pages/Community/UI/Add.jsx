@@ -1,9 +1,13 @@
+import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
 import {
   Avatar,
   Box,
   Button,
   ButtonGroup,
   Fab,
+  formControlLabelClasses,
   Modal,
   Stack,
   styled,
@@ -20,6 +24,7 @@ import {
   PersonAdd,
   VideoCameraBack,
 } from '@mui/icons-material';
+import { addPostAsync } from '../../../../redux/actions/postsActions';
 
 const SytledModal = styled(Modal)({
   display: 'flex',
@@ -36,16 +41,22 @@ const UserBox = styled(Box)({
 
 function Add() {
   const [open, setOpen] = useState(false);
+  const [img, setImg] = useState(null);
+  const [inputs, setInputs] = useState({ title: '', text: '' });
+  console.log(inputs);
+
+  const { modelId } = useParams();
+  const dispatch = useDispatch();
+
+  const inputHandler = (e) => {
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
   return (
     <>
       <Tooltip
         onClick={(e) => setOpen(true)}
         title="Создать пост"
-        // sx={{
-        //   position: 'fixed',
-        //   bottom: 20,
-        //   left: { xs: 'calc(50% - 25px)', md: 30 },
-        // }}
       >
         <Fab variant="extended" size="medium" color="primary" aria-label="add">
           <AddIcon sx={{ mr: 30 }} />
@@ -70,37 +81,50 @@ function Add() {
           </Typography>
           <UserBox>
             <Avatar
-              src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              src=""
               sx={{ width: 30, height: 30 }}
             />
             <Typography fontWeight={500} variant="span">
               John Doe
             </Typography>
           </UserBox>
-          <TextField
-            sx={{ width: '100%' }}
-            id="standard-multiline-static"
-            multiline
-            rows={6}
-            placeholder="What's on your mind?"
-            variant="standard"
-          />
-          <Stack direction="row" gap={1} mt={2} mb={3}>
-            <EmojiEmotions color="primary" />
-            <Image color="secondary" />
-            <VideoCameraBack color="success" />
-            <PersonAdd color="error" />
-          </Stack>
-          <ButtonGroup
-            fullWidth
-            variant="contained"
-            aria-label="outlined primary button group"
-          >
-            <Button>Post</Button>
-            <Button sx={{ width: '100px' }}>
-              <DateRange />
-            </Button>
-          </ButtonGroup>
+          <Box type="form">
+            <TextField
+              sx={{ width: '100%' }}
+              id="standard-multiline-static"
+              multiline
+              rows={1}
+              placeholder="Title"
+              variant="standard"
+              onChange={inputHandler}
+              name="title"
+            />
+            <TextField
+              sx={{ width: '100%' }}
+              id="standard-multiline-static"
+              multiline
+              rows={6}
+              placeholder="Text"
+              variant="standard"
+              onChange={inputHandler}
+              name="text"
+            />
+            <TextField type="file" onChange={e => setImg(e.target.files[0])} />
+            {/* я здесь */}
+            <Stack direction="row" gap={1} mt={2} mb={3}>
+              <Image color="secondary" />
+            </Stack>
+            <ButtonGroup
+              fullWidth
+              variant="contained"
+              aria-label="outlined primary button group"
+            >
+              <Button type="submit" onClick={() => dispatch(addPostAsync(modelId, inputs, img))}>Post</Button>
+              <Button sx={{ width: '100px' }}>
+                <DateRange />
+              </Button>
+            </ButtonGroup>
+          </Box>
         </Box>
       </SytledModal>
     </>
