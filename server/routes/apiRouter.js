@@ -45,9 +45,21 @@ router.post('/login', async (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-  res.clearCookie('user_sid');
+  res.clearCookie('sid');
   req.session.destroy();
   res.sendStatus(200);
+});
+
+router.get('/auth', (req, res) => {
+  if (!req.session.userId) {
+    res.sendStatus(401);
+  }
+  const sessionData = {
+    name: req.session.userName,
+    email: req.session.email,
+    id: req.session.userId,
+  };
+  res.json(sessionData);
 });
 
 module.exports = router;
