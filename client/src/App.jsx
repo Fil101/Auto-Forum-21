@@ -22,7 +22,7 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <>
       <Navbar />
       <Routes>
         <Route path="/" element={<Brands />} />
@@ -36,7 +36,7 @@ function App() {
         <Route path="/registration" element={<Registration />} />
         <Route path="/login" element={<Login />} />
       </Routes>
-    </div>
+    </>
   );
 }
 
