@@ -46,6 +46,7 @@ router.post('/login', async (req, res) => {
     req.session.email = databaseUser.email;
     req.session.userId = databaseUser.id;
     req.session.img = databaseUser.img;
+
     res.json(sessionData);
   } else res.sendStatus(401);
 });
