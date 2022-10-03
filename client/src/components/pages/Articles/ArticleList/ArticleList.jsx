@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  Box, CardMedia, createTheme, Divider, Stack, ThemeProvider, Typography,
+  Box, Button, CardMedia, createTheme, Divider, Stack, ThemeProvider, Typography,
 } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
-import { useParams } from 'react-router-dom';
-import Article from '../Article';
+import { NavLink, useParams } from 'react-router-dom';
+// import Article from '../Article';
 import { fetchArticles } from '../../../../redux/actions/articlesActions';
+import { fetchModels } from '../../../../redux/actions/modelsActions';
 
 function ArticleList() {
   const { modelId } = useParams();
-
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchArticles());
+    dispatch(fetchArticles(modelId));
   }, []);
   const articles = useSelector((state) => state.articles);
+  // const models = useSelector((state) => state.models);
+  // const model = models.find(el => el.id === modelId);
+
   const [mode, setMode] = useState('dark');
   const darkTheme = createTheme({
     palette: {
@@ -36,10 +39,12 @@ function ArticleList() {
     <ThemeProvider theme={darkTheme}>
       <Box bgcolor="background.default" color="text.primary">
         <Stack spacing={2} justifyContent="space-between" sx={{ borderRadius: "15px" }} divider={<Divider orientation="horizontal" flexItem />}>
-          {console.log('\x1b[34m%s\x1b[0m', '32', articles)}
+          {console.log('\x1b[34m%s\x1b[0m', 'ArticleList.42', articles)}
+          {/* {console.log('\x1b[34m%s\x1b[0m', 'ArticleList.43', models)} */}
+          {/* {console.log('\x1b[34m%s\x1b[0m', 'ArticleList.44', model)} */}
           <Item sx={{ borderRadius: "15px", width: '100%' }}>
             <Typography gutterBottom variant="h5" component="div">
-              MODEL
+              {articles[0] && articles[0]['Car_model.name']}
             </Typography>
           </Item>
           {articles && articles?.map((el) => (
@@ -58,11 +63,20 @@ function ArticleList() {
                   {el.text}
                 </Item>
               </Stack>
+              {/* <Stack direction="row" spacing={2}> */}
               <Item sx={{ borderRadius: "15px" }}>
                 Дата публикации:
                 {' '}
                 {new Date(el.createdAt).toLocaleString()}
               </Item>
+              <Item
+                component={NavLink}
+                to={`/models/${modelId}`}
+                sx={{ my: 1, color: 'white', display: 'block', borderRadius: "15px" }}
+              >
+                Назад
+              </Item>
+              {/* </Stack> */}
             </Item>
           ))}
           {/* <Article /> */}

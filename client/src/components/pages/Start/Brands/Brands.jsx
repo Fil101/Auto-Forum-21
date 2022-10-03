@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import './style.css';
-// import BrandItem from './BrandsItem';
 import ReactPaginate from 'react-paginate';
+import BrandItem from './BrandItem';
 
 function Brands() {
   const brands = useSelector((state) => state.brands);
@@ -14,15 +14,10 @@ function Brands() {
   const pagesVisited = pageNumber * brandsPage;
 
   const displayBrands = brands
-    .slice(pagesVisited, pagesVisited + brandsPage).map((brand) => (
-      <div className="logoBrand">
-        <img
-          src={brand.logo}
-          alt=""
-          style={{ width: '120px', height: '80px' }}
-        />
-      </div>
+    .slice(pagesVisited, pagesVisited + brandsPage).map((el) => (
+      <BrandItem key={el.id} brand={el} />
     ));
+
   const pageCount = Math.ceil(brands.length / brandsPage);
 
   const changeBrands = ({ selected }) => {
@@ -37,9 +32,9 @@ function Brands() {
         <ReactPaginate
           marginPagesDisplayed={2}
           // eslint-disable-next-line react/jsx-curly-brace-presence
-          previousLabel={"Назад"}
+          previousLabel={"<--"}
           // eslint-disable-next-line react/jsx-curly-brace-presence
-          nextLabel={"Вперед"}
+          nextLabel={"-->"}
           pageCount={pageCount}
           onPageChange={changeBrands}
           containerClassName="paginationBttns"
@@ -47,6 +42,7 @@ function Brands() {
           nextLinkClassName="nextBttn"
           disabledClassName="paginationDisabled"
           activeClassName="paginationActive"
+          pageLinkClassName="count"
         />
       </div>
     </div>

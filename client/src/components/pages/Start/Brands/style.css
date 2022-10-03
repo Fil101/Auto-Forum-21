@@ -1,27 +1,29 @@
 .box{
-    background-color: #ffffff2c;
+    background-color: #0e0e0eea;
     width: 650px;
     height: 450px;
     flex-wrap: wrap;
-    border-radius: 25px;
+    /* border-radius: 25px; */
     justify-content: space-between;
     align-items: center;
     display: flex;
+    /* border: 1px solid rgb(175, 175, 175); */
 }
 
 .logoBrand {
-    background-color: rgba(0, 0, 0, 0.759);
+    background-color: rgba(0, 0, 0, 0);
     width: 130px;
-    height: 90px;
+    height: 90px;   
     margin: 10px;
-    border-radius: 10px;
+    border-radius: 15px;
     justify-content: center;
     align-items: center;
     display: flex;
+    border: 1px solid rgb(175, 175, 175);
 }
 
 .asd{
-    background-color: rgb(58, 15, 15);
+    background-image: url(https://vsthemes.org/uploads/posts/2021-09/1632784738_screenshot-from-2021-09-28-02-17-05.png);
     width: 100vw;
     height: 100vw;
     /* margin-top: 5rem; */
@@ -47,4 +49,8 @@
     border: 1px solid rgb(30, 30, 30);
     color:rgb(0, 0, 0);
     cursor: pointer;
+}
+
+.count{
+    display: none;
 }

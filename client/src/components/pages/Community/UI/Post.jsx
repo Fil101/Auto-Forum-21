@@ -1,9 +1,13 @@
 import React from 'react';
+
+import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
+import ForumIcon from '@mui/icons-material/Forum';
 import {
-  Favorite, FavoriteBorder, MoreVert, Share,
+  Favorite, FavoriteBorder, MoreVert,
 } from '@mui/icons-material';
 import {
   Avatar,
+  Badge,
   Card,
   CardActions,
   CardContent,
@@ -13,9 +17,10 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
+import Add from './Add';
+import ShowPost from './ShowPost';
 
-function Post({ post }) {
-  console.log(post?.img);
+function Post({ post, addFavoritePost }) {
   return (
     <Card sx={{ width: '60%', margin: '1%' }}>
       <CardHeader
@@ -34,7 +39,7 @@ function Post({ post }) {
         component="img"
         height="500vh"
         image={`http://localhost:3001/${post?.img}`}
-        alt="Paella dish"
+        alt="Post Photo"
       />
       <CardContent>
         <Typography variant="h4" color="text.secondary">
@@ -45,15 +50,19 @@ function Post({ post }) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="like">
           <Checkbox
             icon={<FavoriteBorder />}
             checkedIcon={<Favorite sx={{ color: 'red' }} />}
           />
         </IconButton>
-        <IconButton aria-label="share">
-          <Share />
+        <IconButton onClick={() => addFavoritePost(post?.id)} aria-label="favorite">
+          <Checkbox
+            icon={<BookmarkAddIcon />}
+            checkedIcon={<BookmarkAddIcon sx={{ color: 'white' }} />}
+          />
         </IconButton>
+        <ShowPost post={post} />
       </CardActions>
     </Card>
   );

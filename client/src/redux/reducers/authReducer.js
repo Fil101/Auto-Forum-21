@@ -1,4 +1,4 @@
-import { SET_AUTH, LOGOUT } from '../types';
+import { SET_AUTH, LOGOUT, SET_ABOUT } from '../types';
 
 export default (state = null, action) => {
   const { type, payload } = action;
@@ -9,6 +9,9 @@ export default (state = null, action) => {
 
     case LOGOUT:
       return null;
+
+    case SET_ABOUT:
+      return { ...state, about: payload };
 
     default:
       return state;

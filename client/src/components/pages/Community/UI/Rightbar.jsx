@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Link, NavLink, useParams } from 'react-router-dom';
 import {
   Avatar,
   AvatarGroup,
@@ -86,8 +86,8 @@ function Rightbar() {
             />
           </ImageListItem>
         </ImageList>
-        <Typography variant="h6" fontWeight={100} mt={2}>
-          Latest Conversations
+        <Typography component={NavLink} to={`/models/${modelId}/articles`} variant="h6" fontWeight={100} mt={2}>
+          Статьи про авто
         </Typography>
         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
           <ListItem alignItems="flex-start">

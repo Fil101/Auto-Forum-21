@@ -1,11 +1,20 @@
 import { Box, Stack, Skeleton } from '@mui/material';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 import Add from './Add';
 import Post from './Post';
 
 function Feed() {
   const { posts } = useSelector((state) => state);
+
+  const addFavoritePost = async (postId) => {
+    try {
+      await axios.post(`/api/posts/favorite/${postId}`);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <Box
@@ -17,7 +26,7 @@ function Feed() {
     >
       <Add />
       {posts && posts.map((post) => (
-        <Post key={post.id} post={post} />
+        <Post key={post.id} post={post} addFavoritePost={addFavoritePost} />
       ))}
     </Box>
   );
