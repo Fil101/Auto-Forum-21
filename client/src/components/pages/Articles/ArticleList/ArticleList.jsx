@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  Box, CardMedia, createTheme, Divider, Stack, ThemeProvider, Typography,
+  Box, Button, CardMedia, createTheme, Divider, Stack, ThemeProvider, Typography,
 } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
@@ -9,6 +9,7 @@ import { NavLink, useParams } from 'react-router-dom';
 import Article from '../Article';
 import { fetchArticles } from '../../../../redux/actions/articlesActions';
 import { fetchModels } from '../../../../redux/actions/modelsActions';
+// import Article from '../Article';
 
 function ArticleList() {
   const { modelId } = useParams();
@@ -65,9 +66,8 @@ function ArticleList() {
                   {el.text}
                 </Item>
               </Stack>
-
               {/* <Stack direction="row" spacing={2}> */}
-
+              {/* <Stack direction="row" spacing={2}> */}
               <Item sx={{ borderRadius: "15px" }}>
                 Дата публикации:
                 {' '}
@@ -81,14 +81,12 @@ function ArticleList() {
                 Назад
               </Item>
               {/* </Stack> */}
-
             </Item>
           ))}
           {/* <Article /> */}
         </Stack>
       </Box>
     </ThemeProvider>
-
   );
 }
 

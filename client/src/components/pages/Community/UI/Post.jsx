@@ -38,7 +38,7 @@ function Post({ post, addFavoritePost }) {
       <CardMedia
         component="img"
         height="500vh"
-        image={`http://localhost:3001/${post.img}`}
+        image={`http://localhost:3001/${post?.img}`}
         alt="Post Photo"
       />
       <CardContent>

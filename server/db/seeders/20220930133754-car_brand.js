@@ -1,14 +1,14 @@
 const brendTopArr = [
-  'Audi', 'BMW', 'Chery',
+  'Audi', 'BMW', 'Honda', 'Lexus', 'Kia', 'Skoda', 'Chery',
   'Chevrolet', 'Citroen', 'Daewoo',
   'Ford', 'Geely',
-  'Haval', 'Honda', 'Hyundai',
-  'Infiniti', 'Jeep', 'Kia',
-  'VAZ (Lada)', 'Land Rover', 'Lexus',
+  'Haval', 'Hyundai',
+  'Infiniti', 'Jeep',
+  'VAZ (Lada)', 'Land Rover',
   'Mazda', 'Mercedes-Benz',
   'Mitsubishi', 'Nissan', 'Opel',
   'Peugeot', 'Porsche', 'Renault',
-  'Skoda', 'Subaru', 'Suzuki',
+  'Subaru', 'Suzuki',
   'Toyota', 'Volkswagen',
   'Volvo', 'GAZ', 'UAZ'];
 
