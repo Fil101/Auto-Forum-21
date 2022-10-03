@@ -17,6 +17,7 @@ function ArticleList() {
     dispatch(fetchArticles());
   }, []);
   const articles = useSelector((state) => state.articles);
+
   const models = useSelector((state) => state.models);
   const model = models.find(el => el.id === modelId).name;
 
@@ -85,7 +86,6 @@ function ArticleList() {
         </Stack>
       </Box>
     </ThemeProvider>
-
   );
 }
 
