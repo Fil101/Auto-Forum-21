@@ -12,7 +12,7 @@ function FormComment(props) {
     marginBottom: '20px',
   });
   const user = useSelector((state) => state.auth);
-  console.log(user);
+  // console.log('это пользователь', user);
   return (
     <Box
       width={700}
@@ -26,11 +26,11 @@ function FormComment(props) {
       </Typography>
       <UserBox>
         <Avatar
-          src=""
+          src={user?.img}
           sx={{ width: 30, height: 30 }}
         />
         <Typography fontWeight={500} variant="span">
-          John Doe
+          {user?.name}
         </Typography>
       </UserBox>
       <Box type="form">

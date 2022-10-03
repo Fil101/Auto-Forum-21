@@ -57,20 +57,21 @@ router.get('/logout', (req, res) => {
 });
 
 router.get('/auth', (req, res) => {
-  if (!req.session.userId) {
-    res.sendStatus(401);
-  } else {
+  console.log('мы в ручке', req.session.userId);
+  if (req.session.userId) {
     const currUser = User.findByPk(req.session.userId);
     res.json(currUser);
+  } else {
+    res.sendStatus(401);
   }
 
-  const sessionData = {
-    name: req.session.userName,
-    email: req.session.email,
-    id: req.session.userId,
-    img: req.session.img,
-  };
-  res.json(sessionData);
+  // const sessionData = {
+  //   name: req.session.userName,
+  //   email: req.session.email,
+  //   id: req.session.userId,
+  //   img: req.session.img,
+  // };
+  // res.json(sessionData);
 });
 
 module.exports = router;
