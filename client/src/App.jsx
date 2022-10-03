@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import Article from './components/pages/Articles/Article';
-import ArticleList from './components/pages/Articles/ArticleList/ArticleList';
+import ArticleList from './components/pages/Articles/ArticleList';
 import Login from './components/pages/Auth/Login/Login';
 import Registration from './components/pages/Auth/Registration/Registration';
 import Community from './components/pages/Community';
@@ -20,7 +20,6 @@ function App() {
   useEffect(() => {
     dispatch(auth());
     dispatch(fetchBrands());
-    dispatch(fetchModels());
   }, []);
 
   return (
