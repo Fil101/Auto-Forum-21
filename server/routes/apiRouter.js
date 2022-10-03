@@ -41,10 +41,12 @@ router.post('/login', async (req, res) => {
       email: databaseUser.email,
       id: databaseUser.id,
       img: databaseUser.img,
+      about: databaseUser.about,
     };
     req.session.userName = databaseUser.name;
     req.session.email = databaseUser.email;
     req.session.userId = databaseUser.id;
+    req.session.userAbout = databaseUser.about;
     req.session.img = databaseUser.img;
     res.json(sessionData);
   } else res.sendStatus(401);
