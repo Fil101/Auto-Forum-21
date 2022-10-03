@@ -1,7 +1,8 @@
 import React from 'react';
 
-export default function OneCommunity() {
+export default function OneCommunity({ community }) {
+  console.log(community);
   return (
-    <div>OneCommunity</div>
+    <div>{community?.car_model}</div>
   );
 }
