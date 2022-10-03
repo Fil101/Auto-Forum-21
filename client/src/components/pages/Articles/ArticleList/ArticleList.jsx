@@ -44,7 +44,7 @@ function ArticleList() {
           {/* {console.log('\x1b[34m%s\x1b[0m', '44', model)} */}
           <Item sx={{ borderRadius: "15px", width: '100%' }}>
             <Typography gutterBottom variant="h5" component="div">
-              {articles[0]['Car_model.name']}
+              {/* {articles[0]['Car_model.name']} */}
             </Typography>
           </Item>
           {articles && articles?.map((el) => (
