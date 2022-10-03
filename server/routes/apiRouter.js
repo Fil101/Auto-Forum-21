@@ -40,11 +40,13 @@ router.post('/login', async (req, res) => {
       email: databaseUser.email,
       id: databaseUser.id,
       img: databaseUser.img,
+      about: databaseUser.about,
     };
     req.session.userName = databaseUser.name;
     req.session.email = databaseUser.email;
     req.session.userId = databaseUser.id;
     req.session.userImg = databaseUser.img;
+    req.session.userAbout = databaseUser.about;
     res.json(sessionData);
   } else res.sendStatus(401);
 });
@@ -63,7 +65,8 @@ router.get('/auth', (req, res) => {
     name: req.session.userName,
     email: req.session.email,
     id: req.session.userId,
-    img: req.session.userImg, // добавить в данные из сессии фото пользователя
+    img: req.session.userImg,
+    about: req.session.userAbout,
   };
   res.json(sessionData);
 });
