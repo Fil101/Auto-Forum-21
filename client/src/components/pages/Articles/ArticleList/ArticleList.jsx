@@ -8,6 +8,7 @@ import { styled } from '@mui/material/styles';
 import { useParams } from 'react-router-dom';
 import Article from '../Article';
 import { fetchArticles } from '../../../../redux/actions/articlesActions';
+import { fetchModels } from '../../../../redux/actions/modelsActions';
 
 function ArticleList() {
   const { modelId } = useParams();
@@ -39,13 +40,15 @@ function ArticleList() {
           {console.log('\x1b[34m%s\x1b[0m', '32', articles)}
           <Item sx={{ borderRadius: "15px", width: '100%' }}>
             <Typography gutterBottom variant="h5" component="div">
-              MODEL
+              {modelId}
             </Typography>
           </Item>
           {articles && articles?.map((el) => (
             <Item key={el.id} sx={{ borderRadius: "15px", margin: '10px' }}>
               <Typography gutterBottom variant="h5" component="div">
                 {el.title}
+                {' '}
+                {el['Car_model.name']}
               </Typography>
               <Stack direction="row" spacing={2}>
                 <CardMedia
