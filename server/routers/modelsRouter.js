@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/all', async (req, res) => {
   const { modelId } = req.params;
-  console.log('\x1b[34m%s\x1b[0m', 'Сработала ручка Models');
+  // console.log('\x1b[34m%s\x1b[0m', 'Сработала ручка Models');
   const models = await Car_model.findAll({ raw: true });
   // console.log(models);
   res.json(models);

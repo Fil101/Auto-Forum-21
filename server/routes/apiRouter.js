@@ -36,10 +36,12 @@ router.post('/login', async (req, res) => {
       name: databaseUser.name,
       email: databaseUser.email,
       id: databaseUser.id,
+      img: databaseUser.img,
     };
     req.session.userName = databaseUser.name;
     req.session.email = databaseUser.email;
     req.session.userId = databaseUser.id;
+    req.session.userImg = databaseUser.img;
     res.json(sessionData);
   } else res.sendStatus(401);
 });
@@ -58,6 +60,7 @@ router.get('/auth', (req, res) => {
     name: req.session.userName,
     email: req.session.email,
     id: req.session.userId,
+    img: req.session.userImg, // добавить в данные из сессии фото пользователя
   };
   res.json(sessionData);
 });

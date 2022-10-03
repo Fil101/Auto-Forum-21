@@ -19,14 +19,14 @@ function Post({ post }) {
     <Card sx={{ width: '60%', margin: '1%' }}>
       <CardHeader
         avatar={(
-          <Avatar src={post.User.img} aria-label="recipe" />
+          <Avatar src={post?.User?.img} aria-label="recipe" />
         )}
         action={(
           <IconButton aria-label="settings">
             <MoreVert />
           </IconButton>
         )}
-        title={post.User.name}
+        title={post?.User?.name}
         subheader={new Date(post.updatedAt).toLocaleString()}
       />
       <CardMedia
