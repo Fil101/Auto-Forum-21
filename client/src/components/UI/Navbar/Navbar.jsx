@@ -12,6 +12,8 @@ import Tooltip from "@mui/material/Tooltip";
 import AdbIcon from "@mui/icons-material/Adb";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import NavigationIcon from '@mui/icons-material/Navigation';
+import { Fab } from "@mui/material";
 import { logout } from "../../../redux/actions/authActions";
 
 function Navbar() {
@@ -23,8 +25,17 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="sticky">
-      <Container maxWidth="xl">
+    <AppBar
+      position="sticky"
+      sx={{
+        display: "flex",
+        justifyContent: "space-between",
+      }}
+    >
+      <Container
+        maxWidth="xl"
+
+      >
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
@@ -40,6 +51,7 @@ function Navbar() {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              justifyContent: "space-around",
             }}
           >
             AutoForum 21
@@ -82,14 +94,14 @@ function Navbar() {
                 component={NavLink}
                 to="/registration"
               >
-                Регистрация
+                Зарегистрироваться
               </Button>
               <Button
                 sx={{ my: 2, color: "white", display: "block" }}
                 component={NavLink}
                 to="/login"
               >
-                Авторизация
+                Войти
               </Button>
             </Box>
           )}
@@ -108,6 +120,14 @@ function Navbar() {
               <Button onClick={logoutHandler} sx={{ color: "white" }} component={NavLink} to="/login">
                 Выйти
               </Button>
+              <Fab
+                component={NavLink}
+                to="/"
+                variant="extended"
+              >
+                <NavigationIcon sx={{ mr: 1 }} />
+                На главную
+              </Fab>
             </Box>
           )}
         </Toolbar>

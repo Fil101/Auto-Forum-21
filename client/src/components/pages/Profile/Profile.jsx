@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Avatar,
   Box,
@@ -10,22 +10,25 @@ import {
   Tabs,
   Tab,
   Input,
+  Fab,
 } from "@mui/material";
+import NavigationIcon from '@mui/icons-material/Navigation';
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import { changeAbout } from "../../../redux/actions/authActions";
 
 function Profile() {
-  const [value, setValue] = useState(0);
+  const [tabNum, setTabNum] = useState(0);
 
-  const initialText = `Заполните информацию о себе`;
-
-  const [info, setInfo] = useState(initialText);
+  const about = useSelector(state => state.auth?.about);
+  const [info, setInfo] = useState(about);
   const [isEdit, setIsEdit] = useState(false);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    setTabNum(newValue);
+    // console.log(event, newValue);
   };
 
   const [input, setInput] = useState({ avatar: null });
@@ -41,8 +44,10 @@ function Profile() {
   };
 
   const infoInputHandler = () => {
-    axios.put("/api/users/about", { about: info })
-      .then(setIsEdit(state => !state));
+    dispatch(changeAbout(info));
+    // axios.put("/api/users/about", { about })
+    // .then(setIsEdit(state => !state));
+    setIsEdit(state => !state);
   };
 
   const infoHandler = () => {
@@ -90,7 +95,7 @@ function Profile() {
             className="form-control"
             id="avatar"
           />
-          {/* <Button variant="contained">Добавить фото</Button> */}
+          <Button variant="contained">Добавить фото</Button>
         </Box>
         <Box
           sx={{
@@ -110,7 +115,7 @@ function Profile() {
               />
             </Box>
           )
-            : (<Box>{info}</Box>)}
+            : (<Box>{about}</Box>)}
           {isEdit ? (
             <Button
               onClick={infoInputHandler}
@@ -151,11 +156,11 @@ function Profile() {
         >
           {' '}
           <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-            <Tabs value={value} onChange={handleChange} centered>
+            <Tabs value={tabNum} onChange={handleChange} centered>
               <Tab label="Мои сообщества" />
               <Tab label="Все сообщества" />
               <Tab label="Мои посты" />
-              <Tab label="Избранные посты" />
+              <Tab label="Избранное 🤍" />
             </Tabs>
           </Box>
         </Box>

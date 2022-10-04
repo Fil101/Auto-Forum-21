@@ -81,7 +81,7 @@ function ShowPost({ post }) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Card sx={{ width: '35%', margin: '1%' }}>
+        <Card sx={{ width: '30%', margin: '1%' }}>
           <CardHeader
             avatar={(
               <Avatar src={post?.User?.img} aria-label="recipe" />

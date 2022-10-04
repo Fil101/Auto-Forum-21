@@ -27,6 +27,7 @@ router.put('/about', async (req, res) => {
   // console.log('++++++++++++++++', about, userId);
   const user = await User.findOne({ where: userId });
   user.update({ about });
+  req.session.userAbout = about;
   res.sendStatus(200);
 });
 

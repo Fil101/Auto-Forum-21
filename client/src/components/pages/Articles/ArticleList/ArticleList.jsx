@@ -11,16 +11,18 @@ import { fetchArticles } from '../../../../redux/actions/articlesActions';
 import { fetchModels } from '../../../../redux/actions/modelsActions';
 // import Article from '../Article';
 
+
 function ArticleList() {
   const { modelId } = useParams();
-
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchArticles());
+    dispatch(fetchArticles(modelId));
   }, []);
   const articles = useSelector((state) => state.articles);
-  const models = useSelector((state) => state.models);
-  const model = models.find(el => el.id === modelId).name;
+
+  // const models = useSelector((state) => state.models);
+  // const model = models.find(el => el.id === modelId);
+
   const [mode, setMode] = useState('dark');
   const darkTheme = createTheme({
     palette: {
@@ -40,20 +42,18 @@ function ArticleList() {
     <ThemeProvider theme={darkTheme}>
       <Box bgcolor="background.default" color="text.primary">
         <Stack spacing={2} justifyContent="space-between" sx={{ borderRadius: "15px" }} divider={<Divider orientation="horizontal" flexItem />}>
-          {console.log('\x1b[34m%s\x1b[0m', '42', articles)}
-          {console.log('\x1b[34m%s\x1b[0m', '43', models)}
-          {console.log('\x1b[34m%s\x1b[0m', '44', model)}
+          {console.log('\x1b[34m%s\x1b[0m', 'ArticleList.42', articles)}
+          {/* {console.log('\x1b[34m%s\x1b[0m', 'ArticleList.43', models)} */}
+          {/* {console.log('\x1b[34m%s\x1b[0m', 'ArticleList.44', model)} */}
           <Item sx={{ borderRadius: "15px", width: '100%' }}>
             <Typography gutterBottom variant="h5" component="div">
-              {modelId}
+              {articles[0] && articles[0]['Car_model.name']}
             </Typography>
           </Item>
           {articles && articles?.map((el) => (
             <Item key={el.id} sx={{ borderRadius: "15px", margin: '10px' }}>
               <Typography gutterBottom variant="h5" component="div">
                 {el.title}
-                {' '}
-                {el['Car_model.name']}
               </Typography>
               <Stack direction="row" spacing={2}>
                 <CardMedia
@@ -75,7 +75,7 @@ function ArticleList() {
               </Item>
               <Item
                 component={NavLink}
-                to="/models/:modelId"
+                to={`/models/${modelId}`}
                 sx={{ my: 1, color: 'white', display: 'block', borderRadius: "15px" }}
               >
                 Назад
