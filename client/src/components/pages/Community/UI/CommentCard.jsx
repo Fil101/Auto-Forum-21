@@ -7,9 +7,9 @@ function CommentCard({ comment }) {
     <Card sx={{ width: '100%', margin: '1%' }}>
       <CardHeader
         avatar={(
-          <Avatar src="" aria-label="recipe" />
+          <Avatar src={comment?.User?.img} aria-label="recipe" />
       )}
-        title="John"
+        title={comment?.User?.name}
         subheader={new Date(comment?.updatedAt).toLocaleString()}
       />
       <IconButton aria-label="like">

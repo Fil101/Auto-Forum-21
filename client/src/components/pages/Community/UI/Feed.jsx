@@ -7,6 +7,7 @@ import Post from './Post';
 
 function Feed() {
   const { posts } = useSelector((state) => state);
+  console.log('--------------> все посты', posts);
 
   const addFavoritePost = async (postId) => {
     try {
