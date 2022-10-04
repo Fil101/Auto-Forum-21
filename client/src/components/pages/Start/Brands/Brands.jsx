@@ -21,20 +21,25 @@ function Brands() {
   const pageCount = Math.ceil(brands.length / brandsPage);
 
   const changeBrands = ({ selected }) => {
-    console.log('++++');
     setPageNumber(selected);
   };
 
   return (
-    <div className="asd">
-      <div className="box">
-        {displayBrands}
+    <div className="video-box">
+      <video className="video" autoPlay muted loop preload="auto">
+        <source type="video/mp4" src="/Video.mp4" />
+        {/* <source type="video/mp4" src="videos/forest.mp4"/> */}
+      </video>
+      <div className="asd">
+        <div className="box">
+          {displayBrands}
+        </div>
         <ReactPaginate
           marginPagesDisplayed={2}
           // eslint-disable-next-line react/jsx-curly-brace-presence
-          previousLabel={"<--"}
+          previousLabel={"<<<<"}
           // eslint-disable-next-line react/jsx-curly-brace-presence
-          nextLabel={"-->"}
+          nextLabel={">>>>"}
           pageCount={pageCount}
           onPageChange={changeBrands}
           containerClassName="paginationBttns"

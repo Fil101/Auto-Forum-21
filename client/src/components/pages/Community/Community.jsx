@@ -41,7 +41,6 @@ function Community() {
           <Feed />
           <Rightbar />
         </Stack>
-
       </Box>
     </ThemeProvider>
   );
