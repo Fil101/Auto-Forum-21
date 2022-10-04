@@ -1,10 +1,11 @@
 import { DateRange, Image } from '@mui/icons-material';
 import { Box, Button, ButtonGroup, Stack, styled, TextField, Typography, Avatar } from '@mui/material';
-
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { addCommentsAsync } from '../../../../redux/actions/commentsActions';
 
-function FormComment(props) {
+function FormComment({ post }) {
+  const dispatch = useDispatch();
   const UserBox = styled(Box)({
     display: 'flex',
     alignItems: 'center',
@@ -12,10 +13,10 @@ function FormComment(props) {
     marginBottom: '20px',
   });
   const user = useSelector((state) => state.auth);
-  // console.log('это пользователь', user);
+  console.log('это айди из поста --------->', post?.id);
   return (
     <Box
-      width={700}
+      width="100%"
       height={400}
       bgcolor="background.default"
       color="text.primary"
@@ -33,7 +34,7 @@ function FormComment(props) {
           {user?.name}
         </Typography>
       </UserBox>
-      <Box type="form">
+      <Box component="form" onSubmit={(e) => dispatch(addCommentsAsync(e, post?.id, Object.fromEntries(new FormData(e.target))))}>
         <TextField
           sx={{ width: '100%' }}
           id="standard-multiline-static"
