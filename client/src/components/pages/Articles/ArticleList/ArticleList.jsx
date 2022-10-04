@@ -1,92 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  Box, Button, CardMedia, createTheme, Divider, Stack, ThemeProvider, Typography,
-} from '@mui/material';
-import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
-import { NavLink, useParams } from 'react-router-dom';
-import Article from '../Article';
+import Carousel from 'react-bootstrap/Carousel';
+import { useParams } from 'react-router-dom';
 import { fetchArticles } from '../../../../redux/actions/articlesActions';
-import { fetchModels } from '../../../../redux/actions/modelsActions';
-// import Article from '../Article';
-
+import './Article.css';
 
 function ArticleList() {
+  const articles = useSelector((state) => state.articles);
   const { modelId } = useParams();
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchArticles(modelId));
   }, []);
-  const articles = useSelector((state) => state.articles);
-
-  // const models = useSelector((state) => state.models);
-  // const model = models.find(el => el.id === modelId);
-
-  const [mode, setMode] = useState('dark');
-  const darkTheme = createTheme({
-    palette: {
-      mode,
-    },
-  });
-
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
+  console.log('eto articles', articles);
 
   return (
-    <ThemeProvider theme={darkTheme}>
-      <Box bgcolor="background.default" color="text.primary">
-        <Stack spacing={2} justifyContent="space-between" sx={{ borderRadius: "15px" }} divider={<Divider orientation="horizontal" flexItem />}>
-          {console.log('\x1b[34m%s\x1b[0m', 'ArticleList.42', articles)}
-          {/* {console.log('\x1b[34m%s\x1b[0m', 'ArticleList.43', models)} */}
-          {/* {console.log('\x1b[34m%s\x1b[0m', 'ArticleList.44', model)} */}
-          <Item sx={{ borderRadius: "15px", width: '100%' }}>
-            <Typography gutterBottom variant="h5" component="div">
-              {articles[0] && articles[0]['Car_model.name']}
-            </Typography>
-          </Item>
-          {articles && articles?.map((el) => (
-            <Item key={el.id} sx={{ borderRadius: "15px", margin: '10px' }}>
-              <Typography gutterBottom variant="h5" component="div">
-                {el.title}
-              </Typography>
-              <Stack direction="row" spacing={2}>
-                <CardMedia
-                  sx={{ maxWidth: 345, maxHeight: 258, borderRadius: "15px" }}
-                  component="img"
-                  image={el.img}
-                  alt={el.img}
+    <div className="ArticleListBody">
+      <Carousel>
+        {articles && articles?.map((el) => (
+          <Carousel.Item key={el.id}>
+            <div className="container">
+              <div className="titleDiv">
+                <h4 className="title">{el.title}</h4>
+              </div>
+              <div className="imgDiv">
+                <img
+                  className="img"
+                  src={el.img}
+                  alt="First slide"
                 />
-                <Item sx={{ borderRadius: "15px", width: '100%' }}>
-                  {el.text}
-                </Item>
-              </Stack>
-              {/* <Stack direction="row" spacing={2}> */}
-              {/* <Stack direction="row" spacing={2}> */}
-              <Item sx={{ borderRadius: "15px" }}>
-                Дата публикации:
-                {' '}
-                {new Date(el.createdAt).toLocaleString()}
-              </Item>
-              <Item
-                component={NavLink}
-                to={`/models/${modelId}`}
-                sx={{ my: 1, color: 'white', display: 'block', borderRadius: "15px" }}
-              >
-                Назад
-              </Item>
-              {/* </Stack> */}
-            </Item>
-          ))}
-          {/* <Article /> */}
-        </Stack>
-      </Box>
-    </ThemeProvider>
+              </div>
+              <div className="textDiv">
+                <p className="text">{el.text}</p>
+              </div>
+              {/* <Carousel.Caption> */}
+              {/* </Carousel.Caption> */}
+              {/* <Carousel.Caption> */}
+              {/* </Carousel.Caption> */}
+            </div>
+          </Carousel.Item>
+        ))}
+      </Carousel>
+    </div>
   );
 }
 
