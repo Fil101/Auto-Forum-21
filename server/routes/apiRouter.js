@@ -1,6 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const { User, Subscribe, Car_model, Car_brand } = require('../db/models');
+const { User, Subscribe, Car_model, Car_brand, Post, Like_post } = require('../db/models');
 
 // import upload from '../middlewares/multer';
 
@@ -96,4 +96,34 @@ router.get('/myCommunity', async (req, res) => {
   });
   res.json(myCommunity);
 });
+
+router.get('/myPosts', async (req, res) => {
+  const user = req.session.userId;
+  const myPosts = await Post.findAll({
+    where: {
+      user_id: user,
+    },
+    include: [
+      {
+        model: Like_post,
+        attributes: ['post_id', 'id'],
+     }
+    ],
+  });
+  res.json(myPosts);
+});
+
+router.get('/likePosts', async (req, res) => {
+  const user = req.session.userId;
+  const myLikedPosts = await Like_post.findAll({
+    where: {
+      user_id: user,
+    },
+   });
+  res.json(myLikedPosts);
+});
+
+
+
+
 module.exports = router;

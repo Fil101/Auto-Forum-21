@@ -26,8 +26,12 @@ function Profile() {
   const [info, setInfo] = useState(about);
   const [isEdit, setIsEdit] = useState(false);
   const [community, setCommunity] = useState([]);
+  const [post, setPost] = useState([]);
+  const [likePost, setlikePost] = useState([]);
   const dispatch = useDispatch();
-  console.log('это комьюнити массив', community);
+
+  // console.log('это комьюнити массив', community);
+  console.log('это массив постов', post);
 
   const handleChange = (event, newValue) => {
     setTabNum(newValue);
@@ -35,7 +39,7 @@ function Profile() {
   };
 
   const postOrCommunity = () => {
-    if (tabNum === 0 || tabNum === 1) {
+    if (tabNum === 0) {
       return true;
     }
     return false;
@@ -48,10 +52,10 @@ function Profile() {
         axios("/api/v1/myCommunity").then((res) => setCommunity(res.data));
         break;
       case 1:
-        // тут будут запрос за всеми комментариями
+        axios("/api/v1/myPosts").then((res) => setPost(res.data));
         break;
       case 2:
-        // тут будет запрос за всеми лайками
+        axios("/api/v1/likePosts").then((res) => setlikePost(res.data));
         break;
       default:
         break;
@@ -193,53 +197,12 @@ function Profile() {
         </Box>
         <Box>
           {resultPostOrCommunity ? (
-            community?.map((el) => {
-              console.log(el);
-              return <OneCommunity community={el} key={el.id} />;
-            })
+            community?.map((el) => <OneCommunity community={el} key={el.id} />)
           ) : (
-            <OnePost />
+            post?.map((el) => <OnePost post={el} key={el.id} />)
           )}
         </Box>
       </Box>
-      {/* <Box
-        sx={{
-          display: "flex",
-          // width: 300,
-          height: 300,
-          flexDirection: "row",
-          margin: "10px",
-          border: "1px solid",
-          padding: "10px",
-          justifyContent: "space-around",
-          backgroundColor: "#f5f5f5",
-          "&:hover": {
-            backgroundColor: "primary.ligth",
-            opacity: [0.9, 0.8, 0.7],
-          },
-        }}
-      >
-        Мои сообщества
-      </Box> */}
-
-      {/* <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          margin: "10px",
-          height: 300,
-          border: "1px solid",
-          padding: "10px",
-          justifyContent: "space-around",
-          backgroundColor: "#f5f5f5",
-          "&:hover": {
-            backgroundColor: "secondary.ligth",
-            opacity: [0.9, 0.8, 0.7],
-          },
-        }}
-      >
-        Все сообщества
-      </Box> */}
     </div>
   );
 }
