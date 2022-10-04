@@ -113,12 +113,32 @@ router.get('/myPosts', async (req, res) => {
 
 router.get('/favoritePosts', async (req, res) => {
   const user = req.session.userId;
-  const myLikedPosts = await Favorite_post.findAll({
+  const myFavPosts = await Favorite_post.findAll({
     where: {
       user_id: user,
     },
+    include: [{
+      model: Post,
+      attributes: ['title', 'text', 'img'],
+    },
+    ],
   });
-  res.json(myLikedPosts);
+  const favPosts = myFavPosts.map((el) => ({
+    img: el.Post.img,
+    text: el.Post.text,
+    title: el.Post.title,
+  }));
+  // console.log(myFavPosts);
+  res.json(favPosts);
 });
 
 module.exports = router;
+
+// car_model_id: 105
+// createdAt: "2022-10-04T15:30:49.495Z"
+// id: 3
+// img: "1664897449468-ÑÐ°ÑÐºÐ°.jpg"
+// text: "ты тама"
+// title: "я тута"
+// updatedAt: "2022-10-04T15:30:49.495Z"
+// user_id: 3

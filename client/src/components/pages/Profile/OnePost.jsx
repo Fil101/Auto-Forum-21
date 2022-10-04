@@ -5,8 +5,13 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions, Box } from '@mui/material';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 
-export default function OnePost({ post }) {
+export default function OnePost({ post, isFavorite }) {
+  const deleteHandler = (e) => {
+    // axios
+  };
+
   return (
     <Box sx={{
       display: 'flex',
@@ -40,16 +45,19 @@ export default function OnePost({ post }) {
             </Typography>
           </CardContent>
         </CardActionArea>
-        {/* <CardActions>
+        {isFavorite
+        && (
+        <CardActions>
           <Button
             component={NavLink}
             size="small"
             color="primary"
-            to="/"
+            onClick={deleteHandler}
           >
-            Перейти
+            Удалить
           </Button>
-        </CardActions> */}
+        </CardActions>
+        )}
       </Card>
     </Box>
   );
