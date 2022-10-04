@@ -47,6 +47,7 @@ router.post('/favorite/:postId', async (req, res) => {
   const { postId } = req.params;
   const { userId } = req.session;
   const addFavorite = await Favorite_post.create({ post_id: postId, user_id: userId });
+  console.log(addFavorite);
   res.sendStatus(200);
 });
 
