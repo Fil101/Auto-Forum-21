@@ -22,7 +22,7 @@ function Community() {
   const { modelId } = useParams();
   const dispatch = useDispatch();
   const { posts, users } = useSelector((state) => state);
-  console.log('это юзеры', users);
+
   // получаем все посты сообщества:
   useEffect(() => {
     dispatch(fetchPostsAsync(modelId));
