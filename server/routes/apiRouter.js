@@ -1,6 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const { User, Subscribe, Car_model } = require('../db/models');
+const { User, Subscribe, Car_model, Car_brand } = require('../db/models');
 
 // import upload from '../middlewares/multer';
 
@@ -83,10 +83,18 @@ router.get('/myCommunity', async (req, res) => {
     where: {
       user_id: user,
     },
-    include: [{ model: Car_model, attributes: ['name'] }],
+    include: [
+      {
+        model: Car_model,
+        attributes: ['name', 'img'],
+        include: [{
+          model: Car_brand,
+          attributes: ['name']
+        }
+        ],
+      }
+    ],
   });
-  console.log(myCommunity);
   res.json(myCommunity);
 });
-
 module.exports = router;
