@@ -27,6 +27,7 @@ function Profile() {
   const [isEdit, setIsEdit] = useState(false);
   const [community, setCommunity] = useState([]);
   const dispatch = useDispatch();
+  console.log('это комьюнити массив', community);
 
   const handleChange = (event, newValue) => {
     setTabNum(newValue);
@@ -47,12 +48,9 @@ function Profile() {
         axios("/api/v1/myCommunity").then((res) => setCommunity(res.data));
         break;
       case 1:
-        // тут будет запрос к ручке с сообществами
-        break;
-      case 2:
         // тут будут запрос за всеми комментариями
         break;
-      case 3:
+      case 2:
         // тут будет запрос за всеми лайками
         break;
       default:
@@ -188,7 +186,6 @@ function Profile() {
           <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
             <Tabs value={tabNum} onChange={handleChange} centered>
               <Tab label="Мои сообщества" />
-              <Tab label="Все сообщества" />
               <Tab label="Мои посты" />
               <Tab label="Избранное 🤍" />
             </Tabs>

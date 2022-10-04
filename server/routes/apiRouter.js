@@ -66,13 +66,13 @@ router.get('/auth', (req, res) => {
   //   res.json(currUser);
   }
 
-  // const sessionData = {
-  //   name: req.session.userName,
-  //   email: req.session.email,
-  //   id: req.session.userId,
-  //   img: req.session.img,
-  // };
-  // res.json(sessionData);
+  const sessionData = {
+    name: req.session.userName,
+    email: req.session.email,
+    id: req.session.userId,
+    img: req.session.img,
+  };
+  res.json(sessionData);
 });
 
 router.get('/myCommunity', async (req, res) => {
@@ -85,10 +85,10 @@ router.get('/myCommunity', async (req, res) => {
     include: [
       {
         model: Car_model,
-        attributes: ['name', 'img'],
+        attributes: ['name', 'img', 'id'],
         include: [{
           model: Car_brand,
-          attributes: ['name']
+          attributes: ['name', 'id']
         }
         ],
       }
