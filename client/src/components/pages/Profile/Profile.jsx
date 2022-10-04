@@ -26,7 +26,14 @@ function Profile() {
   const [info, setInfo] = useState(about);
   const [isEdit, setIsEdit] = useState(false);
   const [community, setCommunity] = useState([]);
+  const [post, setPost] = useState([]);
+  // const [favPost, setFavPost] = useState([]);
   const dispatch = useDispatch();
+
+  // console.log('это комьюнити массив', community);
+  // console.log('это массив постов', post);
+  // console.log('это массив сохраненных постов', favPost);
+  // console.log(info);
 
   const handleChange = (event, newValue) => {
     setTabNum(newValue);
@@ -34,7 +41,7 @@ function Profile() {
   };
 
   const postOrCommunity = () => {
-    if (tabNum === 0 || tabNum === 1) {
+    if (tabNum === 0) {
       return true;
     }
     return false;
@@ -47,13 +54,10 @@ function Profile() {
         axios("/api/v1/myCommunity").then((res) => setCommunity(res.data));
         break;
       case 1:
-        // тут будет запрос к ручке с сообществами
+        axios("/api/v1/myPosts").then((res) => setPost(res.data));
         break;
       case 2:
-        // тут будут запрос за всеми комментариями
-        break;
-      case 3:
-        // тут будет запрос за всеми лайками
+        axios("/api/v1/favoritePosts").then((res) => setPost(res.data));
         break;
       default:
         break;
@@ -75,14 +79,15 @@ function Profile() {
   const infoInputHandler = () => {
     dispatch(changeAbout(info));
     // axios.put("/api/users/about", { about })
-    // .then(setIsEdit(state => !state));
+    //   .then(setIsEdit(state => !state));
     setIsEdit((state) => !state);
   };
 
   const infoHandler = () => {
     setIsEdit((state) => !state);
   };
-  console.log(community);
+
+  // console.log(community);
 
   return (
     <div style={{ backgroundColor: "white" }}>
@@ -188,7 +193,6 @@ function Profile() {
           <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
             <Tabs value={tabNum} onChange={handleChange} centered>
               <Tab label="Мои сообщества" />
-              <Tab label="Все сообщества" />
               <Tab label="Мои посты" />
               <Tab label="Избранное 🤍" />
             </Tabs>
@@ -196,53 +200,12 @@ function Profile() {
         </Box>
         <Box>
           {resultPostOrCommunity ? (
-            community?.map((el) => {
-              console.log(el);
-              return <OneCommunity community={el} key={el.id} />;
-            })
+            community?.map((el) => <OneCommunity community={el} key={el.id} />)
           ) : (
-            <OnePost />
+            post?.map((el) => <OnePost post={el} key={el.id} />)
           )}
         </Box>
       </Box>
-      {/* <Box
-        sx={{
-          display: "flex",
-          // width: 300,
-          height: 300,
-          flexDirection: "row",
-          margin: "10px",
-          border: "1px solid",
-          padding: "10px",
-          justifyContent: "space-around",
-          backgroundColor: "#f5f5f5",
-          "&:hover": {
-            backgroundColor: "primary.ligth",
-            opacity: [0.9, 0.8, 0.7],
-          },
-        }}
-      >
-        Мои сообщества
-      </Box> */}
-
-      {/* <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          margin: "10px",
-          height: 300,
-          border: "1px solid",
-          padding: "10px",
-          justifyContent: "space-around",
-          backgroundColor: "#f5f5f5",
-          "&:hover": {
-            backgroundColor: "secondary.ligth",
-            opacity: [0.9, 0.8, 0.7],
-          },
-        }}
-      >
-        Все сообщества
-      </Box> */}
     </div>
   );
 }

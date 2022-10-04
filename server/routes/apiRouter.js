@@ -1,6 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const { User, Subscribe, Car_model, Car_brand } = require('../db/models');
+const { User, Subscribe, Car_model, Car_brand, Post, Like_post, Favorite_post } = require('../db/models');
 
 // import upload from '../middlewares/multer';
 
@@ -61,23 +61,26 @@ router.get('/logout', (req, res) => {
 router.get('/auth', (req, res) => {
   if (!req.session.userId) {
     res.sendStatus(401);
-  // } else {
-  //   const currUser = User.findByPk(req.session.userId);
-  //   res.json(currUser);
+    return;
   }
 
-  // const sessionData = {
-  //   name: req.session.userName,
-  //   email: req.session.email,
-  //   id: req.session.userId,
-  //   img: req.session.img,
-  // };
-  // res.json(sessionData);
+  const sessionData = {
+    name: req.session.userName,
+    email: req.session.email,
+    id: req.session.userId,
+    img: req.session.img,
+    about: req.session.userAbout,
+  };
+  // console.log(sessionData);
+  res.json(sessionData);
 });
 
 router.get('/myCommunity', async (req, res) => {
+  if (!req.session.userId) {
+    res.sendStatus(401);
+    return;
+  }
   const user = req.session.userId;
-  console.log(user);
   const myCommunity = await Subscribe.findAll({
     where: {
       user_id: user,
@@ -85,15 +88,37 @@ router.get('/myCommunity', async (req, res) => {
     include: [
       {
         model: Car_model,
-        attributes: ['name', 'img'],
+        attributes: ['name', 'img', 'id'],
         include: [{
           model: Car_brand,
-          attributes: ['name']
-        }
+          attributes: ['name', 'id'],
+        },
         ],
-      }
+      },
     ],
   });
   res.json(myCommunity);
 });
+
+router.get('/myPosts', async (req, res) => {
+  const user = req.session.userId;
+  const myPosts = await Post.findAll({
+    where: {
+      user_id: user,
+    },
+  });
+  console.log(user, myPosts);
+  res.json(myPosts);
+});
+
+router.get('/favoritePosts', async (req, res) => {
+  const user = req.session.userId;
+  const myLikedPosts = await Favorite_post.findAll({
+    where: {
+      user_id: user,
+    },
+  });
+  res.json(myLikedPosts);
+});
+
 module.exports = router;
