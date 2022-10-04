@@ -1,6 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const { User } = require('../db/models');
+const { User, Subscribe, Car_model, Car_brand } = require('../db/models');
 
 // import upload from '../middlewares/multer';
 
@@ -59,12 +59,11 @@ router.get('/logout', (req, res) => {
 });
 
 router.get('/auth', (req, res) => {
-  console.log('мы в ручке', req.session.userId);
-  if (req.session.userId) {
-    const currUser = User.findByPk(req.session.userId);
-    res.json(currUser);
-  } else {
+  if (!req.session.userId) {
     res.sendStatus(401);
+  // } else {
+  //   const currUser = User.findByPk(req.session.userId);
+  //   res.json(currUser);
   }
 
   // const sessionData = {
@@ -76,4 +75,25 @@ router.get('/auth', (req, res) => {
   // res.json(sessionData);
 });
 
+router.get('/myCommunity', async (req, res) => {
+  const user = req.session.userId;
+  console.log(user);
+  const myCommunity = await Subscribe.findAll({
+    where: {
+      user_id: user,
+    },
+    include: [
+      {
+        model: Car_model,
+        attributes: ['name', 'img'],
+        include: [{
+          model: Car_brand,
+          attributes: ['name']
+        }
+        ],
+      }
+    ],
+  });
+  res.json(myCommunity);
+});
 module.exports = router;
