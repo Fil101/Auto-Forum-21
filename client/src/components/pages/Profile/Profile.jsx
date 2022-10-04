@@ -27,11 +27,13 @@ function Profile() {
   const [isEdit, setIsEdit] = useState(false);
   const [community, setCommunity] = useState([]);
   const [post, setPost] = useState([]);
-  const [likePost, setlikePost] = useState([]);
+  // const [favPost, setFavPost] = useState([]);
   const dispatch = useDispatch();
 
   // console.log('это комьюнити массив', community);
-  console.log('это массив постов', post);
+  // console.log('это массив постов', post);
+  // console.log('это массив сохраненных постов', favPost);
+  // console.log(info);
 
   const handleChange = (event, newValue) => {
     setTabNum(newValue);
@@ -55,7 +57,7 @@ function Profile() {
         axios("/api/v1/myPosts").then((res) => setPost(res.data));
         break;
       case 2:
-        axios("/api/v1/likePosts").then((res) => setlikePost(res.data));
+        axios("/api/v1/favoritePosts").then((res) => setPost(res.data));
         break;
       default:
         break;
@@ -77,14 +79,15 @@ function Profile() {
   const infoInputHandler = () => {
     dispatch(changeAbout(info));
     // axios.put("/api/users/about", { about })
-    // .then(setIsEdit(state => !state));
+    //   .then(setIsEdit(state => !state));
     setIsEdit((state) => !state);
   };
 
   const infoHandler = () => {
     setIsEdit((state) => !state);
   };
-  console.log(community);
+
+  // console.log(community);
 
   return (
     <div style={{ backgroundColor: "white" }}>

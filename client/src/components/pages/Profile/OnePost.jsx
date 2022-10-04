@@ -40,7 +40,7 @@ export default function OnePost({ post }) {
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions>
+        {/* <CardActions>
           <Button
             component={NavLink}
             size="small"
@@ -49,7 +49,7 @@ export default function OnePost({ post }) {
           >
             Перейти
           </Button>
-        </CardActions>
+        </CardActions> */}
       </Card>
     </Box>
   );

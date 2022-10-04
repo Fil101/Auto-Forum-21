@@ -33,10 +33,10 @@ router.get('/:modelId', async (req, res) => {
 router.post('/:modelId', fileMiddleware.single('post-photo'), async (req, res) => {
   const { modelId } = req.params;
   const { title, text } = req.body;
-  const user = req.session; // добавить сессию
+  const user = req.session.userId;
   const fixPath = req.file.path.substring(7);
   try {
-    const newPost = await Post.create({ title, text, img: fixPath, car_model_id: modelId, user_id: 1 });
+    const newPost = await Post.create({ title, text, img: fixPath, car_model_id: modelId, user_id: user });
     res.json(newPost);
   } catch (error) {
     console.log(error);
