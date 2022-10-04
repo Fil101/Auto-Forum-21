@@ -66,14 +66,13 @@ router.get('/auth', (req, res) => {
   //   res.json(currUser);
   }
 
-  const sessionData = {
-    name: req.session.userName,
-    email: req.session.email,
-    id: req.session.userId,
-    about: req.session.userAbout,
-    img: req.session.img,
-  };
-  res.json(sessionData);
+  // const sessionData = {
+  //   name: req.session.userName,
+  //   email: req.session.email,
+  //   id: req.session.userId,
+  //   img: req.session.img,
+  // };
+  // res.json(sessionData);
 });
 
 router.get('/myCommunity', async (req, res) => {
