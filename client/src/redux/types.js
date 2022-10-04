@@ -17,6 +17,7 @@ export const SET_BRANDS = 'SET_BRANDS';
 
 // Models
 export const SET_MODELS = 'SET_MODELS';
+export const SET_MODELS_LIST = 'SET_MODELS_LIST';
 
 // ARTICLES
 export const SET_ARTICLES = 'SET_ARTICLES';

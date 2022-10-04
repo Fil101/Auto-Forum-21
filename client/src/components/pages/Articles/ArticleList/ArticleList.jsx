@@ -9,7 +9,7 @@ import { NavLink, useParams } from 'react-router-dom';
 import Article from '../Article';
 import { fetchArticles } from '../../../../redux/actions/articlesActions';
 import { fetchModels } from '../../../../redux/actions/modelsActions';
-// import Article from '../Article';
+import Sidebar from '../../Community/UI/Sidebar';
 
 function ArticleList() {
   const { modelId } = useParams();
@@ -40,6 +40,7 @@ function ArticleList() {
   return (
     <ThemeProvider theme={darkTheme}>
       <Box bgcolor="background.default" color="text.primary">
+        <Sidebar setMode={setMode} mode={mode} />
         <Stack spacing={2} justifyContent="space-between" sx={{ borderRadius: "15px" }} divider={<Divider orientation="horizontal" flexItem />}>
           {console.log('\x1b[34m%s\x1b[0m', 'ArticleList.42', articles)}
           {/* {console.log('\x1b[34m%s\x1b[0m', 'ArticleList.43', models)} */}
