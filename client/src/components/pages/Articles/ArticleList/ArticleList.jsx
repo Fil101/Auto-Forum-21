@@ -11,7 +11,6 @@ import { fetchArticles } from '../../../../redux/actions/articlesActions';
 import { fetchModels } from '../../../../redux/actions/modelsActions';
 // import Article from '../Article';
 
-
 function ArticleList() {
   const { modelId } = useParams();
   const dispatch = useDispatch();
