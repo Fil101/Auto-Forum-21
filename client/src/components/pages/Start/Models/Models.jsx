@@ -26,21 +26,25 @@ function Models() {
   const pageCount = Math.ceil(models.length / modelsPage);
 
   const changeModels = ({ selected }) => {
-    console.log('++++');
     setPageNumber(selected);
   };
 
   return (
-
-    <div className="asd">
-      <div className="box">
-        {displayModels}
+    <div className="video-box">
+      <video className="video" autoPlay muted loop preload="auto">
+        <source type="video/mp4" src="/Video.mp4" />
+        {/* <source type="video/mp4" src="videos/forest.mp4"/> */}
+      </video>
+      <div className="asd">
+        <div className="box">
+          {displayModels}
+        </div>
         <ReactPaginate
           marginPagesDisplayed={2}
           // eslint-disable-next-line react/jsx-curly-brace-presence
-          previousLabel={"<--"}
+          previousLabel={"<<<"}
           // eslint-disable-next-line react/jsx-curly-brace-presence
-          nextLabel={"-->"}
+          nextLabel={">>>"}
           pageCount={pageCount}
           onPageChange={changeModels}
           containerClassName="paginationBttns"
@@ -52,7 +56,6 @@ function Models() {
         />
       </div>
     </div>
-
   );
 }
 

@@ -3,21 +3,22 @@ import { Link, useNavigate } from 'react-router-dom';
 
 function ModelItem({ model }) {
   const [failedImg, setFailedImg] = useState(false);
-  console.log('eto modeli', model);
-  // if (failedImg) {
-  //   return null;
-  // }
+  const [showImage, setShowImage] = useState(false);
   return (
-    <Link to={`/models/${model.id}/`}>
-      <div className="logoBrand">
-        <img
-          onError={() => { setFailedImg(true); }}
-          src={model.img}
-          alt=""
-          style={{ width: '90px', height: '60px', display: failedImg && 'none' }}
-        />
+    <Link to={`/models/${model.id}/`} style={{ textDecoration: "none" }}>
+      <div className="logoBrand" onMouseEnter={() => setShowImage(true)} onMouseLeave={() => setShowImage(false)}>
+        {showImage ? (
+          <img
+            src={model.img}
+            alt=""
+            style={{ width: '100%', height: '100%', borderRadius: "15px", display: failedImg && 'none' }}
+          />
+        ) : (
+          <div className="modelName">
+            {model.name}
+          </div>
+        ) }
       </div>
-      {model.name}
     </Link>
   );
 }

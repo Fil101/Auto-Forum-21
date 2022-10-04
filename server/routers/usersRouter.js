@@ -8,9 +8,9 @@ const router = express.Router();
 // end point добавляет юзера в подписчики сообщества
 router.post('/:modelId', async (req, res) => {
   const { modelId } = req.params;
-  const { userId } = req.session; // Добавить сессию, пока не работает
+  const { userId } = req.session;
   // console.log('это id user', userId);
-  const newSubscribe = await Subscribe.create({ user_id: 1, car_model_id: modelId });
+  const newSubscribe = await Subscribe.create({ user_id: userId, car_model_id: modelId });
   res.json(newSubscribe);
 });
 

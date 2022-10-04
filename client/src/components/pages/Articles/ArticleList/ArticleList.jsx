@@ -6,7 +6,7 @@ import {
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 import { NavLink, useParams } from 'react-router-dom';
-// import Article from '../Article';
+import Article from '../Article';
 import { fetchArticles } from '../../../../redux/actions/articlesActions';
 import { fetchModels } from '../../../../redux/actions/modelsActions';
 import Sidebar from '../../Community/UI/Sidebar';
@@ -18,6 +18,7 @@ function ArticleList() {
     dispatch(fetchArticles(modelId));
   }, []);
   const articles = useSelector((state) => state.articles);
+
   // const models = useSelector((state) => state.models);
   // const model = models.find(el => el.id === modelId);
 
@@ -65,6 +66,7 @@ function ArticleList() {
                   {el.text}
                 </Item>
               </Stack>
+              {/* <Stack direction="row" spacing={2}> */}
               {/* <Stack direction="row" spacing={2}> */}
               <Item sx={{ borderRadius: "15px" }}>
                 Дата публикации:
