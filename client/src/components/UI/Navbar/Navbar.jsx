@@ -30,6 +30,7 @@ function Navbar() {
       sx={{
         display: "flex",
         justifyContent: "space-between",
+        backgroundColor: "black",
       }}
     >
       <Container

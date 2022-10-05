@@ -1,7 +1,58 @@
-import React from 'react';
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { Button, CardActionArea, CardActions, Box } from '@mui/material';
+import { NavLink } from 'react-router-dom';
 
-export default function OneCommunity() {
+export default function OneCommunity({ community }) {
   return (
-    <div>OneCommunity</div>
+    <Box sx={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+    }}
+    >
+      <Card
+        sx={{
+          width: 400,
+          heigth: 400,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          margin: 1,
+        }}
+      >
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            height="140"
+            image={community?.Car_model?.img}
+            alt="green iguana"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {community?.Car_model?.Car_brand?.name}
+              {' '}
+              {community?.Car_model?.name}
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              {community?.Car_model?.description}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          <Button
+            component={NavLink}
+            size="small"
+            color="primary"
+            to={`/models/${community?.Car_model?.id}`}
+          >
+            Перейти
+          </Button>
+        </CardActions>
+      </Card>
+    </Box>
   );
 }

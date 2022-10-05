@@ -52,7 +52,7 @@ function ShowPost({ post }) {
 
   return (
     <>
-      <Badge badgeContent={4} color="primary">
+      <Badge badgeContent={post?.commentsCount} color="primary">
         <IconButton
           onClick={(e) => setOpen(true)}
           aria-label="comments"

@@ -50,16 +50,20 @@ function Post({ post, addFavoritePost }) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
+
         <IconButton aria-label="like">
-          <Checkbox
-            icon={<FavoriteBorder />}
-            checkedIcon={<Favorite sx={{ color: 'red' }} />}
-          />
+          <Badge badgeContent={post?.likesCount} color="primary">
+            <Checkbox
+              icon={<FavoriteBorder />}
+              checkedIcon={<Favorite sx={{ color: 'red' }} />}
+            />
+          </Badge>
         </IconButton>
+
         <IconButton onClick={() => addFavoritePost(post?.id)} aria-label="favorite">
           <Checkbox
             icon={<BookmarkAddIcon />}
-            checkedIcon={<BookmarkAddIcon sx={{ color: 'white' }} />}
+            checkedIcon={<BookmarkAddIcon sx={{ color: 'red' }} />}
           />
         </IconButton>
         <ShowPost post={post} />
