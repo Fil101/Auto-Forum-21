@@ -202,7 +202,7 @@ function Profile() {
           {resultPostOrCommunity ? (
             community?.map((el) => <OneCommunity community={el} key={el.id} />)
           ) : (
-            post?.map((el) => <OnePost post={el} key={el.id} />)
+            post?.map((el) => <OnePost post={el} key={el.id} isFavorite={tabNum === 2} />)
           )}
         </Box>
       </Box>
