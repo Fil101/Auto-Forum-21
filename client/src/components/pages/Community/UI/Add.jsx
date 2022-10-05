@@ -43,7 +43,6 @@ function Add() {
   const [open, setOpen] = useState(false);
   const [img, setImg] = useState(null);
   const [inputs, setInputs] = useState({ title: '', text: '' });
-  console.log(inputs);
 
   const { modelId } = useParams();
   const dispatch = useDispatch();

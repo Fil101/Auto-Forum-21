@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 import { SET_COMMENTS, ADD_COMMENT } from '../types';
+import { addPostCounter } from './postsActions';
 
 export const setComments = (random) => ({
   type: SET_COMMENTS,
@@ -17,6 +18,7 @@ export const addCommentsAsync = (e, postId, inputs) => async (dispatch) => {
   try {
     const res = await axios.post(`/api/posts/comments/${postId}`, inputs);
     dispatch(addComments(res.data));
+    dispatch(addPostCounter(postId));
   } catch (error) {
     console.log(error);
   }

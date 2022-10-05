@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
-import { SET_POSTS, ADD_POST } from '../types';
+import { SET_POSTS, ADD_POST, ADD_POST_COUNTER } from '../types';
 
 export const setPosts = (random) => ({
   type: SET_POSTS,
@@ -11,6 +11,11 @@ export const setPosts = (random) => ({
 export const addPost = (post) => ({
   type: ADD_POST,
   payload: post,
+});
+
+export const addPostCounter = (postId) => ({
+  type: ADD_POST_COUNTER,
+  payload: postId,
 });
 
 export const fetchPostsAsync = (modelId) => async (dispatch) => {
