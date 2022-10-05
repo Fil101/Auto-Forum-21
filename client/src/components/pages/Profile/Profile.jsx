@@ -37,7 +37,7 @@ function Profile() {
 
   const handleChange = (event, newValue) => {
     setTabNum(newValue);
-    console.log(event, newValue);
+    // console.log(event, newValue);
   };
 
   const postOrCommunity = () => {
@@ -202,7 +202,7 @@ function Profile() {
           {resultPostOrCommunity ? (
             community?.map((el) => <OneCommunity community={el} key={el.id} />)
           ) : (
-            post?.map((el) => <OnePost post={el} key={el.id} isFavorite={tabNum === 2} />)
+            post?.map((el) => <OnePost post={el} key={el.id} isFavorite={tabNum === 2} setPost={setPost} />)
           )}
         </Box>
       </Box>
