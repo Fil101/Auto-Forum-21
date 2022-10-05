@@ -246,33 +246,6 @@ function Profile() {
           <Box flex={1} p={2} sx={{ display: { xs: 'none', sm: 'block' } }}>{' '}</Box>
         </Stack>
         <Stack direction="row" spacing={2} justifyContent="space-between">
-          <Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-around",
-                alignContent: "stretch",
-                alignItems: "center",
-              }}
-            >
-              {" "}
-              {/* <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
-                <Tabs value={tabNum} onChange={handleChange} centered>
-                  <Tab label="Мои сообщества" />
-                  <Tab label="Мои посты" />
-                  <Tab label="Избранное 🤍" />
-                </Tabs>
-              </Box> */}
-            </Box>
-            <Box>
-              {resultPostOrCommunity ? (
-                community?.map((el) => <OneCommunity community={el} key={el.id} />)
-              ) : (
-                post?.map((el) => <OnePost post={el} key={el.id} isFavorite={tabNum === 2} setPost={setPost} />)
-              )}
-            </Box>
-          </Box>
           <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
             <Tabs value={tabNum} onChange={handleChange} centered>
               <Tab label="Мои сообщества" />
@@ -280,10 +253,29 @@ function Profile() {
               <Tab label="Избранное 🤍" />
             </Tabs>
           </Box>
+        </Stack>
+        <Stack direction="row" spacing={2} justifyContent="center">
+          <Box sx={{
+            display: "flex",
+            // flexDirection: "row",
+            flexWrap: 'wrap',
+            justifyContent: "center",
+            alignContent: "stretch",
+            alignItems: "center",
+            // width: "80%",
+          }}
+          >
+            {resultPostOrCommunity ? (
+              community?.map((el) => <OneCommunity community={el} key={el.id} />)
+            ) : (
+              post?.map((el) => <OnePost post={el} key={el.id} isFavorite={tabNum === 2} setPost={setPost} />)
+            )}
+          </Box>
 
         </Stack>
+
         <Box
-          // bgcolor="background.default"
+          bgcolor="background.default"
           color="text.primary"
           flex={1}
           p={2}
