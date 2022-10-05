@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import axios from 'axios';
-import { LOGOUT, SET_ABOUT, SET_AUTH } from '../types';
+import { LOGOUT, SET_ABOUT, SET_AUTH, SET_TG } from '../types';
 
 export const setAuth = (data) => ({ type: SET_AUTH, payload: data });
 
@@ -16,9 +16,13 @@ export const auth = () => (dispatch) => {
     .catch(console.log);
 };
 export const setAbout = (data) => ({ type: SET_ABOUT, payload: data });
+export const setTg = (data) => ({ type: SET_TG, payload: data });
 
-export const changeAbout = (about) => (dispatch) => {
-  axios.put('/api/users/about', { about })
-    .then(() => dispatch(setAbout(about)))
+export const changeAbout = (about, tg) => (dispatch) => {
+  axios.put('/api/users/about', { about, tg })
+    .then(() => {
+      dispatch(setAbout(about));
+      dispatch(setTg(tg));
+    })
     .catch(console.log);
 };

@@ -11,11 +11,16 @@ import {
   Tab,
   Input,
   Fab,
+  TextField,
+  FormControl,
+  OutlinedInput,
 } from "@mui/material";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import FormHelperText from '@mui/material/FormHelperText';
+import { ThreeGMobiledataRounded } from "@mui/icons-material";
 import { changeAbout } from "../../../redux/actions/authActions";
 import OnePost from "./OnePost";
 import OneCommunity from "./OneCommunity";
@@ -23,8 +28,9 @@ import Sidebar from "../Community/UI/Sidebar";
 
 function Profile() {
   const [tabNum, setTabNum] = useState(0);
-  const about = useSelector((state) => state.auth?.about);
+  const { about, tg, name, email } = useSelector((state) => state.auth);
   const [info, setInfo] = useState(about);
+  const [tgInfo, setTgInfo] = useState(tg);
   const [isEdit, setIsEdit] = useState(false);
   const [community, setCommunity] = useState([]);
   const [post, setPost] = useState([]);
@@ -85,7 +91,7 @@ function Profile() {
   };
 
   const infoInputHandler = () => {
-    dispatch(changeAbout(info));
+    dispatch(changeAbout(info, tgInfo));
     // axios.put("/api/users/about", { about })
     //   .then(setIsEdit(state => !state));
     setIsEdit((state) => !state);
@@ -94,6 +100,17 @@ function Profile() {
   const infoHandler = () => {
     setIsEdit((state) => !state);
   };
+
+  // const tgInputHandler = () => {
+  //   dispatch(changeTg(tg));
+  //   // axios.put("/api/users/about", { about })
+  //   //   .then(setIsEdit(state => !state));
+  //   setIsEdit((state) => !state);
+  // };
+
+  // const infoHandler = () => {
+  //   setIsEdit((state) => !state);
+  // };
 
   // console.log(community);
 
@@ -153,17 +170,51 @@ function Profile() {
                 alignItems: "center",
               }}
             >
-              {isEdit ? (
-                <Box sx={{ width: "100%" }}>
-                  <Input
-                    sx={{ width: "100%" }}
-                    value={info}
-                    onChange={(e) => setInfo(e.target.value)}
-                  />
-                </Box>
-              ) : (
+              {/* {isEdit ? ( */}
+              <Box sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+              >
+                <TextField
+                  id="outlined-name"
+                  disabled
+                  sx={{ margin: "5px" }}
+                  label="имя"
+                  value={name}
+                  // onChange={(e) => setTgInfo(e.target.value)}
+                />
+                <TextField
+                  id="outlined-name"
+                  disabled
+                  sx={{ margin: "5px" }}
+                  label="email"
+                  value={email}
+                />
+                <TextField
+                  id="outlined-name"
+                  disabled={!isEdit}
+                  sx={{ margin: "5px" }}
+                  label="телеграмм"
+                  value={tgInfo}
+                  onChange={(e) => setTgInfo(e.target.value)}
+                />
+
+                <TextField
+                  id="outlined-name"
+                  sx={{ margin: "5px" }}
+                  disabled={!isEdit}
+                  label="о себе"
+                  value={info}
+                  onChange={(e) => setInfo(e.target.value)}
+                />
+              </Box>
+              {/* ) : (
                 <Box>{about}</Box>
-              )}
+              )} */}
+
               {isEdit ? (
                 <Button
                   onClick={infoInputHandler}

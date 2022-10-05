@@ -3,6 +3,7 @@
 export const SET_AUTH = 'SET_AUTH';
 export const LOGOUT = 'LOGOUT';
 export const SET_ABOUT = 'SET_ABOUT';
+export const SET_TG = 'SET_TG';
 
 // POSTS
 export const SET_POSTS = 'SET_POSTS';

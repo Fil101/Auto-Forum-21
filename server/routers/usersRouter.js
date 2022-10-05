@@ -30,11 +30,12 @@ router.get('/:modelId', async (req, res) => {
 
 router.put('/about', async (req, res) => {
   const { userId } = req.session;
-  const { about } = req.body;
+  const { about, tg } = req.body;
   // console.log('++++++++++++++++', about, userId);
   const user = await User.findOne({ where: userId });
-  user.update({ about });
+  user.update({ about, tg });
   req.session.userAbout = about;
+  req.session.userTg = tg;
   res.sendStatus(200);
 });
 
