@@ -19,6 +19,7 @@ import { Navigate } from "react-router-dom";
 import { changeAbout } from "../../../redux/actions/authActions";
 import OnePost from "./OnePost";
 import OneCommunity from "./OneCommunity";
+import Sidebar from "../Community/UI/Sidebar";
 
 function Profile() {
   const [tabNum, setTabNum] = useState(0);
@@ -29,6 +30,13 @@ function Profile() {
   const [post, setPost] = useState([]);
   // const [favPost, setFavPost] = useState([]);
   const dispatch = useDispatch();
+
+  const [mode, setMode] = useState('dark');
+  const darkTheme = createTheme({
+    palette: {
+      mode,
+    },
+  });
 
   // console.log('это комьюнити массив', community);
   // console.log('это массив постов', post);
@@ -90,106 +98,130 @@ function Profile() {
   // console.log(community);
 
   return (
-    <div style={{ backgroundColor: "white" }}>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          margin: "10px",
-          border: "1px solid",
-          padding: "10px",
-          justifyContent: "space-around",
-          backgroundColor: "#f5f5f5",
-          "&:hover": {
-            backgroundColor: "primary.ligth",
-            opacity: [0.9, 0.8, 0.7],
-          },
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            alignContent: "stretch",
-            alignItems: "center",
-          }}
-        >
-          <Avatar
-            alt="photo"
-            src="/avatars/elDar.jpg"
-            sx={{ width: 56, height: 56 }}
-          />
-          <label className="form-label" htmlFor="avatar">
-            Фото
-          </label>
-          <input
-            name="avatar"
-            onChange={photoHandler}
-            type="file"
-            className="form-control"
-            id="avatar"
-          />
-          <Button variant="contained">Добавить фото</Button>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            alignContent: "stretch",
-            alignItems: "center",
-          }}
-        >
-          {isEdit ? (
-            <Box sx={{ width: "100%" }}>
-              <Input
-                sx={{ width: "100%" }}
-                value={info}
-                onChange={(e) => setInfo(e.target.value)}
+    <ThemeProvider theme={darkTheme}>
+      <Box bgcolor="background.default" color="text.primary" sx={{ zIndex: 'tooltip' }}>
+        <Stack direction="row" spacing={2} justifyContent="space-between">
+          <Sidebar setMode={setMode} mode={mode} />
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              margin: "10px",
+              border: "1px solid",
+              padding: "10px",
+              width: "60%",
+              justifyContent: "space-around",
+              backgroundColor: "#f5f5f5",
+              "&:hover": {
+                backgroundColor: "primary.ligth",
+                opacity: [0.9, 0.8, 0.7],
+              },
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                alignContent: "stretch",
+                alignItems: "center",
+              }}
+            >
+              <Avatar
+                alt="photo"
+                src="/avatars/elDar.jpg"
+                sx={{ width: 56, height: 56 }}
               />
+              <label className="form-label" htmlFor="avatar">
+                Фото
+              </label>
+              <input
+                name="avatar"
+                onChange={photoHandler}
+                type="file"
+                className="form-control"
+                id="avatar"
+              />
+              <Button variant="contained">Добавить фото</Button>
             </Box>
-          ) : (
-            <Box>{about}</Box>
-          )}
-          {isEdit ? (
-            <Button
-              onClick={infoInputHandler}
-              variant="contained"
-              name="about"
-              required
-              fullWidth
-              id="about"
-              label="about"
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                alignContent: "stretch",
+                alignItems: "center",
+              }}
             >
-              Сохранить
-            </Button>
-          ) : (
-            <Button
-              onClick={infoHandler}
-              variant="contained"
-              name="about"
-              required
-              fullWidth
-              id="about"
-              label="about"
+              {isEdit ? (
+                <Box sx={{ width: "100%" }}>
+                  <Input
+                    sx={{ width: "100%" }}
+                    value={info}
+                    onChange={(e) => setInfo(e.target.value)}
+                  />
+                </Box>
+              ) : (
+                <Box>{about}</Box>
+              )}
+              {isEdit ? (
+                <Button
+                  onClick={infoInputHandler}
+                  variant="contained"
+                  name="about"
+                  required
+                  fullWidth
+                  id="about"
+                  label="about"
+                >
+                  Сохранить
+                </Button>
+              ) : (
+                <Button
+                  onClick={infoHandler}
+                  variant="contained"
+                  name="about"
+                  required
+                  fullWidth
+                  id="about"
+                  label="about"
+                >
+                  Редактировать
+                </Button>
+              )}
+            </Box>
+
+          </Box>
+          <Box flex={1} p={2} sx={{ display: { xs: 'none', sm: 'block' } }}>{' '}</Box>
+        </Stack>
+        <Stack direction="row" spacing={2} justifyContent="space-between">
+          <Box>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-around",
+                alignContent: "stretch",
+                alignItems: "center",
+              }}
             >
-              Редактировать
-            </Button>
-          )}
-        </Box>
-      </Box>
-      <Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-around",
-            alignContent: "stretch",
-            alignItems: "center",
-          }}
-        >
-          {" "}
+              {" "}
+              {/* <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
+                <Tabs value={tabNum} onChange={handleChange} centered>
+                  <Tab label="Мои сообщества" />
+                  <Tab label="Мои посты" />
+                  <Tab label="Избранное 🤍" />
+                </Tabs>
+              </Box> */}
+            </Box>
+            <Box>
+              {resultPostOrCommunity ? (
+                community?.map((el) => <OneCommunity community={el} key={el.id} />)
+              ) : (
+                post?.map((el) => <OnePost post={el} key={el.id} isFavorite={tabNum === 2} />)
+              )}
+            </Box>
+          </Box>
           <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
             <Tabs value={tabNum} onChange={handleChange} centered>
               <Tab label="Мои сообщества" />
@@ -197,16 +229,19 @@ function Profile() {
               <Tab label="Избранное 🤍" />
             </Tabs>
           </Box>
-        </Box>
-        <Box>
-          {resultPostOrCommunity ? (
-            community?.map((el) => <OneCommunity community={el} key={el.id} />)
-          ) : (
-            post?.map((el) => <OnePost post={el} key={el.id} isFavorite={tabNum === 2} />)
-          )}
+        </Stack>
+        <Box
+          // bgcolor="background.default"
+          color="text.primary"
+          flex={1}
+          p={2}
+          sx={{ display: { xs: 'none', sm: 'block' } }}
+        >
+          {' '}
+          {' '}
         </Box>
       </Box>
-    </div>
+    </ThemeProvider>
   );
 }
 
