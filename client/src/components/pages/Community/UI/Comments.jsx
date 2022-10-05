@@ -6,7 +6,6 @@ import CommentCard from './CommentCard';
 
 function Comments({ post }) {
   const comments = useSelector(state => state.comments);
-  console.log('это комментраии', comments);
   const dispatch = useDispatch();
 
   // получаем все комментарии к открытому посту
@@ -17,7 +16,7 @@ function Comments({ post }) {
   return (
     <Box>
       {comments && comments.map((comment) => (
-        <CommentCard comment={comment} />
+        <CommentCard key={comment.id} comment={comment} />
       ))}
     </Box>
   );

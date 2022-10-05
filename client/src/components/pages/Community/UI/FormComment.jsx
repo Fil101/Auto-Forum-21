@@ -13,11 +13,10 @@ function FormComment({ post }) {
     marginBottom: '20px',
   });
   const user = useSelector((state) => state.auth);
-  console.log('это айди из поста --------->', post?.id);
   return (
     <Box
       width="100%"
-      height={400}
+      height={230}
       bgcolor="background.default"
       color="text.primary"
       p={3}
@@ -40,7 +39,7 @@ function FormComment({ post }) {
           id="standard-multiline-static"
           multiline
           rows={3}
-          placeholder="Text"
+          placeholder="Введите свой комметарий..."
           variant="standard"
           name="text"
         />

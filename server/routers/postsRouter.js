@@ -42,13 +42,35 @@ router.post('/:modelId', fileMiddleware.single('post-photo'), async (req, res) =
     console.log(error);
   }
 });
+
 // добавляет пост в избранное
 router.post('/favorite/:postId', async (req, res) => {
   const { postId } = req.params;
   const { userId } = req.session;
-  const addFavorite = await Favorite_post.create({ post_id: postId, user_id: userId });
-  console.log(addFavorite);
-  res.sendStatus(200);
+  const [favPost, created] = await Favorite_post.findOrCreate({
+    where: { post_id: postId, user_id: userId },
+  });
+  if (created) {
+    res.sendStatus(200);
+  } else {
+    favPost.destroy();
+    res.sendStatus(200);
+  }
+});
+
+// добавляет лайк к посту
+router.post('/like/:postId', async (req, res) => {
+  const { postId } = req.params;
+  const { userId } = req.session;
+  const [likePost, created] = await Like_post.findOrCreate({
+    where: { post_id: postId, user_id: userId },
+  });
+  if (created) {
+    res.sendStatus(200);
+  } else {
+    likePost.destroy();
+    res.sendStatus(200);
+  }
 });
 
 // Добавляем комментарии к посту
