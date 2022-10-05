@@ -119,7 +119,7 @@ router.get('/favoritePosts', async (req, res) => {
     },
     include: [{
       model: Post,
-      attributes: ['title', 'text', 'img'],
+      attributes: ['title', 'text', 'img', 'updatedAt', 'id'],
     },
     ],
   });
@@ -127,6 +127,8 @@ router.get('/favoritePosts', async (req, res) => {
     img: el.Post.img,
     text: el.Post.text,
     title: el.Post.title,
+    updatedAt: el.Post.updatedAt,
+    id: el.Post.id,
   }));
   // console.log(myFavPosts);
   res.json(favPosts);
