@@ -1,4 +1,4 @@
-import { SET_COMMENTS, ADD_COMMENT, ADD_COMMENT_COUNTER } from '../types';
+import { SET_COMMENTS, ADD_COMMENT } from '../types';
 
 /* eslint-disable default-param-last */
 export default function commentsReducer(state = [], action) {
