@@ -10,7 +10,7 @@ module.exports = {
         name: model,
         img: `/IMG/Models/${brand.name}-${model}.jpeg`,
         description: deskListArr[model],
-        banner: `/IMG/Banner/${brand.name}-${model}.png`,
+        banner: `/IMG/Banner/${brand.name}-${model}.jpg`,
         car_brand_id: brand.id,
       }
     ))));
