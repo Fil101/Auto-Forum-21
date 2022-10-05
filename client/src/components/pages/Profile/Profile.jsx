@@ -180,7 +180,7 @@ function Profile() {
               >
                 <TextField
                   id="outlined-name"
-                  disabled
+                  disabled={!isEdit}
                   sx={{ margin: "5px" }}
                   label="имя"
                   value={name}
