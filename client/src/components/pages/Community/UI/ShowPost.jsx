@@ -1,6 +1,4 @@
-import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import axios from 'axios';
+/* eslint-disable import/no-cycle */
 import ForumIcon from '@mui/icons-material/Forum';
 import {
   Avatar,
@@ -24,7 +22,7 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Add as AddIcon,
   DateRange,
@@ -38,36 +36,25 @@ import {
 } from '@mui/icons-material';
 import { addPostAsync } from '../../../../redux/actions/postsActions';
 import FormComment from './FormComment';
+import Comments from './Comments';
+import { fetchCommentsAsync } from '../../../../redux/actions/commentsActions';
 
 const SytledModal = styled(Modal)({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-});
-
-const UserBox = styled(Box)({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '10px',
-  marginBottom: '20px',
+  position: 'absolute',
+  top: '50%',
+  left: '30%',
+  overflow: 'scroll',
+  height: '100%',
+  margin: 'auto',
+  opacity: '0.97',
 });
 
 function ShowPost({ post }) {
   const [open, setOpen] = useState(false);
-  const [img, setImg] = useState(null);
-  const [inputs, setInputs] = useState({ text: '' });
-  console.log(inputs);
-
-  const { modelId } = useParams();
-  const dispatch = useDispatch();
-
-  const inputHandler = (e) => {
-    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
 
   return (
     <>
-      <Badge badgeContent={4} color="primary">
+      <Badge badgeContent={post?.commentsCount} color="primary">
         <IconButton
           onClick={(e) => setOpen(true)}
           aria-label="comments"
@@ -81,7 +68,7 @@ function ShowPost({ post }) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Card sx={{ width: '30%', margin: '1%' }}>
+        <Card sx={{ width: '50%', margin: '1%' }}>
           <CardHeader
             avatar={(
               <Avatar src={post?.User?.img} aria-label="recipe" />
@@ -97,7 +84,7 @@ function ShowPost({ post }) {
           <CardMedia
             component="img"
             height="500vh"
-            image={`http://localhost:3001/${post.img}`}
+            image={`http://localhost:3001/${post?.img}`}
             alt="Post Photo"
           />
           <CardContent>
@@ -116,7 +103,8 @@ function ShowPost({ post }) {
               />
             </IconButton>
           </CardActions>
-          <FormComment />
+          <FormComment post={post} />
+          <Comments post={post} />
         </Card>
       </SytledModal>
     </>

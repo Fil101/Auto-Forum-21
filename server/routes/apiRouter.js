@@ -1,6 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const { User } = require('../db/models');
+const { User, Subscribe, Car_model, Car_brand, Post, Like_post, Favorite_post } = require('../db/models');
 
 // import upload from '../middlewares/multer';
 
@@ -61,19 +61,84 @@ router.get('/logout', (req, res) => {
 router.get('/auth', (req, res) => {
   if (!req.session.userId) {
     res.sendStatus(401);
-  } else {
-    const currUser = User.findByPk(req.session.userId);
-    res.json(currUser);
+    return;
   }
 
   const sessionData = {
     name: req.session.userName,
     email: req.session.email,
     id: req.session.userId,
-    about: req.session.userAbout,
     img: req.session.img,
+    about: req.session.userAbout,
   };
+  // console.log(sessionData);
   res.json(sessionData);
 });
 
+router.get('/myCommunity', async (req, res) => {
+  if (!req.session.userId) {
+    res.sendStatus(401);
+    return;
+  }
+  const user = req.session.userId;
+  const myCommunity = await Subscribe.findAll({
+    where: {
+      user_id: user,
+    },
+    include: [
+      {
+        model: Car_model,
+        attributes: ['name', 'img', 'id'],
+        include: [{
+          model: Car_brand,
+          attributes: ['name', 'id'],
+        },
+        ],
+      },
+    ],
+  });
+  res.json(myCommunity);
+});
+
+router.get('/myPosts', async (req, res) => {
+  const user = req.session.userId;
+  const myPosts = await Post.findAll({
+    where: {
+      user_id: user,
+    },
+  });
+  console.log(user, myPosts);
+  res.json(myPosts);
+});
+
+router.get('/favoritePosts', async (req, res) => {
+  const user = req.session.userId;
+  const myFavPosts = await Favorite_post.findAll({
+    where: {
+      user_id: user,
+    },
+    include: [{
+      model: Post,
+      attributes: ['title', 'text', 'img'],
+    },
+    ],
+  });
+  const favPosts = myFavPosts.map((el) => ({
+    img: el.Post.img,
+    text: el.Post.text,
+    title: el.Post.title,
+  }));
+  // console.log(myFavPosts);
+  res.json(favPosts);
+});
+
 module.exports = router;
+
+// car_model_id: 105
+// createdAt: "2022-10-04T15:30:49.495Z"
+// id: 3
+// img: "1664897449468-ÑÐ°ÑÐºÐ°.jpg"
+// text: "ты тама"
+// title: "я тута"
+// updatedAt: "2022-10-04T15:30:49.495Z"
+// user_id: 3

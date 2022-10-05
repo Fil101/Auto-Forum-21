@@ -22,16 +22,16 @@ function Community() {
   const { modelId } = useParams();
   const dispatch = useDispatch();
   const { posts, users } = useSelector((state) => state);
-  console.log('это юзеры', users);
+
   // получаем все посты сообщества:
   useEffect(() => {
     dispatch(fetchPostsAsync(modelId));
-  }, []);
+  }, [modelId]);
 
   // получаем всех подписчиков сообщества:
   useEffect(() => {
     dispatch(fetchUsersAsync(modelId));
-  }, []);
+  }, [modelId]);
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -41,7 +41,6 @@ function Community() {
           <Feed />
           <Rightbar />
         </Stack>
-
       </Box>
     </ThemeProvider>
   );

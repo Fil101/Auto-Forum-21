@@ -1,4 +1,5 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, useParams } from 'react-router-dom';
 import {
@@ -15,23 +16,37 @@ import {
   ListItemText,
   Typography,
 } from '@mui/material';
-import { addUserAsync } from '../../../../redux/actions/usersActions';
+import { actionUserAsync } from '../../../../redux/actions/usersActions';
 
 function Rightbar() {
   const dispatch = useDispatch();
   const { modelId } = useParams();
+  const users = useSelector((state) => state.users);
+  console.log('текущие подписчики', users);
+  const [checkSubscribe, setCheckSubscribe] = useState(false);
+  console.log(checkSubscribe, 'это проверка подписки');
 
-  const { users } = useSelector((state) => state);
+  useEffect(() => {
+    axios(`/api/users/${modelId}/subscribe`)
+      .then((res) => {
+        console.log(res.data.state, 'это ответ с бека');
+        setCheckSubscribe(res.data.state);
+      });
+  }, []);
 
   return (
     <Box flex={2} p={2} sx={{ display: { xs: 'none', sm: 'block' } }}>
       <Box position="fixed" width={300}>
+
         <Button
           sx={{ width: '100%', marginBottom: '15px' }}
           variant="outlined"
-          onClick={() => dispatch(addUserAsync(modelId))}
+          onClick={() => {
+            dispatch(actionUserAsync(modelId));
+            setCheckSubscribe(!checkSubscribe);
+          }}
         >
-          Подписаться
+          {checkSubscribe ? 'Отписаться' : 'Подписаться'}
         </Button>
         <Typography variant="h6" fontWeight={100}>
           Подписчики
@@ -40,8 +55,8 @@ function Rightbar() {
           {users && users.map((user) => (
             <Avatar
               key={user.id}
-              alt={user.User?.name}
-              src={user.User?.img}
+              alt={user?.User?.name}
+              src={user?.User?.img}
             />
           ))}
         </AvatarGroup>
