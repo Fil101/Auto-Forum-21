@@ -8,7 +8,7 @@ function BrandItem({ brand }) {
         <img
           src={brand.logo}
           alt=""
-          style={{ width: '90px', height: '60px' }}
+          style={{ width: '85%', height: '85%' }}
         />
       </div>
     </Link>
