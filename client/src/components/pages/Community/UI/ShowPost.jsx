@@ -40,11 +40,13 @@ import Comments from './Comments';
 import { fetchCommentsAsync } from '../../../../redux/actions/commentsActions';
 
 const SytledModal = styled(Modal)({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  position: 'absolute',
+  top: '50%',
+  left: '30%',
   overflow: 'scroll',
-  top: '10%',
+  height: '100%',
+  margin: 'auto',
+  opacity: '0.97',
 });
 
 function ShowPost({ post }) {

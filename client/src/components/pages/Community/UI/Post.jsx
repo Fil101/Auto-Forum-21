@@ -20,7 +20,7 @@ import {
 import Add from './Add';
 import ShowPost from './ShowPost';
 
-function Post({ post, addFavoritePost }) {
+function Post({ post, addFavoritePost, addLikePost }) {
   return (
     <Card sx={{ width: '60%', margin: '1%' }}>
       <CardHeader
@@ -51,7 +51,7 @@ function Post({ post, addFavoritePost }) {
       </CardContent>
       <CardActions disableSpacing>
 
-        <IconButton aria-label="like">
+        <IconButton onClick={() => addLikePost(post?.id)} aria-label="like">
           <Badge badgeContent={post?.likesCount} color="primary">
             <Checkbox
               icon={<FavoriteBorder />}
