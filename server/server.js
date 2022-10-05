@@ -12,6 +12,7 @@ const apiRouter = require('./routes/apiRouter');
 const brandsRouter = require('./routers/brandsRouter');
 const articlesRouter = require('./routers/articlesRouter');
 const modelsRouter = require('./routers/modelsRouter');
+const photosRouter = require('./routers/photosRouter');
 
 require('dotenv').config();
 
@@ -45,5 +46,6 @@ app.use('/api/v1', apiRouter);
 app.use('/api/brands', brandsRouter);
 app.use('/api/articles', articlesRouter);
 app.use('/api/models', modelsRouter);
+app.use('/api/v2/models', photosRouter);
 
 app.listen(PORT, () => console.log(`Server has started on PORT ${PORT}`));

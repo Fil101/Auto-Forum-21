@@ -7,6 +7,7 @@ import modelsReducer from './reducers/modelsReducer';
 import modelsListReducer from './reducers/modelsListReducer';
 import postsReducer from './reducers/postsReducer';
 import usersReducer from './reducers/usersReducer';
+import photosReducer from './reducers/photosReducer';
 
 export default configureStore({
   reducer: {
@@ -17,7 +18,7 @@ export default configureStore({
     posts: postsReducer, // Слайс хранит посты только открытого сообщества, с приэнклюженными лайками и каунтером кол-ва комментариев
     comments: commentsReducer, // Слайс хранит комментарии только открытого поста
     users: usersReducer, // Слайс хранит всех юзеров, которые подписаны на открытое сообщество
-    photos: '[]', // Слайс хранит фотографии только открытого сообщества
+    photos: photosReducer, // Слайс хранит фотографии только открытого сообщества
     articles: articlesReducer, // Слайс хранит статьи только открытого сообщества
   },
 });

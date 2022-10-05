@@ -27,3 +27,6 @@ export const SET_ARTICLES = 'SET_ARTICLES';
 export const SET_COMMENTS = 'SET_COMMENTS';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const ADD_POST_COUNTER = 'ADD_POST_COUNTER';
+
+// PHOTOS
+export const SET_PHOTO = 'SET_PHOTO';
