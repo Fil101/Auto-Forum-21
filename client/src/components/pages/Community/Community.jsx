@@ -26,12 +26,12 @@ function Community() {
   // получаем все посты сообщества:
   useEffect(() => {
     dispatch(fetchPostsAsync(modelId));
-  }, []);
+  }, [modelId]);
 
   // получаем всех подписчиков сообщества:
   useEffect(() => {
     dispatch(fetchUsersAsync(modelId));
-  }, []);
+  }, [modelId]);
 
   return (
     <ThemeProvider theme={darkTheme}>

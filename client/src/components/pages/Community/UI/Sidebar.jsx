@@ -1,12 +1,8 @@
 import {
   AccountBox,
   Article,
-  Group,
   Home,
   ModeNight,
-  Person,
-  Settings,
-  Storefront,
 } from '@mui/icons-material';
 import {
   Autocomplete,
@@ -19,32 +15,40 @@ import {
   Switch,
   TextField,
 } from '@mui/material';
+import TurnSlightRightIcon from '@mui/icons-material/TurnSlightRight';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import { fetchModels } from '../../../../redux/actions/modelsActions';
-
-const brandsName = [];
-const modelsName = [];
+import { Link, NavLink } from 'react-router-dom';
+import { fetchModelsList } from '../../../../redux/actions/modelsActionsList';
 
 function Sidebar({ mode, setMode }) {
   const brands = useSelector((state) => state.brands);
   const models = useSelector((state) => state.models);
-  // const temp = brandsName.push(brands.map((brand) => brand.name));
+  const modelsList = useSelector((state) => state.modelsList);
+  // console.log('28', brands[0].name);
+  // const temp = [{ title: brands[0].name, id: brands[0].id }];
+  // console.log('28', temp);
 
-  const [value, setValue] = React.useState();
-  const [value2, setValue2] = React.useState();
-  const [inputValue, setInputValue] = React.useState('');
-  const [inputValue2, setInputValue2] = React.useState('');
+  const [brandsNameValue, setBrandsNameValue] = useState();
+  const [modelsNameValue, setModelsNamevalue] = useState();
+  const [inputBrandsNameValue, setInputBrandsNameValue] = useState();
+  const [inputModelsNamevalue, setInputModelsNamevalue] = useState();
+  const [modelsListChek, setModelsListChek] = useState(false);
+
   const dispatch = useDispatch();
   useEffect(() => {
-    const temp2 = modelsName.push(models.map((model) => console.log(model.name)));
-  }, [value]);
+    if (brandsNameValue) {
+      dispatch(fetchModelsList(brandsNameValue.id));
+    }
+  }, [brandsNameValue]);
+  useEffect(() => {
+    if (modelsList?.length > 0) {
+      setModelsListChek(true);
+    }
+  }, [modelsList]);
 
   return (
     <Box flex={1} p={2} sx={{ display: { xs: 'none', sm: 'block' } }}>
-      {console.log('brands-------------> ', brands)}
-      {console.log('brandsName---------> ', brandsName)}
       <Box position="fixed">
         <List>
           <ListItem disablePadding>
@@ -61,43 +65,58 @@ function Sidebar({ mode, setMode }) {
                 <Article />
               </ListItemIcon>
               <Autocomplete
-                value={value}
+                value={brandsNameValue || null}
                 onChange={(event, newValue) => {
-                  setValue(newValue);
-                  // getModel(newValue);
+                  setBrandsNameValue(newValue);
                 }}
-                inputValue={inputValue}
+                inputValue={inputBrandsNameValue}
                 onInputChange={(event, newInputValue) => {
-                  setInputValue(newInputValue);
+                  console.log('newInputValue', newInputValue);
+                  setInputBrandsNameValue(newInputValue);
                 }}
-                id="controllable-states-demo"
-                options={brands.map((brand) => brand.name)}
+                id="controllable-states-brands"
+                options={brands}
+                getOptionLabel={(option) => option?.name.toString()}
                 sx={{ width: 180 }}
                 renderInput={(params) => <TextField {...params} label="Выберите бренд" />}
               />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
+          {/* {brandsNameValue ? ( */}
+          {console.log('modelsListChek', modelsListChek)}
+          {modelsListChek === true ? (
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <Article />
+                </ListItemIcon>
+                <Autocomplete
+                  value={modelsNameValue || null}
+                  onChange={(event, newValue) => {
+                    setModelsNamevalue(newValue);
+                    console.log('modelsNameValue', modelsNameValue);
+                  }}
+                  inputValue={inputModelsNamevalue}
+                  onInputChange={(event, newInputValue) => {
+                    setInputModelsNamevalue(newInputValue);
+                  }}
+                  id="controllable-states-models"
+                  options={modelsList}
+                  getOptionLabel={(option) => option?.label.toString()}
+                  sx={{ width: 180 }}
+                  renderInput={(params) => <TextField {...params} label="Выберите модель" />}
+                />
+              </ListItemButton>
+            </ListItem>
+          ) : <> </>}
+          {modelsNameValue ? (
+            <ListItemButton component={Link} to={`/models/${modelsNameValue.id}`}>
               <ListItemIcon>
-                <Article />
+                <TurnSlightRightIcon />
               </ListItemIcon>
-              <Autocomplete
-                value={value2}
-                onChange={(event, newValue) => {
-                  setValue2(newValue);
-                }}
-                inputValue={inputValue2}
-                onInputChange={(event, newInputValue) => {
-                  setInputValue2(newInputValue);
-                }}
-                id="controllable-states-demo"
-                options={modelsName}
-                sx={{ width: 180 }}
-                renderInput={(params) => <TextField {...params} label="Выберите модель" />}
-              />
+              <ListItemText primary="Перейти" />
             </ListItemButton>
-          </ListItem>
+          ) : <> </>}
           <ListItem disablePadding>
             <ListItemButton component={NavLink} to="/personal">
               <ListItemIcon>
@@ -116,6 +135,7 @@ function Sidebar({ mode, setMode }) {
           </ListItem>
         </List>
       </Box>
+      {console.log('modelList', modelsList)}
     </Box>
   );
 }
