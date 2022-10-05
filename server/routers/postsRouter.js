@@ -47,6 +47,14 @@ router.post('/:modelId', fileMiddleware.single('post-photo'), async (req, res) =
 router.post('/favorite/:postId', async (req, res) => {
   const { postId } = req.params;
   const { userId } = req.session;
+  if (!req.session.userId) {
+    res.sendStatus(401);
+    return;
+  }
+  if (!postId) {
+    res.sendStatus(401);
+    return;
+  }
   const [favPost, created] = await Favorite_post.findOrCreate({
     where: { post_id: postId, user_id: userId },
   });
