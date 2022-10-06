@@ -64,7 +64,7 @@ router.post('/:modelId', fileMiddleware.single('post-photo'), async (req, res) =
   const fixPath = req.file.path.substring(7);
   try {
     const newPost = await Post.create({ title, text, img: fixPath, car_model_id: modelId, user_id: user });
-    const postWithUser = await Post.findOne({ where: { user_id: user }, include: { model: User } });
+    const postWithUser = await Post.findOne({ where: { id: newPost.id }, include: { model: User } });
     res.json(postWithUser);
   } catch (error) {
     console.error(error);

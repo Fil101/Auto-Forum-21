@@ -47,7 +47,6 @@ function Community() {
     dispatch(fetchPhoto(modelId));
   }, [modelId]);
 
- 
   useEffect(() => {
     console.log('dksjfksajbvgkhbvglaekhrbvgaerkbv hi bi');
   }, [mode]);

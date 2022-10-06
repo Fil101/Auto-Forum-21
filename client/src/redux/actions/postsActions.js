@@ -27,6 +27,7 @@ export const addPostCounterLike = (postId) => ({
   type: ADD_POST_COUNTER_LIKE,
   payload: postId,
 });
+
 // export const fetchPostsAsync = (modelId) => async (dispatch) => {
 //   try {
 //     const res = await axios(`/api/posts/${modelId}`);
@@ -41,6 +42,7 @@ export const addPostAsync = (modelId, inputs, img) => async (dispatch) => {
   // data.append('post-photo', img);
   const { title, text } = inputs;
   const data = { 'post-photo': img, title, text };
+  console.log('мы в addPost');
   await axios.post(`/api/posts/${modelId}`, data, {
     headers: {
       'Content-Type': 'multipart/form-data',
