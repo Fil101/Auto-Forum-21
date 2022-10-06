@@ -43,7 +43,7 @@ function Community() {
     <ThemeProvider theme={darkTheme}>
       <Box bgcolor="background.default" color="text.primary" minHeight="100vh">
         <Stack direction="row" spacing={2} justifyContent="space-between">
-          <Sidebar setMode={setMode} mode={mode} />
+          <Sidebar setMode={setMode} mode={mode} sx={{ height: '100%' }} />
           <Feed />
           <Rightbar />
         </Stack>

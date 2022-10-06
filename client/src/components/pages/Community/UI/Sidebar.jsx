@@ -18,13 +18,15 @@ import {
 import TurnSlightRightIcon from '@mui/icons-material/TurnSlightRight';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, Navigate, NavLink, useNavigate, useParams } from 'react-router-dom';
 import { fetchModelsList } from '../../../../redux/actions/modelsActionsList';
 
 function Sidebar({ mode, setMode }) {
+  const navigate = useNavigate();
   const brands = useSelector((state) => state.brands);
   const models = useSelector((state) => state.models);
   const modelsList = useSelector((state) => state.modelsList);
+  const { modelId } = useParams();
   // console.log('28', brands[0].name);
   // const temp = [{ title: brands[0].name, id: brands[0].id }];
   // console.log('28', temp);
@@ -40,16 +42,16 @@ function Sidebar({ mode, setMode }) {
     if (brandsNameValue) {
       dispatch(fetchModelsList(brandsNameValue.id));
     }
-  }, [brandsNameValue]);
+  }, [brandsNameValue, modelId]);
   useEffect(() => {
     if (modelsList?.length > 0) {
       setModelsListChek(true);
     }
-  }, [modelsList]);
+  }, [modelsList, modelId]);
 
   return (
-    <Box flex={3} p={2} sx={{ display: { xs: 'none', sm: 'flex' }, justifyContent: 'flex-end' }}>
-      <Box position="fixed">
+    <Box flex={1} p={2} sx={{ display: { xs: 'none', sm: 'block', height: '100%' } }}>
+      <Box position="fixed" sx={{ zIndex: 'tooltip' }}>
         <List>
           <ListItem disablePadding>
             <ListItemButton component={NavLink} to="/brands">
@@ -57,6 +59,22 @@ function Sidebar({ mode, setMode }) {
                 <Home />
               </ListItemIcon>
               <ListItemText primary="Homepage" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton component={NavLink} to="/personal">
+              <ListItemIcon>
+                <AccountBox />
+              </ListItemIcon>
+              <ListItemText primary="Profile" />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton component="a" href="#simple-list">
+              <ListItemIcon>
+                <ModeNight />
+              </ListItemIcon>
+              <Switch onChange={e => setMode(mode === 'light' ? 'dark' : 'light')} />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
@@ -78,7 +96,7 @@ function Sidebar({ mode, setMode }) {
                 options={brands}
                 getOptionLabel={(option) => option?.name.toString()}
                 sx={{ width: 180 }}
-                renderInput={(params) => <TextField {...params} label="Выберите бренд" />}
+                renderInput={(params) => <TextField {...params} sx={{ zIndex: 'tooltip' }} label="Выберите бренд" />}
               />
             </ListItemButton>
           </ListItem>
@@ -95,6 +113,7 @@ function Sidebar({ mode, setMode }) {
                   onChange={(event, newValue) => {
                     setModelsNamevalue(newValue);
                     console.log('modelsNameValue', modelsNameValue);
+                  // navigate(`/models/${modelsNameValue.id}`);
                   }}
                   inputValue={inputModelsNamevalue}
                   onInputChange={(event, newInputValue) => {
@@ -117,22 +136,6 @@ function Sidebar({ mode, setMode }) {
               <ListItemText primary="Перейти" />
             </ListItemButton>
           ) : <> </>}
-          <ListItem disablePadding>
-            <ListItemButton component={NavLink} to="/personal">
-              <ListItemIcon>
-                <AccountBox />
-              </ListItemIcon>
-              <ListItemText primary="Profile" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <ModeNight />
-              </ListItemIcon>
-              <Switch onChange={e => setMode(mode === 'light' ? 'dark' : 'light')} />
-            </ListItemButton>
-          </ListItem>
         </List>
       </Box>
       {console.log('modelList', modelsList)}
