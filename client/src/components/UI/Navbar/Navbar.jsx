@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,82 +13,105 @@ import AdbIcon from "@mui/icons-material/Adb";
 import LogoutIcon from '@mui/icons-material/Logout';
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import NavigationIcon from '@mui/icons-material/Navigation';
-import { Fab } from "@mui/material";
+// import NavigationIcon from '@mui/icons-material/Navigation';
+// import { Fab } from "@mui/material";
+import { createTheme, ListItemButton, ListItemIcon, Switch } from "@mui/material";
+import { ModeNight } from "@mui/icons-material";
+import { ThemeProvider } from "@emotion/react";
 import { logout } from "../../../redux/actions/authActions";
+import { setMode } from "../../../redux/actions/modeThemeActions";
+import './logostyle.css';
 
 function Navbar() {
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  const visibleReg = auth === null;
+  // const visibleReg = auth === null;
   const logoutHandler = (e) => {
     dispatch(logout());
   };
-  console.log(auth);
-  return (
-    <AppBar
-      position="sticky"
-      sx={{
-        display: "flex",
-        justifyContent: "space-between",
-        backgroundColor: "black",
-      }}
-    >
-      <Container
-        maxWidth="xl"
-      >
-        <Toolbar disableGutters>
-          {/* <LogoutIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: "70%",
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-              justifyContent: "space-around",
-            }}
-          >
-            AutoForum 21
-          </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              color="inherit"
+  const { mode } = useSelector((state) => state);
+  // const [mode, setMode] = useState('dark');
+  const darkTheme = createTheme({
+    palette: {
+      mode,
+    },
+  });
+
+  return (
+    <ThemeProvider theme={darkTheme}>
+      <AppBar
+        position="sticky"
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          backgroundColor: "black",
+        }}
+      >
+        <Container
+          maxWidth="xl"
+        >
+          <Toolbar disableGutters>
+            {/* <LogoutIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
+            <Typography
+              variant="h6"
+              noWrap
+              component="a"
+              href="/"
+              sx={{
+                mr: "50%",
+                display: { xs: "none", md: "flex" },
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+                justifyContent: "space-around",
+              }}
             >
-              <MenuIcon />
-            </IconButton>
-          </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            AutoForum
-          </Typography>
-          {visibleReg && (
+              <p>
+                <span className="car">CAR</span>
+                <span className="munity">MUNITY</span>
+              </p>
+            </Typography>
+
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                color="inherit"
+              >
+                <MenuIcon />
+              </IconButton>
+            </Box>
+            <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+            <Typography
+              variant="h5"
+              noWrap
+              component="a"
+              href=""
+              sx={{
+                mr: 2,
+                display: { xs: "flex", md: "none" },
+                flexGrow: 1,
+                fontFamily: "monospace",
+                fontWeight: 700,
+                letterSpacing: ".3rem",
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              CARMUNITY
+            </Typography>
+            <ListItemButton component="a" href="#simple-list" sx={{ width: '1px' }}>
+              <ListItemIcon>
+                <ModeNight />
+              </ListItemIcon>
+              <Switch onChange={e => (dispatch(setMode()))} />
+            </ListItemButton>
+            {!auth?.name && (
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               <Button
                 sx={{ my: 2, color: "white", display: "block" }}
@@ -105,9 +128,9 @@ function Navbar() {
                 Войти
               </Button>
             </Box>
-          )}
+            )}
 
-          {!visibleReg && (
+            {auth?.name && (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Перейти в личный кабинет">
                 <IconButton
@@ -122,10 +145,11 @@ function Navbar() {
                 <LogoutIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
               </Button>
             </Box>
-          )}
-        </Toolbar>
-      </Container>
-    </AppBar>
+            )}
+          </Toolbar>
+        </Container>
+      </AppBar>
+    </ThemeProvider>
   );
 }
 export default Navbar;

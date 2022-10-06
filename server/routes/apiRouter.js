@@ -87,6 +87,7 @@ router.get('/myCommunity', async (req, res) => {
     return;
   }
   const user = req.session.userId;
+  console.info('\x1b[34m%s\x1b[0m', 'Сработала ручка myCommunity');
   const myCommunity = await Subscribe.findAll({
     where: {
       user_id: user,
@@ -103,24 +104,26 @@ router.get('/myCommunity', async (req, res) => {
       },
     ],
   });
-  console.log('myCommunity ', myCommunity);
+  // console.info('myCommunity ', myCommunity);
   res.json(myCommunity);
 });
 
 router.get('/myPosts', async (req, res) => {
   const user = req.session.userId;
+  console.info('\x1b[34m%s\x1b[0m', 'Сработала ручка myPosts');
   const myPosts = await Post.findAll({
     where: {
       user_id: user,
     },
     include: { model: User },
   });
-  console.log('myPosts ', myPosts);
+  // console.info('myPosts ', myPosts);
   res.json(myPosts);
 });
 
 router.get('/favoritePosts', async (req, res) => {
   const user = req.session.userId;
+  console.info('\x1b[34m%s\x1b[0m', 'Сработала ручка favoritePosts');
   const myFavPosts = await Favorite_post.findAll({
     where: {
       user_id: user,
@@ -138,7 +141,7 @@ router.get('/favoritePosts', async (req, res) => {
     updatedAt: el.Post.updatedAt,
     id: el.Post.id,
   }));
-  console.log('favPosts ', favPosts);
+  // console.info('favPosts ', favPosts);
   res.json(favPosts);
 });
 
