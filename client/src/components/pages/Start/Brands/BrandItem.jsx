@@ -7,7 +7,7 @@ function BrandItem({ brand }) {
       <div className="logoBrand">
         <img
           src={brand.logo}
-          alt=""
+          alt={brand.name}
           style={{ width: '85%', height: '85%' }}
         />
       </div>
