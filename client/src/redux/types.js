@@ -34,3 +34,6 @@ export const ADD_POST_COUNTER_LIKE = 'ADD_POST_COUNTER_LIKE';
 
 // PHOTOS
 export const SET_PHOTO = 'SET_PHOTO';
+
+// ThemeMode
+export const SET_MODE = 'SET_MODE';
