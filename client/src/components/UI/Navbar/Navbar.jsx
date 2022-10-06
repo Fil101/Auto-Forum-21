@@ -110,6 +110,7 @@ function Navbar() {
                 <ModeNight />
               </ListItemIcon>
               <Switch onChange={e => (dispatch(setMode()))} />
+              {console.log('kukukukukukukukukukukuk')}
             </ListItemButton>
             {!auth?.name && (
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
