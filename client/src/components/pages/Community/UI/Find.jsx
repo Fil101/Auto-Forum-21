@@ -23,6 +23,7 @@ export default function Find() {
       }}
       noValidate
       autoComplete="off"
+      marginTop={5}
     >
       <TextField value={input} onChange={(e) => setInput(e.target.value)} id="standard-basic" label="Поиск..." variant="standard" />
     </Box>

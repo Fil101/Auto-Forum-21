@@ -20,7 +20,6 @@ import {
 } from '@mui/material';
 import { Home } from '@mui/icons-material';
 import { actionUserAsync } from '../../../../redux/actions/usersActions';
-import { fetchPhoto } from '../../../../redux/actions/photosActions';
 
 function Rightbar() {
   const dispatch = useDispatch();
@@ -40,10 +39,6 @@ function Rightbar() {
         setCheckSubscribe(res.data.state);
       });
   }, [modelId]);
-
-  useEffect(() => {
-    dispatch(fetchPhoto(modelId));
-  }, []);
 
   return (
     <Box flex={3} p={2} sx={{ display: { xs: 'none', sm: 'flex' }, justifyContent: 'flex-start' }}>

@@ -11,6 +11,7 @@ import Sidebar from './UI/Sidebar';
 // import { fetchPostsAsync } from '../../../redux/actions/postsActions';
 import { fetchUsersAsync } from '../../../redux/actions/usersActions';
 import { fetchArticles } from '../../../redux/actions/articlesActions';
+import { fetchPhoto } from '../../../redux/actions/photosActions';
 
 function Community() {
   const [mode, setMode] = useState('dark');
@@ -37,7 +38,12 @@ function Community() {
   // получаем все статьи сообщества
   useEffect(() => {
     dispatch(fetchArticles(modelId));
-  }, []);
+  }, [modelId]);
+
+  // получаем все фотки сообщества
+  useEffect(() => {
+    dispatch(fetchPhoto(modelId));
+  }, [modelId]);
 
   return (
     <ThemeProvider theme={darkTheme}>
