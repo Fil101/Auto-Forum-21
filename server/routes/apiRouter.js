@@ -106,6 +106,7 @@ router.get('/myPosts', async (req, res) => {
     where: {
       user_id: user,
     },
+    include: { model: User },
   });
   console.log(user, myPosts);
   res.json(myPosts);

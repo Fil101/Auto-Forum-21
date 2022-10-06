@@ -120,6 +120,9 @@ function Profile() {
         <Stack direction="row" spacing={2} justifyContent="space-between">
           <Sidebar setMode={setMode} mode={mode} />
           <Box
+            // position="fixed"
+            bgcolor="background.default"
+            color="text.primary"
             sx={{
               display: "flex",
               flexDirection: "row",
@@ -128,14 +131,16 @@ function Profile() {
               padding: "10px",
               width: "60%",
               justifyContent: "space-around",
-              backgroundColor: "#f5f5f5",
-              "&:hover": {
-                backgroundColor: "primary.ligth",
-                opacity: [0.9, 0.8, 0.7],
-              },
+              // backgroundColor: "#f5f5f5",
+              // "&:hover": {
+              //   backgroundColor: "primary.ligth",
+              //   opacity: [0.9, 0.8, 0.7],
+              // },
             }}
           >
             <Box
+              bgcolor="background.default"
+              color="text.primary"
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -162,6 +167,8 @@ function Profile() {
               <Button variant="contained">Добавить фото</Button>
             </Box>
             <Box
+              bgcolor="background.default"
+              color="text.primary"
               sx={{
                 display: "flex",
                 flexDirection: "column",
@@ -171,12 +178,15 @@ function Profile() {
               }}
             >
               {/* {isEdit ? ( */}
-              <Box sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                width: "100%",
-              }}
+              <Box
+                bgcolor="background.default"
+                color="text.primary"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  width: "100%",
+                }}
               >
                 <TextField
                   id="outlined-name"
@@ -254,16 +264,22 @@ function Profile() {
             </Tabs>
           </Box>
         </Stack>
+        {/* <Stack position="fixed"> */}
         <Stack direction="row" spacing={2} justifyContent="center">
-          <Box sx={{
-            display: "flex",
-            // flexDirection: "row",
-            flexWrap: 'wrap',
-            justifyContent: "center",
-            alignContent: "stretch",
-            alignItems: "center",
-            // width: "80%",
-          }}
+          <Box
+            bgcolor="background.default"
+            color="text.primary"
+            // position="fixed"
+            sx={{
+              display: "flex",
+              // flexDirection: "row",
+              flexWrap: 'wrap',
+              justifyContent: "center",
+              alignContent: "stretch",
+              alignItems: "center",
+              // width: "80%",
+              zIndex: 'modal',
+            }}
           >
             {resultPostOrCommunity ? (
               community?.map((el) => <OneCommunity community={el} key={el.id} />)
@@ -273,7 +289,7 @@ function Profile() {
           </Box>
 
         </Stack>
-
+        {/* </Stack> */}
         <Box
           bgcolor="background.default"
           color="text.primary"
