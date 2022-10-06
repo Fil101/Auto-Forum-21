@@ -50,7 +50,7 @@ function Sidebar({ mode, setMode }) {
   }, [modelsList, modelId]);
 
   return (
-    <Box flex={1} p={2} sx={{ display: { xs: 'none', sm: 'block' } }}>
+    <Box flex={1} p={2} sx={{ display: { xs: 'none', sm: 'block', height: '100%' } }}>
       <Box position="fixed" sx={{ zIndex: 'tooltip' }}>
         <List>
           <ListItem disablePadding>
@@ -113,7 +113,7 @@ function Sidebar({ mode, setMode }) {
                   onChange={(event, newValue) => {
                     setModelsNamevalue(newValue);
                     console.log('modelsNameValue', modelsNameValue);
-                    // navigate(`/models/${modelsNameValue.id}`);
+                  // navigate(`/models/${modelsNameValue.id}`);
                   }}
                   inputValue={inputModelsNamevalue}
                   onInputChange={(event, newInputValue) => {

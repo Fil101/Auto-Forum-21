@@ -56,7 +56,7 @@ router.post('/favorite/:postId', async (req, res) => {
     return;
   }
   const [favPost, created] = await Favorite_post.findOrCreate({
-    where: { post_id: postId, user_id: userId },
+    where: { post_id: postId, user_id: userId }, include: { model: User },
   });
   if (created) {
     res.sendStatus(200);

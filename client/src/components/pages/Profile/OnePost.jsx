@@ -32,7 +32,7 @@ export default function OnePost({ post, isFavorite, setPost }) {
   };
 
   return (
-    <Card sx={{ width: '60%', margin: '1%' }}>
+    <Card sx={{ width: '25%', height: '45%', margin: '1%' }}>
       <CardHeader
         avatar={(
           <Avatar src={post?.User?.img} aria-label="recipe" />
@@ -47,7 +47,7 @@ export default function OnePost({ post, isFavorite, setPost }) {
       />
       <CardMedia
         component="img"
-        height="500vh"
+        height="150vh"
         image={`http://localhost:3001/${post?.img}`}
         alt="Post Photo"
       />
