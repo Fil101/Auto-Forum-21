@@ -9,8 +9,9 @@ import modelsListReducer from './reducers/modelsListReducer';
 import postsReducer from './reducers/postsReducer';
 import usersReducer from './reducers/usersReducer';
 import postsSagaWatcher from './sagas/postsSaga';
-const sagaMiddleware = createSagaMiddleware();
 import photosReducer from './reducers/photosReducer';
+
+const sagaMiddleware = createSagaMiddleware();
 
 export default configureStore({
   reducer: {

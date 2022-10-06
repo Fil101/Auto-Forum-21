@@ -50,7 +50,7 @@ function Sidebar({ mode, setMode }) {
   }, [modelsList, modelId]);
 
   return (
-    <Box flex={1} p={2} sx={{ display: { xs: 'none', sm: 'block', height: '100%' } }}>
+    <Box flex={3} p={2} sx={{ display: { xs: 'none', sm: 'flex' }, justifyContent: 'flex-end' }}>
       <Box position="fixed" sx={{ zIndex: 'tooltip' }}>
         <List>
           <ListItem disablePadding>
