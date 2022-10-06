@@ -13,18 +13,22 @@ import {
   List,
   ListItem,
   ListItemAvatar,
+  ListItemButton,
+  ListItemIcon,
   ListItemText,
   Typography,
 } from '@mui/material';
+import { Home } from '@mui/icons-material';
 import { actionUserAsync } from '../../../../redux/actions/usersActions';
 
 function Rightbar() {
   const dispatch = useDispatch();
   const { modelId } = useParams();
   const users = useSelector((state) => state.users);
-  console.log('текущие подписчики', users);
+  const articles = useSelector((state) => state.articles);
+  console.log('это статьи', articles);
+
   const [checkSubscribe, setCheckSubscribe] = useState(false);
-  console.log(checkSubscribe, 'это проверка подписки');
 
   useEffect(() => {
     axios(`/api/users/${modelId}/subscribe`)
@@ -32,12 +36,11 @@ function Rightbar() {
         console.log(res.data.state, 'это ответ с бека');
         setCheckSubscribe(res.data.state);
       });
-  }, []);
+  }, [modelId]);
 
   return (
-    <Box flex={2} p={2} sx={{ display: { xs: 'none', sm: 'block' } }}>
+    <Box flex={3} p={2} sx={{ display: { xs: 'none', sm: 'flex' }, justifyContent: 'flex-start' }}>
       <Box position="fixed" width={300}>
-
         <Button
           sx={{ width: '100%', marginBottom: '15px' }}
           variant="outlined"
@@ -60,7 +63,15 @@ function Rightbar() {
             />
           ))}
         </AvatarGroup>
-        <Typography variant="h6" fontWeight={100} mt={2} mb={2}>
+        <Typography
+          component={NavLink}
+          to={`/models/${modelId}/photos`}
+          variant="h6"
+          fontWeight={100}
+          mt={2}
+          style={{ textDecoration: 'none' }}
+          color="text.primary"
+        >
           Фотографии ваших авто
         </Typography>
         <ImageList rowHeight={100} style={{ marginBottom: 20 }} cols={2}>
@@ -101,75 +112,37 @@ function Rightbar() {
             />
           </ImageListItem>
         </ImageList>
-        <Typography component={NavLink} to={`/models/${modelId}/articles`} variant="h6" fontWeight={100} mt={2}>
+        <Typography
+          component={NavLink}
+          to={`/models/${modelId}/articles`}
+          variant="h6"
+          fontWeight={100}
+          mt={2}
+          style={{ textDecoration: 'none' }}
+          color="text.primary"
+        >
           Статьи про авто
         </Typography>
         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-          <ListItem alignItems="flex-start">
-            <ListItemAvatar>
-              <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/3.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-              primary="Brunch this weekend?"
-              secondary={(
-                <>
-                  <Typography
-                    sx={{ display: 'inline' }}
-                    component="span"
-                    variant="body2"
-                    color="text.primary"
-                  >
-                    Ali Connors
-                  </Typography>
-                  {" — I'll be in your neighborhood doing errands this…"}
-                </>
-          )}
-            />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem alignItems="flex-start">
-            <ListItemAvatar>
-              <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-              primary="Summer BBQ"
-              secondary={(
-                <>
-                  <Typography
-                    sx={{ display: 'inline' }}
-                    component="span"
-                    variant="body2"
-                    color="text.primary"
-                  >
-                    to Scott, Alex, Jennifer
-                  </Typography>
-                  {" — Wish I could come, but I'm out of town this…"}
-                </>
-          )}
-            />
-          </ListItem>
-          <Divider variant="inset" component="li" />
-          <ListItem alignItems="flex-start">
-            <ListItemAvatar>
-              <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-            </ListItemAvatar>
-            <ListItemText
-              primary="Oui Oui"
-              secondary={(
-                <>
-                  <Typography
-                    sx={{ display: 'inline' }}
-                    component="span"
-                    variant="body2"
-                    color="text.primary"
-                  >
-                    Sandra Adams
-                  </Typography>
-                  {' — Do you have Paris recommendations? Have you ever…'}
-                </>
-          )}
-            />
-          </ListItem>
+          {articles && articles.map((article) => (
+            <>
+              <ListItem alignItems="flex-start">
+                <ListItemAvatar>
+                  <Avatar alt="Remy Sharp" src={article?.img} />
+                </ListItemAvatar>
+                <ListItemText
+                  primary={article?.title}
+                  secondary={(
+                    <>
+                      {`${article?.text.substr(0, 53)}...`}
+                      {/* {" — I'll be in your neighborhood doing errands this…"} */}
+                    </>
+                  )}
+                />
+              </ListItem>
+              <Divider variant="inset" component="li" />
+            </>
+          ))}
         </List>
       </Box>
     </Box>

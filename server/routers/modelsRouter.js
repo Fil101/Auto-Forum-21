@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 const express = require('express');
 
-const { Car_model } = require('../db/models');
+const { Car_model, Car_brand } = require('../db/models');
 
 const router = express.Router();
 
@@ -20,6 +20,12 @@ router.get('/modelslist/:brandId', async (req, res) => {
   const modelList = models.map((brand) => ({ label: brand.name, id: brand.id }));
   console.log(modelList);
   res.json(modelList);
+});
+
+router.get('/model/:modelId', async (req, res) => {
+  const { modelId } = req.params;
+  const model = await Car_model.findOne({ where: { id: modelId }, include: { model: Car_brand } });
+  res.json(model);
 });
 
 module.exports = router;

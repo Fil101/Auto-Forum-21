@@ -2,33 +2,60 @@
 /* eslint-disable camelcase */
 const express = require('express');
 const { Sequelize } = require('sequelize');
+const { Op } = require('sequelize');
 const { Post, Like_post, User, Favorite_post, Comment } = require('../db/models');
 const fileMiddleware = require('../middleWares/multerByFil');
 
 const router = express.Router();
 
 // end point возвращает все посты определенного сообщества по id модели
-router.get('/:modelId', async (req, res) => {
+router.post('/search/:modelId', async (req, res) => {
   const { modelId } = req.params;
-  const posts = await Post.findAll({
-    where: { car_model_id: modelId },
+  const { input } = req.body;
+  const postsWithCommentsCount = await Post.findAll({
+    where: {
+      car_model_id: modelId,
+      text: {
+        [Op.like]: `%${input}%`,
+      },
+    },
     attributes: {
       include: [
         [Sequelize.fn('COUNT', Sequelize.col('Comments.id')), 'commentsCount'],
-        [Sequelize.fn('COUNT', Sequelize.col('Like_posts.id')), 'likesCount'],
       ],
     },
     include: [
       { model: User },
-      { model: Like_post, attributes: [] },
       { model: Comment, attributes: [] }],
     group: [
       'Post.id',
       'User.id',
     ],
   });
-  res.json(posts);
+  const likes = await Post.findAll({
+    where: {
+      car_model_id: modelId,
+      text: {
+        [Op.like]: `%${input}%`,
+      },
+    },
+    attributes: {
+      include: [
+        [Sequelize.fn('COUNT', Sequelize.col('Like_posts.id')), 'likesCount'],
+      ],
+    },
+    include: [
+      { model: User, attributes: [] },
+      { model: Like_post, attributes: [] },
+    ],
+    group: [
+      'Post.id',
+      'User.id',
+    ],
+  });
+  res.json(postsWithCommentsCount.map((el, ind) => ({ ...JSON.parse(JSON.stringify(el)), ...JSON.parse(JSON.stringify(likes[ind])) })));
 });
+
 // Добавляет пост с мультером
 router.post('/:modelId', fileMiddleware.single('post-photo'), async (req, res) => {
   const { modelId } = req.params;
@@ -47,8 +74,16 @@ router.post('/:modelId', fileMiddleware.single('post-photo'), async (req, res) =
 router.post('/favorite/:postId', async (req, res) => {
   const { postId } = req.params;
   const { userId } = req.session;
+  if (!req.session.userId) {
+    res.sendStatus(401);
+    return;
+  }
+  if (!postId) {
+    res.sendStatus(401);
+    return;
+  }
   const [favPost, created] = await Favorite_post.findOrCreate({
-    where: { post_id: postId, user_id: userId },
+    where: { post_id: postId, user_id: userId }, include: { model: User },
   });
   if (created) {
     res.sendStatus(200);

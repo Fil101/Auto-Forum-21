@@ -3,10 +3,13 @@
 export const SET_AUTH = 'SET_AUTH';
 export const LOGOUT = 'LOGOUT';
 export const SET_ABOUT = 'SET_ABOUT';
+export const SET_TG = 'SET_TG';
+export const SET_NAME = 'SET_NAME';
 
-// POSTS
+// POSTS FETCH_POSTS
 export const SET_POSTS = 'SET_POSTS';
 export const ADD_POST = 'ADD_POST';
+export const FETCH_POSTS = 'FETCH_POSTS';
 
 // USERS
 export const SET_USERS = 'SET_USERS';
@@ -27,3 +30,6 @@ export const SET_ARTICLES = 'SET_ARTICLES';
 export const SET_COMMENTS = 'SET_COMMENTS';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const ADD_POST_COUNTER = 'ADD_POST_COUNTER';
+
+// PHOTOS
+export const SET_PHOTO = 'SET_PHOTO';
