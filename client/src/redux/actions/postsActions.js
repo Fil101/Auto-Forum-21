@@ -1,11 +1,16 @@
 /* eslint-disable max-len */
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
-import { SET_POSTS, ADD_POST, ADD_POST_COUNTER } from '../types';
+import { SET_POSTS, ADD_POST, ADD_POST_COUNTER, FETCH_POSTS } from '../types';
 
-export const setPosts = (random) => ({
+export const setPosts = (payload) => ({
   type: SET_POSTS,
-  payload: random,
+  payload,
+});
+
+export const fetchPosts = (modelId, input) => ({
+  type: FETCH_POSTS,
+  payload: { modelId, input },
 });
 
 export const addPost = (post) => ({
@@ -18,14 +23,14 @@ export const addPostCounter = (postId) => ({
   payload: postId,
 });
 
-export const fetchPostsAsync = (modelId) => async (dispatch) => {
-  try {
-    const res = await axios(`/api/posts/${modelId}`);
-    dispatch(setPosts(res.data));
-  } catch (e) {
-    console.log(e);
-  }
-};
+// export const fetchPostsAsync = (modelId) => async (dispatch) => {
+//   try {
+//     const res = await axios(`/api/posts/${modelId}`);
+//     dispatch(setPosts(res.data));
+//   } catch (e) {
+//     console.log(e);
+//   }
+// };
 
 export const addPostAsync = (modelId, inputs, img) => async (dispatch) => {
   // const data = new FormData();

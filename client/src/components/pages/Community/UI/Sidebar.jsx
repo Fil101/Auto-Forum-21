@@ -48,7 +48,7 @@ function Sidebar({ mode, setMode }) {
   }, [modelsList]);
 
   return (
-    <Box flex={1} p={2} sx={{ display: { xs: 'none', sm: 'block' } }}>
+    <Box flex={3} p={2} sx={{ display: { xs: 'none', sm: 'flex' }, justifyContent: 'flex-end' }}>
       <Box position="fixed">
         <List>
           <ListItem disablePadding>

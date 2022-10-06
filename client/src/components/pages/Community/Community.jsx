@@ -8,8 +8,9 @@ import Add from './UI/Add';
 import Feed from './UI/Feed';
 import Rightbar from './UI/Rightbar';
 import Sidebar from './UI/Sidebar';
-import { fetchPostsAsync } from '../../../redux/actions/postsActions';
+// import { fetchPostsAsync } from '../../../redux/actions/postsActions';
 import { fetchUsersAsync } from '../../../redux/actions/usersActions';
+import { fetchArticles } from '../../../redux/actions/articlesActions';
 
 function Community() {
   const [mode, setMode] = useState('dark');
@@ -24,18 +25,23 @@ function Community() {
   const { posts, users } = useSelector((state) => state);
 
   // получаем все посты сообщества:
-  useEffect(() => {
-    dispatch(fetchPostsAsync(modelId));
-  }, [modelId]);
+  // useEffect(() => {
+  //   dispatch(fetchPostsAsync(modelId));
+  // }, [modelId]);
 
   // получаем всех подписчиков сообщества:
   useEffect(() => {
     dispatch(fetchUsersAsync(modelId));
   }, [modelId]);
 
+  // получаем все статьи сообщества
+  useEffect(() => {
+    dispatch(fetchArticles(modelId));
+  }, []);
+
   return (
     <ThemeProvider theme={darkTheme}>
-      <Box bgcolor="background.default" color="text.primary">
+      <Box bgcolor="background.default" color="text.primary" minHeight="100vh">
         <Stack direction="row" spacing={2} justifyContent="space-between">
           <Sidebar setMode={setMode} mode={mode} />
           <Feed />

@@ -11,9 +11,8 @@ function ArticleList() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchArticles(modelId));
+    if (articles.length === 0) { dispatch(fetchArticles(modelId)); }
   }, []);
-  console.log('eto articles', articles);
 
   return (
     <div className="ArticleListBody">

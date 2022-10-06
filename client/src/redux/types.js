@@ -4,9 +4,10 @@ export const SET_AUTH = 'SET_AUTH';
 export const LOGOUT = 'LOGOUT';
 export const SET_ABOUT = 'SET_ABOUT';
 
-// POSTS
+// POSTS FETCH_POSTS
 export const SET_POSTS = 'SET_POSTS';
 export const ADD_POST = 'ADD_POST';
+export const FETCH_POSTS = 'FETCH_POSTS';
 
 // USERS
 export const SET_USERS = 'SET_USERS';
