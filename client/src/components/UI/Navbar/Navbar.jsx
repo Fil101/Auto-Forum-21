@@ -58,7 +58,7 @@ function Navbar() {
               sx={{
                 mr: "50%",
                 display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
+                fontFamily: "montserrat",
                 fontWeight: 700,
                 letterSpacing: ".3rem",
                 color: "inherit",
@@ -66,7 +66,8 @@ function Navbar() {
                 justifyContent: "space-around",
               }}
             >
-              <p>
+              <img src="/carr.png" alt="car" className="navbarcar" />
+              <p className="boxlogo">
                 <span className="car">CAR</span>
                 <span className="munity">MUNITY</span>
               </p>
