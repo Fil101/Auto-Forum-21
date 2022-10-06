@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const express = require('express');
 const bcrypt = require('bcrypt');
 const { User, Subscribe, Car_model, Car_brand, Post, Like_post, Favorite_post } = require('../db/models');
@@ -17,12 +18,14 @@ router.post('/user', async (req, res) => {
   });
   if (!created) res.sendStatus(500);
   else {
-    const { name, email, id, img } = currentUser.dataValues;
+    const { name, email, id, img, about, tg } = currentUser.dataValues;
     req.session.userName = name;
     req.session.email = email;
     req.session.userId = id;
     req.session.img = img;
-    res.json({ name, email, id, img });
+    req.session.userAbout = about;
+    req.session.userTg = tg;
+    res.json({ name, email, id, img, about, tg });
   }
 });
 
@@ -42,12 +45,14 @@ router.post('/login', async (req, res) => {
       id: databaseUser.id,
       img: databaseUser.img,
       about: databaseUser.about,
+      tg: databaseUser.tg,
     };
     req.session.userName = databaseUser.name;
     req.session.email = databaseUser.email;
     req.session.userId = databaseUser.id;
     req.session.userAbout = databaseUser.about;
     req.session.img = databaseUser.img;
+    req.session.userTg = databaseUser.tg;
     res.json(sessionData);
   } else res.sendStatus(401);
 });
@@ -70,6 +75,7 @@ router.get('/auth', (req, res) => {
     id: req.session.userId,
     img: req.session.img,
     about: req.session.userAbout,
+    tg: req.session.userTg,
   };
   // console.log(sessionData);
   res.json(sessionData);
@@ -108,7 +114,6 @@ router.get('/myPosts', async (req, res) => {
     },
     include: { model: User },
   });
-  console.log(user, myPosts);
   res.json(myPosts);
 });
 
@@ -131,17 +136,7 @@ router.get('/favoritePosts', async (req, res) => {
     updatedAt: el.Post.updatedAt,
     id: el.Post.id,
   }));
-  // console.log(myFavPosts);
   res.json(favPosts);
 });
 
 module.exports = router;
-
-// car_model_id: 105
-// createdAt: "2022-10-04T15:30:49.495Z"
-// id: 3
-// img: "1664897449468-ÑÐ°ÑÐºÐ°.jpg"
-// text: "ты тама"
-// title: "я тута"
-// updatedAt: "2022-10-04T15:30:49.495Z"
-// user_id: 3

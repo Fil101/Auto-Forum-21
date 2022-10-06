@@ -31,10 +31,10 @@ function Profile() {
   const { about, tg, name, email } = useSelector((state) => state.auth);
   const [info, setInfo] = useState(about);
   const [tgInfo, setTgInfo] = useState(tg);
+  const [newName, setNewName] = useState(name);
   const [isEdit, setIsEdit] = useState(false);
   const [community, setCommunity] = useState([]);
   const [post, setPost] = useState([]);
-  // const [favPost, setFavPost] = useState([]);
   const dispatch = useDispatch();
 
   const [mode, setMode] = useState('dark');
@@ -43,16 +43,6 @@ function Profile() {
       mode,
     },
   });
-
-  // console.log('это комьюнити массив', community);
-  // console.log('это массив постов', post);
-  // console.log('это массив сохраненных постов', favPost);
-  // console.log(info);
-
-  const handleChange = (event, newValue) => {
-    setTabNum(newValue);
-    // console.log(event, newValue);
-  };
 
   const postOrCommunity = () => {
     if (tabNum === 0) {
@@ -78,6 +68,20 @@ function Profile() {
     }
   }, [tabNum]);
 
+  const handleChange = (newValue) => {
+    setTabNum(newValue);
+  };
+
+  const infoInputHandler = () => {
+    dispatch(changeAbout(info, tgInfo, newName));
+    setIsEdit((state) => !state);
+  };
+
+  const infoHandler = () => {
+    setIsEdit((state) => !state);
+  };
+
+  // для загрузки фото
   const [input, setInput] = useState({ avatar: null });
   const photoHandler = (e) => {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.files[0] }));
@@ -89,30 +93,6 @@ function Profile() {
       // navigate('/');
     });
   };
-
-  const infoInputHandler = () => {
-    dispatch(changeAbout(info, tgInfo));
-    // axios.put("/api/users/about", { about })
-    //   .then(setIsEdit(state => !state));
-    setIsEdit((state) => !state);
-  };
-
-  const infoHandler = () => {
-    setIsEdit((state) => !state);
-  };
-
-  // const tgInputHandler = () => {
-  //   dispatch(changeTg(tg));
-  //   // axios.put("/api/users/about", { about })
-  //   //   .then(setIsEdit(state => !state));
-  //   setIsEdit((state) => !state);
-  // };
-
-  // const infoHandler = () => {
-  //   setIsEdit((state) => !state);
-  // };
-
-  // console.log(community);
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -177,11 +157,13 @@ function Profile() {
                 alignItems: "center",
               }}
             >
+
               {/* {isEdit ? ( */}
               <Box
                 bgcolor="background.default"
                 color="text.primary"
                 sx={{
+
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
@@ -190,11 +172,12 @@ function Profile() {
               >
                 <TextField
                   id="outlined-name"
-                  disabled
+                  disabled={!isEdit}
                   sx={{ margin: "5px" }}
                   label="имя"
-                  value={name}
-                  // onChange={(e) => setTgInfo(e.target.value)}
+                    // value={name}
+                  value={newName}
+                  onChange={(e) => setNewName(e.target.value)}
                 />
                 <TextField
                   id="outlined-name"
@@ -221,9 +204,44 @@ function Profile() {
                   onChange={(e) => setInfo(e.target.value)}
                 />
               </Box>
-              {/* ) : (
-                <Box>{about}</Box>
-              )} */}
+              ) : (
+              <Box sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                width: "100%",
+              }}
+              >
+                <TextField
+                  id="outlined-name"
+                  disabled
+                  sx={{ margin: "5px" }}
+                  label="имя"
+                  value={name}
+                />
+                <TextField
+                  id="outlined-name"
+                  disabled
+                  sx={{ margin: "5px" }}
+                  label="email"
+                  value={email}
+                />
+                <TextField
+                  id="outlined-name"
+                  disabled
+                  sx={{ margin: "5px" }}
+                  label="телеграмм"
+                  value={tg}
+                />
+                <TextField
+                  id="outlined-name"
+                  sx={{ margin: "5px" }}
+                  disabled
+                  label="о себе"
+                  value={about}
+                />
+              </Box>
+              )
 
               {isEdit ? (
                 <Button
