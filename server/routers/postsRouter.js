@@ -12,23 +12,6 @@ const router = express.Router();
 router.post('/search/:modelId', async (req, res) => {
   const { modelId } = req.params;
   const { input } = req.body;
-  // const posts = await Post.findAll({
-  //   where: { car_model_id: modelId },
-  //   attributes: {
-  //     include: [
-  //       [Sequelize.fn('COUNT', Sequelize.col('Comments.id')), 'commentsCount'],
-  //       [Sequelize.fn('COUNT', Sequelize.col('Like_posts.id')), 'likesCount'],
-  //     ],
-  //   },
-  //   include: [
-  //     { model: User },
-  //     { model: Like_post, attributes: [] },
-  //     { model: Comment, attributes: [] }],
-  //   group: [
-  //     'Post.id',
-  //     'User.id',
-  //   ],
-  // });
   const postsWithCommentsCount = await Post.findAll({
     where: {
       car_model_id: modelId,
@@ -72,6 +55,7 @@ router.post('/search/:modelId', async (req, res) => {
   });
   res.json(postsWithCommentsCount.map((el, ind) => ({ ...JSON.parse(JSON.stringify(el)), ...JSON.parse(JSON.stringify(likes[ind])) })));
 });
+
 // Добавляет пост с мультером
 router.post('/:modelId', fileMiddleware.single('post-photo'), async (req, res) => {
   const { modelId } = req.params;
