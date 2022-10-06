@@ -103,6 +103,7 @@ router.get('/myCommunity', async (req, res) => {
       },
     ],
   });
+  console.log('myCommunity ', myCommunity);
   res.json(myCommunity);
 });
 
@@ -114,6 +115,7 @@ router.get('/myPosts', async (req, res) => {
     },
     include: { model: User },
   });
+  console.log('myPosts ', myPosts);
   res.json(myPosts);
 });
 
@@ -136,6 +138,7 @@ router.get('/favoritePosts', async (req, res) => {
     updatedAt: el.Post.updatedAt,
     id: el.Post.id,
   }));
+  console.log('favPosts ', favPosts);
   res.json(favPosts);
 });
 

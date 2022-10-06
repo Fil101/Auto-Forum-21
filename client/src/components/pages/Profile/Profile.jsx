@@ -61,6 +61,7 @@ function Profile() {
         axios("/api/v1/myPosts").then((res) => setPost(res.data));
         break;
       case 2:
+        console.log('case 2');
         axios("/api/v1/favoritePosts").then((res) => setPost(res.data));
         break;
       default:
@@ -68,7 +69,7 @@ function Profile() {
     }
   }, [tabNum]);
 
-  const handleChange = (newValue) => {
+  const handleChange = (event, newValue) => {
     setTabNum(newValue);
   };
 
@@ -158,90 +159,90 @@ function Profile() {
               }}
             >
 
-              {/* {isEdit ? ( */}
-              <Box
-                bgcolor="background.default"
-                color="text.primary"
-                sx={{
+              {isEdit ? (
+                <Box
+                  bgcolor="background.default"
+                  color="text.primary"
+                  sx={{
 
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    width: "100%",
+                  }}
+                >
+                  <TextField
+                    id="outlined-name"
+                    disabled={!isEdit}
+                    sx={{ margin: "5px" }}
+                    label="имя"
+                    // value={name}
+                    value={newName}
+                    onChange={(e) => setNewName(e.target.value)}
+                  />
+                  <TextField
+                    id="outlined-name"
+                    disabled
+                    sx={{ margin: "5px" }}
+                    label="email"
+                    value={email}
+                  />
+                  <TextField
+                    id="outlined-name"
+                    disabled={!isEdit}
+                    sx={{ margin: "5px" }}
+                    label="телеграмм"
+                    value={tgInfo}
+                    onChange={(e) => setTgInfo(e.target.value)}
+                  />
+
+                  <TextField
+                    id="outlined-name"
+                    sx={{ margin: "5px" }}
+                    disabled={!isEdit}
+                    label="о себе"
+                    value={info}
+                    onChange={(e) => setInfo(e.target.value)}
+                  />
+                </Box>
+              ) : (
+                <Box sx={{
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
                   width: "100%",
                 }}
-              >
-                <TextField
-                  id="outlined-name"
-                  disabled={!isEdit}
-                  sx={{ margin: "5px" }}
-                  label="имя"
-                    // value={name}
-                  value={newName}
-                  onChange={(e) => setNewName(e.target.value)}
-                />
-                <TextField
-                  id="outlined-name"
-                  disabled
-                  sx={{ margin: "5px" }}
-                  label="email"
-                  value={email}
-                />
-                <TextField
-                  id="outlined-name"
-                  disabled={!isEdit}
-                  sx={{ margin: "5px" }}
-                  label="телеграмм"
-                  value={tgInfo}
-                  onChange={(e) => setTgInfo(e.target.value)}
-                />
-
-                <TextField
-                  id="outlined-name"
-                  sx={{ margin: "5px" }}
-                  disabled={!isEdit}
-                  label="о себе"
-                  value={info}
-                  onChange={(e) => setInfo(e.target.value)}
-                />
-              </Box>
-              ) : (
-              <Box sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                width: "100%",
-              }}
-              >
-                <TextField
-                  id="outlined-name"
-                  disabled
-                  sx={{ margin: "5px" }}
-                  label="имя"
-                  value={name}
-                />
-                <TextField
-                  id="outlined-name"
-                  disabled
-                  sx={{ margin: "5px" }}
-                  label="email"
-                  value={email}
-                />
-                <TextField
-                  id="outlined-name"
-                  disabled
-                  sx={{ margin: "5px" }}
-                  label="телеграмм"
-                  value={tg}
-                />
-                <TextField
-                  id="outlined-name"
-                  sx={{ margin: "5px" }}
-                  disabled
-                  label="о себе"
-                  value={about}
-                />
-              </Box>
-              )
+                >
+                  <TextField
+                    id="outlined-name"
+                    disabled
+                    sx={{ margin: "5px" }}
+                    label="имя"
+                    value={name}
+                  />
+                  <TextField
+                    id="outlined-name"
+                    disabled
+                    sx={{ margin: "5px" }}
+                    label="email"
+                    value={email}
+                  />
+                  <TextField
+                    id="outlined-name"
+                    disabled
+                    sx={{ margin: "5px" }}
+                    label="телеграмм"
+                    value={tg}
+                  />
+                  <TextField
+                    id="outlined-name"
+                    sx={{ margin: "5px" }}
+                    disabled
+                    label="о себе"
+                    value={about}
+                  />
+                </Box>
+              )}
 
               {isEdit ? (
                 <Button
