@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MinorCrashRoundedIcon from "@mui/icons-material/MinorCrashRounded";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { setAuth } from "../../../../redux/actions/authActions";
@@ -61,8 +61,15 @@ function Registration() {
       });
   };
 
+  const { mode } = useSelector((state) => state);
+  const darkTheme = createTheme({
+    palette: {
+      mode,
+    },
+  });
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={darkTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         {/* <img src="/Logo/Lexus.png" /> */}

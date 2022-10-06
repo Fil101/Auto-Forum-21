@@ -33,3 +33,6 @@ export const ADD_POST_COUNTER = 'ADD_POST_COUNTER';
 
 // PHOTOS
 export const SET_PHOTO = 'SET_PHOTO';
+
+// ThemeMode
+export const SET_MODE = 'SET_MODE';
