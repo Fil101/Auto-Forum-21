@@ -158,13 +158,11 @@ function Profile() {
                 alignItems: "center",
               }}
             >
-
               {isEdit ? (
                 <Box
                   bgcolor="background.default"
                   color="text.primary"
                   sx={{
-
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
@@ -195,7 +193,6 @@ function Profile() {
                     value={tgInfo}
                     onChange={(e) => setTgInfo(e.target.value)}
                   />
-
                   <TextField
                     id="outlined-name"
                     sx={{ margin: "5px" }}
@@ -243,7 +240,6 @@ function Profile() {
                   />
                 </Box>
               )}
-
               {isEdit ? (
                 <Button
                   onClick={infoInputHandler}
@@ -270,7 +266,6 @@ function Profile() {
                 </Button>
               )}
             </Box>
-
           </Box>
           <Box flex={1} p={2} sx={{ display: { xs: 'none', sm: 'block' } }}>{' '}</Box>
         </Stack>
@@ -306,7 +301,6 @@ function Profile() {
               post?.map((el) => <OnePost post={el} key={el.id} isFavorite={tabNum === 2} setPost={setPost} />)
             )}
           </Box>
-
         </Stack>
         {/* </Stack> */}
         <Box
