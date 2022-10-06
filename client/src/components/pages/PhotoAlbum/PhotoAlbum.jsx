@@ -21,14 +21,14 @@ function PhotoAlbum() {
 
   return (
     <Box sx={{ width: '100%', height: '100%', overflowY: 'scroll', backgroundColor: 'black' }}>
-      <Tooltip
+      {/* <Tooltip
         onClick={(e) => console.log('eee')}
         title="Добавить фото"
       >
         <Fab variant="extended" size="medium" color="white" aria-label="add">
-          {/* <AddIcon sx={{ mr: 30 }} /> */}
+          <AddIcon sx={{ mr: 30 }} />
         </Fab>
-      </Tooltip>
+      </Tooltip> */}
       <ImageList variant="masonry" cols={3} gap={22}>
         {photos?.map((el) => (
           <ImageListItem key={el.img}>
