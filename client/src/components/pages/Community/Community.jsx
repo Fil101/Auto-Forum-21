@@ -11,9 +11,11 @@ import Sidebar from './UI/Sidebar';
 // import { fetchPostsAsync } from '../../../redux/actions/postsActions';
 import { fetchUsersAsync } from '../../../redux/actions/usersActions';
 import { fetchArticles } from '../../../redux/actions/articlesActions';
+import { setMode } from '../../../redux/actions/modeThemeActions';
 
 function Community() {
-  const [mode, setMode] = useState('dark');
+  const { mode } = useSelector((state) => state);
+  // const [mode, setMode] = useState('dark');
   const darkTheme = createTheme({
     palette: {
       mode,
@@ -38,12 +40,16 @@ function Community() {
   useEffect(() => {
     dispatch(fetchArticles(modelId));
   }, []);
+  useEffect(() => {
+    console.log('dksjfksajbvgkhbvglaekhrbvgaerkbv hi bi');
+  }, [mode]);
 
+  //  setMode={dispatch(setMode)} mode={mode}
   return (
     <ThemeProvider theme={darkTheme}>
       <Box bgcolor="background.default" color="text.primary" minHeight="100vh">
         <Stack direction="row" spacing={2} justifyContent="space-between">
-          <Sidebar setMode={setMode} mode={mode} sx={{ height: '100%' }} />
+          <Sidebar sx={{ height: '100%' }} />
           <Feed />
           <Rightbar />
         </Stack>

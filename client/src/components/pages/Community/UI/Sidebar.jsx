@@ -20,12 +20,15 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Navigate, NavLink, useNavigate, useParams } from 'react-router-dom';
 import { fetchModelsList } from '../../../../redux/actions/modelsActionsList';
+import { setMode } from '../../../../redux/actions/modeThemeActions';
 
-function Sidebar({ mode, setMode }) {
+// { mode, setMode }
+function Sidebar() {
   const navigate = useNavigate();
   const brands = useSelector((state) => state.brands);
   const models = useSelector((state) => state.models);
   const modelsList = useSelector((state) => state.modelsList);
+  const { mode } = useSelector((state) => state.mode);
   const { modelId } = useParams();
   // console.log('28', brands[0].name);
   // const temp = [{ title: brands[0].name, id: brands[0].id }];
@@ -74,7 +77,8 @@ function Sidebar({ mode, setMode }) {
               <ListItemIcon>
                 <ModeNight />
               </ListItemIcon>
-              <Switch onChange={e => setMode(mode === 'light' ? 'dark' : 'light')} />
+              {/* mode === 'light' ? 'dark' : 'light' */}
+              <Switch onChange={e => (dispatch(setMode()))} />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>

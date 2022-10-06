@@ -9,6 +9,7 @@ import modelsListReducer from './reducers/modelsListReducer';
 import postsReducer from './reducers/postsReducer';
 import usersReducer from './reducers/usersReducer';
 import postsSagaWatcher from './sagas/postsSaga';
+import modeThemeReducer from './reducers/modeThemeReducer';
 import photosReducer from './reducers/photosReducer';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -24,6 +25,7 @@ export default configureStore({
     users: usersReducer, // Слайс хранит всех юзеров, которые подписаны на открытое сообщество
     photos: photosReducer, // Слайс хранит фотографии только открытого сообщества
     articles: articlesReducer, // Слайс хранит статьи только открытого сообщества
+    mode: modeThemeReducer, // Слайс хранит статьи только открытого сообщества
   },
   middleware: (mid) => [...mid(), sagaMiddleware],
 });
