@@ -72,15 +72,15 @@ function Sidebar() {
               <ListItemText primary="Profile" />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <ModeNight />
-              </ListItemIcon>
-              {/* mode === 'light' ? 'dark' : 'light' */}
-              <Switch onChange={e => (dispatch(setMode()))} />
-            </ListItemButton>
-          </ListItem>
+          {/* <ListItem disablePadding> */}
+          {/* <ListItemButton component="a" href="#simple-list"> */}
+          {/* <ListItemIcon> */}
+          {/* <ModeNight /> */}
+          {/* </ListItemIcon> */}
+          {/* mode === 'light' ? 'dark' : 'light' */}
+          {/* <Switch onChange={e => (dispatch(setMode()))} /> */}
+          {/* </ListItemButton> */}
+          {/* </ListItem> */}
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
