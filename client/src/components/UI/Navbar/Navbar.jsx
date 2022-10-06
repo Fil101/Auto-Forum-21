@@ -10,6 +10,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import AdbIcon from "@mui/icons-material/Adb";
+import LogoutIcon from '@mui/icons-material/Logout';
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import NavigationIcon from '@mui/icons-material/Navigation';
@@ -23,7 +24,7 @@ function Navbar() {
   const logoutHandler = (e) => {
     dispatch(logout());
   };
-
+  console.log(auth);
   return (
     <AppBar
       position="sticky"
@@ -35,17 +36,16 @@ function Navbar() {
     >
       <Container
         maxWidth="xl"
-
       >
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          {/* <LogoutIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
           <Typography
             variant="h6"
             noWrap
             component="a"
             href="/"
             sx={{
-              mr: 2,
+              mr: "70%",
               display: { xs: "none", md: "flex" },
               fontFamily: "monospace",
               fontWeight: 700,
@@ -115,20 +115,12 @@ function Navbar() {
                   to="/personal"
                   sx={{ p: 0 }}
                 >
-                  <Avatar alt="text" src="/elDar.jpg" />
+                  <Avatar alt="text" src={`${auth?.img}`} />
                 </IconButton>
               </Tooltip>
               <Button onClick={logoutHandler} sx={{ color: "white" }} component={NavLink} to="/login">
-                Выйти
+                <LogoutIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
               </Button>
-              <Fab
-                component={NavLink}
-                to="/"
-                variant="extended"
-              >
-                <NavigationIcon sx={{ mr: 1 }} />
-                На главную
-              </Fab>
             </Box>
           )}
         </Toolbar>
