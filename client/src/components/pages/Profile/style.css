@@ -34,12 +34,12 @@
  
 .input__file-button {
   width: 100%;
-  max-width: 290px;
-  height: 60px;
-  background: #1bbc9b;
-  color: #fff;
-  font-size: 1.125rem;
-  font-weight: 700;
+  max-width: 155px;
+  height: 36px;
+  background: #90caf9;;
+  color: #000000DE;
+  font-size: 14px;
+  font-weight: 550;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -48,7 +48,8 @@
           align-items: center;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: flex-start;
+          justify-content: center;
+          /* justify-content: flex-start; */
   border-radius: 3px;
   cursor: pointer;
   margin: 0 auto;
