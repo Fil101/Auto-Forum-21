@@ -11,6 +11,7 @@ import Sidebar from './UI/Sidebar';
 // import { fetchPostsAsync } from '../../../redux/actions/postsActions';
 import { fetchUsersAsync } from '../../../redux/actions/usersActions';
 import { fetchArticles } from '../../../redux/actions/articlesActions';
+import { fetchPhoto } from '../../../redux/actions/photosActions';
 import { setMode } from '../../../redux/actions/modeThemeActions';
 
 function Community() {
@@ -39,7 +40,14 @@ function Community() {
   // получаем все статьи сообщества
   useEffect(() => {
     dispatch(fetchArticles(modelId));
-  }, []);
+  }, [modelId]);
+
+  // получаем все фотки сообщества
+  useEffect(() => {
+    dispatch(fetchPhoto(modelId));
+  }, [modelId]);
+
+ 
   useEffect(() => {
     console.log('dksjfksajbvgkhbvglaekhrbvgaerkbv hi bi');
   }, [mode]);
