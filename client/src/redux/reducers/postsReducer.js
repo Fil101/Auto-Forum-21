@@ -7,7 +7,7 @@ export default function postsReducer(state = [], action) {
     case SET_POSTS:
       return payload;
     case ADD_POST:
-      return [...state, payload];
+      return [payload, ...state];
     case ADD_POST_COUNTER:
       return state.map((post) => (post.id === payload ? { ...post, commentsCount: (Number(post.commentsCount) + 1).toString() } : post));
     default:

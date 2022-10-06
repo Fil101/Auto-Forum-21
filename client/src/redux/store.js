@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+import createSagaMiddleware from 'redux-saga';
 import articlesReducer from './reducers/articlesReducer';
 import authReducer from './reducers/authReducer';
 import brandsReducer from './reducers/brandsReducer';
@@ -7,6 +8,8 @@ import modelsReducer from './reducers/modelsReducer';
 import modelsListReducer from './reducers/modelsListReducer';
 import postsReducer from './reducers/postsReducer';
 import usersReducer from './reducers/usersReducer';
+import postsSagaWatcher from './sagas/postsSaga';
+const sagaMiddleware = createSagaMiddleware();
 import photosReducer from './reducers/photosReducer';
 
 export default configureStore({
@@ -21,4 +24,7 @@ export default configureStore({
     photos: photosReducer, // Слайс хранит фотографии только открытого сообщества
     articles: articlesReducer, // Слайс хранит статьи только открытого сообщества
   },
+  middleware: (mid) => [...mid(), sagaMiddleware],
 });
+
+sagaMiddleware.run(postsSagaWatcher);

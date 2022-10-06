@@ -22,7 +22,7 @@ import ShowPost from './ShowPost';
 
 function Post({ post, addFavoritePost, addLikePost }) {
   return (
-    <Card sx={{ width: '60%', margin: '1%' }}>
+    <Card sx={{ width: '800px', margin: '1%' }}>
       <CardHeader
         avatar={(
           <Avatar src={post?.User?.img} aria-label="recipe" />

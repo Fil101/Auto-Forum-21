@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import {
   Avatar,
@@ -30,6 +30,7 @@ const SytledModal = styled(Modal)({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  opacity: '0.97',
 });
 
 const UserBox = styled(Box)({
@@ -43,7 +44,8 @@ function Add() {
   const [open, setOpen] = useState(false);
   const [img, setImg] = useState(null);
   const [inputs, setInputs] = useState({ title: '', text: '' });
-
+  const { auth } = useSelector((state) => state);
+  console.log(auth);
   const { modelId } = useParams();
   const dispatch = useDispatch();
 
@@ -57,9 +59,15 @@ function Add() {
         onClick={(e) => setOpen(true)}
         title="Создать пост"
       >
-        <Fab variant="extended" size="medium" color="primary" aria-label="add">
+        {/* <Fab variant="extended" size="medium" color="primary" aria-label="add">
           <AddIcon sx={{ mr: 30 }} />
-        </Fab>
+        </Fab> */}
+        <Button
+          sx={{ width: '800px', marginTop: '15px' }}
+          variant="outlined"
+        >
+          Создать пост
+        </Button>
       </Tooltip>
       <SytledModal
         open={open}
@@ -69,22 +77,22 @@ function Add() {
       >
         <Box
           width={700}
-          height={400}
+          height={450}
           bgcolor="background.default"
           color="text.primary"
           p={3}
           borderRadius={5}
         >
           <Typography variant="h6" color="gray" textAlign="center">
-            Create post
+            Создайте пост
           </Typography>
           <UserBox>
             <Avatar
-              src=""
-              sx={{ width: 30, height: 30 }}
+              src={auth?.img}
+              sx={{ width: 40, height: 40 }}
             />
             <Typography fontWeight={500} variant="span">
-              John Doe
+              {auth?.name}
             </Typography>
           </UserBox>
           <Box type="form">
@@ -93,7 +101,7 @@ function Add() {
               id="standard-multiline-static"
               multiline
               rows={1}
-              placeholder="Title"
+              placeholder="Введите заголовок..."
               variant="standard"
               onChange={inputHandler}
               name="title"
@@ -103,24 +111,28 @@ function Add() {
               id="standard-multiline-static"
               multiline
               rows={6}
-              placeholder="Text"
+              placeholder="Введите текст..."
               variant="standard"
               onChange={inputHandler}
               name="text"
             />
-            <TextField type="file" onChange={e => setImg(e.target.files[0])} />
             {/* я здесь */}
             <Stack direction="row" gap={1} mt={2} mb={3}>
-              <Image color="secondary" />
+              <TextField type="file" fullWidth variant="outlined" onChange={e => setImg(e.target.files[0])} />
             </Stack>
             <ButtonGroup
               fullWidth
               variant="contained"
               aria-label="outlined primary button group"
             >
-              <Button type="submit" onClick={() => dispatch(addPostAsync(modelId, inputs, img))}>Post</Button>
-              <Button sx={{ width: '100px' }}>
-                <DateRange />
+              <Button
+                type="submit"
+                onClick={() => {
+                  dispatch(addPostAsync(modelId, inputs, img));
+                  setOpen(false);
+                }}
+              >
+                Опубликовать
               </Button>
             </ButtonGroup>
           </Box>

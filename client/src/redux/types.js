@@ -6,9 +6,10 @@ export const SET_ABOUT = 'SET_ABOUT';
 export const SET_TG = 'SET_TG';
 export const SET_NAME = 'SET_NAME';
 
-// POSTS
+// POSTS FETCH_POSTS
 export const SET_POSTS = 'SET_POSTS';
 export const ADD_POST = 'ADD_POST';
+export const FETCH_POSTS = 'FETCH_POSTS';
 
 // USERS
 export const SET_USERS = 'SET_USERS';
