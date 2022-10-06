@@ -15,6 +15,7 @@ export const auth = () => (dispatch) => {
     .then((res) => dispatch(setAuth(res.data)))
     .catch(console.log);
 };
+
 export const setAbout = (data) => ({ type: SET_ABOUT, payload: data });
 export const setTg = (data) => ({ type: SET_TG, payload: data });
 export const setNewName = (data) => ({ type: SET_NAME, payload: data });
