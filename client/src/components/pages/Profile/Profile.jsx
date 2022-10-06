@@ -25,6 +25,7 @@ import { changeAbout } from "../../../redux/actions/authActions";
 import OnePost from "./OnePost";
 import OneCommunity from "./OneCommunity";
 import Sidebar from "../Community/UI/Sidebar";
+import { setMode } from "../../../redux/actions/modeThemeActions";
 
 function Profile() {
   const [tabNum, setTabNum] = useState(0);
@@ -37,7 +38,8 @@ function Profile() {
   const [post, setPost] = useState([]);
   const dispatch = useDispatch();
 
-  const [mode, setMode] = useState('dark');
+  const { mode } = useSelector((state) => state);
+  // const [mode, setMode] = useState('dark');
   const darkTheme = createTheme({
     palette: {
       mode,
@@ -94,12 +96,12 @@ function Profile() {
       // navigate('/');
     });
   };
-
+  //  setMode={dispatch(setMode)} mode={mode}
   return (
     <ThemeProvider theme={darkTheme}>
       <Box bgcolor="background.default" color="text.primary" sx={{ zIndex: 'tooltip', minHeight: '100vh' }}>
         <Stack direction="row" spacing={2} justifyContent="space-between">
-          <Sidebar setMode={setMode} mode={mode} />
+          <Sidebar />
           <Box
             // position="fixed"
             bgcolor="background.default"

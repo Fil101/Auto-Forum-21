@@ -19,6 +19,7 @@ import { createTheme, ListItemButton, ListItemIcon, Switch } from "@mui/material
 import { ModeNight } from "@mui/icons-material";
 import { ThemeProvider } from "@emotion/react";
 import { logout } from "../../../redux/actions/authActions";
+import { setMode } from "../../../redux/actions/modeThemeActions";
 import './logostyle.css';
 
 function Navbar() {
@@ -28,7 +29,9 @@ function Navbar() {
   const logoutHandler = (e) => {
     dispatch(logout());
   };
-  const [mode, setMode] = useState('dark');
+
+  const { mode } = useSelector((state) => state);
+  // const [mode, setMode] = useState('dark');
   const darkTheme = createTheme({
     palette: {
       mode,
