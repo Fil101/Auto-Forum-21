@@ -19,7 +19,7 @@ import TurnSlightRightIcon from '@mui/icons-material/TurnSlightRight';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Navigate, NavLink, useNavigate, useParams } from 'react-router-dom';
-import { fetchModelsList } from '../../../../redux/actions/modelsActionsList';
+import { fetchModelsList, setModelsList } from '../../../../redux/actions/modelsActionsList';
 import { setMode } from '../../../../redux/actions/modeThemeActions';
 
 // { mode, setMode }
@@ -34,8 +34,8 @@ function Sidebar() {
   // const temp = [{ title: brands[0].name, id: brands[0].id }];
   // console.log('28', temp);
 
-  const [brandsNameValue, setBrandsNameValue] = useState();
-  const [modelsNameValue, setModelsNamevalue] = useState();
+  const [brandsNameValue, setBrandsNameValue] = useState('');
+  const [modelsNameValue, setModelsNamevalue] = useState('');
   const [inputBrandsNameValue, setInputBrandsNameValue] = useState();
   const [inputModelsNamevalue, setInputModelsNamevalue] = useState();
   const [modelsListChek, setModelsListChek] = useState(false);
@@ -45,12 +45,21 @@ function Sidebar() {
     if (brandsNameValue) {
       dispatch(fetchModelsList(brandsNameValue.id));
     }
-  }, [brandsNameValue, modelId]);
+  }, [brandsNameValue]);
+  // modelId
   useEffect(() => {
     if (modelsList?.length > 0) {
       setModelsListChek(true);
     }
-  }, [modelsList, modelId]);
+  }, [modelsList]);
+  // , modelId
+  useEffect(() => {
+    setModelsNamevalue();
+    setBrandsNameValue();
+    dispatch(setModelsList([]));
+    setModelsListChek(false);
+    console.dir(`---------------Models: ${modelsList}`);
+  }, [modelId]);
 
   return (
     <Box flex={3} p={2} sx={{ display: { xs: 'none', sm: 'flex' }, justifyContent: 'flex-end' }}>
