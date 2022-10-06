@@ -1,4 +1,4 @@
-import { SET_AUTH, LOGOUT, SET_ABOUT, SET_TG } from '../types';
+import { SET_AUTH, LOGOUT, SET_ABOUT, SET_TG, SET_NAME } from '../types';
 
 export default (state = { about: '', tg: '', name: '', email: '' }, action) => {
   const { type, payload } = action;
@@ -15,6 +15,9 @@ export default (state = { about: '', tg: '', name: '', email: '' }, action) => {
 
     case SET_TG:
       return { ...state, tg: payload };
+
+    case SET_NAME:
+      return { ...state, name: payload };
 
     default:
       return state;
