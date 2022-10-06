@@ -16,7 +16,7 @@ function PhotoAlbum() {
   console.log(photos);
 
   useEffect(() => {
-    dispatch(fetchPhoto(modelId));
+    if (photos.length === 0) dispatch(fetchPhoto(modelId));
   }, []);
 
   return (

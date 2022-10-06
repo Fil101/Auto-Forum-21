@@ -20,12 +20,15 @@ import {
 } from '@mui/material';
 import { Home } from '@mui/icons-material';
 import { actionUserAsync } from '../../../../redux/actions/usersActions';
+import { fetchPhoto } from '../../../../redux/actions/photosActions';
 
 function Rightbar() {
   const dispatch = useDispatch();
   const { modelId } = useParams();
   const users = useSelector((state) => state.users);
   const articles = useSelector((state) => state.articles);
+  const photos = useSelector((state) => state.photos);
+
   console.log('это статьи', articles);
 
   const [checkSubscribe, setCheckSubscribe] = useState(false);
@@ -37,6 +40,10 @@ function Rightbar() {
         setCheckSubscribe(res.data.state);
       });
   }, [modelId]);
+
+  useEffect(() => {
+    dispatch(fetchPhoto(modelId));
+  }, []);
 
   return (
     <Box flex={3} p={2} sx={{ display: { xs: 'none', sm: 'flex' }, justifyContent: 'flex-start' }}>
@@ -75,42 +82,14 @@ function Rightbar() {
           Фотографии ваших авто
         </Typography>
         <ImageList rowHeight={100} style={{ marginBottom: 20 }} cols={2}>
-          <ImageListItem>
-            <img
-              src="https://material-ui.com/static/images/image-list/breakfast.jpg"
-              alt=""
-            />
-          </ImageListItem>
-          <ImageListItem>
-            <img
-              src="https://material-ui.com/static/images/image-list/burgers.jpg"
-              alt=""
-            />
-          </ImageListItem>
-          <ImageListItem>
-            <img
-              src="https://material-ui.com/static/images/image-list/camera.jpg"
-              alt=""
-            />
-          </ImageListItem>
-          <ImageListItem>
-            <img
-              src="https://material-ui.com/static/images/image-list/morning.jpg"
-              alt=""
-            />
-          </ImageListItem>
-          <ImageListItem>
-            <img
-              src="https://material-ui.com/static/images/image-list/hats.jpg"
-              alt=""
-            />
-          </ImageListItem>
-          <ImageListItem>
-            <img
-              src="https://material-ui.com/static/images/image-list/vegetables.jpg"
-              alt=""
-            />
-          </ImageListItem>
+          {photos && photos.slice(0, 6).map((photo) => (
+            <ImageListItem>
+              <img
+                src={photo.img}
+                alt={photo.img}
+              />
+            </ImageListItem>
+          ))}
         </ImageList>
         <Typography
           component={NavLink}
