@@ -30,7 +30,7 @@ import './style.css';
 
 function Profile() {
   const [tabNum, setTabNum] = useState(0);
-  const { about, tg, name, email } = useSelector((state) => state.auth);
+  const { about, tg, name, email, img } = useSelector((state) => state.auth);
   const [info, setInfo] = useState(about);
   const [tgInfo, setTgInfo] = useState(tg);
   const [newName, setNewName] = useState(name);
@@ -133,7 +133,7 @@ function Profile() {
               >
                 <Avatar
                   alt="photo"
-                  src="/avatars/elDar.jpg"
+                  src={img}
                   sx={{ width: 200, height: 200 }}
                 />
                 <input
