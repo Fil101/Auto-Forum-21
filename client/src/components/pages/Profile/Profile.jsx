@@ -136,7 +136,7 @@ function Profile() {
                   src="/avatars/elDar.jpg"
                   sx={{ width: 200, height: 200 }}
                 />
-                <input
+                {/* <input
                 // fullWidth
                 // variant="outlined"
                   name="avatar"
@@ -144,7 +144,7 @@ function Profile() {
                   type="file"
                   className="form-control"
                   id="avatar"
-                />
+                /> */}
                 {/* <div className="input__wrapper">
                   <input name="file" type="file" id="input__file" className="input input__file" multiple />
                   <label htmlFor="input__file" className="input__file-button">
