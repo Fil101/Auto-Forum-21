@@ -17,8 +17,8 @@ export default function OneCommunity({ community }) {
     >
       <Card
         sx={{
-          width: 400,
-          heigth: 400,
+          width: '40vh',
+          heigth: '55vh',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
