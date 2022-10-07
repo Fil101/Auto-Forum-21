@@ -114,7 +114,7 @@ function Profile() {
                 display: "flex",
                 flexDirection: "row",
                 margin: "10px",
-                border: "1px solid",
+                // border: "1px solid",
                 padding: "10px",
                 width: "60%",
                 justifyContent: "space-around",
@@ -289,7 +289,9 @@ function Profile() {
         </Box>
         {/* <Box sx={{ overflowY: 'scroll' }}> */}
         <Stack direction="row" spacing={2} justifyContent="center">
+          <Box flex={3} p={2} sx={{ display: { xs: 'none', sm: 'block' } }}>{' '}</Box>
           <Box
+            flex={6}
             bgcolor="background.default"
             color="text.primary"
             sx={{
@@ -299,8 +301,11 @@ function Profile() {
               justifyContent: "center",
               alignContent: "stretch",
               alignItems: "center",
-              // width: "80%",
+              width: "60%",
               zIndex: 'modal',
+              margin: "10px",
+              // border: "1px solid",
+              padding: "10px",
             }}
           >
             {resultPostOrCommunity ? (
@@ -310,7 +315,9 @@ function Profile() {
             )}
 
           </Box>
+          <Box flex={3} p={2} sx={{ display: { xs: 'none', sm: 'block' } }}>{' '}</Box>
         </Stack>
+
         {/* </Box> */}
       </Box>
     </ThemeProvider>
