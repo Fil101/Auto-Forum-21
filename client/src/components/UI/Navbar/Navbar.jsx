@@ -105,15 +105,15 @@ function Navbar() {
             }}
           >
             CARMUNITY
-            </Typography>
-            <ListItemButton component="a" href="#simple-list" sx={{ width: '1px' }}>
-              <ListItemIcon>
-                <ModeNight />
-              </ListItemIcon>
-              <Switch onChange={e => (dispatch(setMode()))} />
-              {console.log('kukukukukukukukkukukukukuukukukuk')}
-            </ListItemButton>
-            {!auth?.name && (
+          </Typography>
+          <ListItemButton component="a" href="#simple-list" sx={{ width: '1px' }}>
+            <ListItemIcon>
+              <ModeNight />
+            </ListItemIcon>
+            <Switch onChange={e => (dispatch(setMode()))} />
+            {console.log('kukukukukukukukkukukukukuukukukuk')}
+          </ListItemButton>
+          {!auth?.name && (
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               <Button
                 sx={{ my: 2, color: "white", display: "block" }}
