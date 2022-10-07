@@ -46,6 +46,7 @@ function Navbar() {
         display: "flex",
         justifyContent: "space-between",
         backgroundColor: "black",
+        zIndex: "snackbar",
       }}
     >
       <Container
@@ -107,8 +108,8 @@ function Navbar() {
             CARMUNITY
           </Typography>
           <ListItemButton component="a" href="#simple-list" sx={{ width: '1px' }}>
-            <ListItemIcon>
-              <ModeNight />
+            <ListItemIcon sx={{ zIndex: "tooltip" }}>
+              <ModeNight sx={{ zIndex: "tooltip", color: "white" }} />
             </ListItemIcon>
             <Switch onChange={e => (dispatch(setMode()))} />
             {console.log('kukukukukukukukkukukukukuukukukuk')}
