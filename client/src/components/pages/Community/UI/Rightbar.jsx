@@ -59,6 +59,7 @@ function Rightbar() {
         <AvatarGroup max={7}>
           {users && users.map((user) => (
             <Avatar
+              sx={{ width: 40, height: 40 }}
               key={user.id}
               alt={user?.User?.name}
               src={user?.User?.img}
