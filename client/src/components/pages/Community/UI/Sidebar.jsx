@@ -19,20 +19,23 @@ import TurnSlightRightIcon from '@mui/icons-material/TurnSlightRight';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Navigate, NavLink, useNavigate, useParams } from 'react-router-dom';
-import { fetchModelsList } from '../../../../redux/actions/modelsActionsList';
+import { fetchModelsList, setModelsList } from '../../../../redux/actions/modelsActionsList';
+import { setMode } from '../../../../redux/actions/modeThemeActions';
 
-function Sidebar({ mode, setMode }) {
+// { mode, setMode }
+function Sidebar() {
   const navigate = useNavigate();
   const brands = useSelector((state) => state.brands);
   const models = useSelector((state) => state.models);
   const modelsList = useSelector((state) => state.modelsList);
+  const { mode } = useSelector((state) => state.mode);
   const { modelId } = useParams();
   // console.log('28', brands[0].name);
   // const temp = [{ title: brands[0].name, id: brands[0].id }];
   // console.log('28', temp);
 
-  const [brandsNameValue, setBrandsNameValue] = useState();
-  const [modelsNameValue, setModelsNamevalue] = useState();
+  const [brandsNameValue, setBrandsNameValue] = useState('');
+  const [modelsNameValue, setModelsNamevalue] = useState('');
   const [inputBrandsNameValue, setInputBrandsNameValue] = useState();
   const [inputModelsNamevalue, setInputModelsNamevalue] = useState();
   const [modelsListChek, setModelsListChek] = useState(false);
@@ -42,12 +45,21 @@ function Sidebar({ mode, setMode }) {
     if (brandsNameValue) {
       dispatch(fetchModelsList(brandsNameValue.id));
     }
-  }, [brandsNameValue, modelId]);
+  }, [brandsNameValue]);
+  // modelId
   useEffect(() => {
     if (modelsList?.length > 0) {
       setModelsListChek(true);
     }
-  }, [modelsList, modelId]);
+  }, [modelsList]);
+  // , modelId
+  useEffect(() => {
+    setModelsNamevalue();
+    setBrandsNameValue();
+    dispatch(setModelsList([]));
+    setModelsListChek(false);
+    console.dir(`---------------Models: ${modelsList}`);
+  }, [modelId]);
 
   return (
     <Box flex={3} p={2} sx={{ display: { xs: 'none', sm: 'flex' }, justifyContent: 'flex-end' }}>
@@ -69,14 +81,15 @@ function Sidebar({ mode, setMode }) {
               <ListItemText primary="Profile" />
             </ListItemButton>
           </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
-              <ListItemIcon>
-                <ModeNight />
-              </ListItemIcon>
-              <Switch onChange={e => setMode(mode === 'light' ? 'dark' : 'light')} />
-            </ListItemButton>
-          </ListItem>
+          {/* <ListItem disablePadding> */}
+          {/* <ListItemButton component="a" href="#simple-list"> */}
+          {/* <ListItemIcon> */}
+          {/* <ModeNight /> */}
+          {/* </ListItemIcon> */}
+          {/* mode === 'light' ? 'dark' : 'light' */}
+          {/* <Switch onChange={e => (dispatch(setMode()))} /> */}
+          {/* </ListItemButton> */}
+          {/* </ListItem> */}
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>

@@ -15,7 +15,7 @@ import MinorCrashRoundedIcon from '@mui/icons-material/MinorCrashRounded';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setAuth } from '../../../../redux/actions/authActions';
 
 function Copyright(props) {
@@ -55,8 +55,15 @@ function Login() {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const { mode } = useSelector((state) => state);
+  const darkTheme = createTheme({
+    palette: {
+      mode,
+    },
+  });
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={darkTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -112,7 +119,7 @@ function Login() {
             {error && <div style={{ color: 'red', background: 'white' }}>Password is incorrect</div>}
             <Grid container>
               <Grid item>
-                <Link href="/http://localhost:3001/registration" variant="body2">
+                <Link href="/registration" variant="body2">
                   Нет аккаунта? Зарегистрируйся
                 </Link>
               </Grid>

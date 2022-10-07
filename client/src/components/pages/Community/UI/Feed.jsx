@@ -1,6 +1,6 @@
-import { Box, IconButton, ImageListItem, ImageListItemBar, Typography } from '@mui/material';
+import { Box, IconButton, ImageListItem, ImageListItemBar, Skeleton, Stack, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import InfoIcon from '@mui/icons-material/Info';
@@ -10,9 +10,11 @@ import Find from './Find';
 
 function Feed() {
   const { posts } = useSelector((state) => state);
+
   const { modelId } = useParams();
   const [currModel, setCurrModel] = useState({}); // стейт хранит одну текущую модель
-  console.log('это текущая модель ->>>>>>', currModel);
+  console.log('это посты ->>>>>>', posts);
+
   // получаем текущую модель
   useEffect(() => {
     axios.get(`/api/models/model/${modelId}`)
@@ -27,14 +29,7 @@ function Feed() {
       console.log(e);
     }
   };
-  // функция добавляет лайк к посту
-  const addLikePost = async (postId) => {
-    try {
-      await axios.post(`/api/posts/like/${postId}`);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+
   return (
     <Box
       flex={6}
@@ -69,22 +64,19 @@ function Feed() {
       <Add />
       {posts.length > 0
         ? posts.map((post) => (
-          <Post key={post.id} post={post} addFavoritePost={addFavoritePost} addLikePost={addLikePost} />
+          <Post key={post.id} post={post} addFavoritePost={addFavoritePost} />
         ))
         : (
           <>
-            <Typography
-              component="h3"
-              variant="h2"
-              align="center"
-              color="text.primary"
-              gutterBottom
-            >
-              Нет постов
+            <Typography marginTop={5} variant="h5" align="center" color="text.secondary" paragraph>
+              Пока постов нет
             </Typography>
-            <Typography variant="h5" align="center" color="text.secondary" paragraph>
-              Ваш всегда может быть первым, просто нажмите на кнопку "создать пост"
-            </Typography>
+            <Stack spacing={1} width={800}>
+              <Skeleton variant="text" height={100} />
+              <Skeleton variant="text" height={20} />
+              <Skeleton variant="text" height={20} />
+              <Skeleton variant="rectangular" height={300} />
+            </Stack>
           </>
         )}
     </Box>

@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
-import { SET_POSTS, ADD_POST, ADD_POST_COUNTER, FETCH_POSTS } from '../types';
+import { SET_POSTS, ADD_POST, ADD_POST_COUNTER, FETCH_POSTS, ADD_POST_COUNTER_LIKE } from '../types';
 
 export const setPosts = (payload) => ({
   type: SET_POSTS,
@@ -23,6 +23,11 @@ export const addPostCounter = (postId) => ({
   payload: postId,
 });
 
+export const addPostCounterLike = (postId) => ({
+  type: ADD_POST_COUNTER_LIKE,
+  payload: postId,
+});
+
 // export const fetchPostsAsync = (modelId) => async (dispatch) => {
 //   try {
 //     const res = await axios(`/api/posts/${modelId}`);
@@ -37,6 +42,7 @@ export const addPostAsync = (modelId, inputs, img) => async (dispatch) => {
   // data.append('post-photo', img);
   const { title, text } = inputs;
   const data = { 'post-photo': img, title, text };
+  console.log('мы в addPost');
   await axios.post(`/api/posts/${modelId}`, data, {
     headers: {
       'Content-Type': 'multipart/form-data',

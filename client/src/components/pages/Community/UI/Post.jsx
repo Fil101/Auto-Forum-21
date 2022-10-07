@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 import ForumIcon from '@mui/icons-material/Forum';
@@ -17,10 +18,22 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
+import { useDispatch } from 'react-redux';
 import Add from './Add';
 import ShowPost from './ShowPost';
+import { addPostCounterLike } from '../../../../redux/actions/postsActions';
 
-function Post({ post, addFavoritePost, addLikePost }) {
+function Post({ post, addFavoritePost }) {
+  // функция добавляет лайк к посту
+  const dispatch = useDispatch();
+  const addLikePost = async (postId) => {
+    try {
+      await axios.post(`/api/posts/like/${postId}`);
+      dispatch(addPostCounterLike(post.id));
+    } catch (e) {
+      console.log(e);
+    }
+  };
   return (
     <Card sx={{ width: '800px', margin: '1%' }}>
       <CardHeader
@@ -38,14 +51,14 @@ function Post({ post, addFavoritePost, addLikePost }) {
       <CardMedia
         component="img"
         height="500vh"
-        image={`http://localhost:3001/${post?.img}`}
+        image={`${process.env.REACT_APP_BASEURL}/${post?.img}`}
         alt="Post Photo"
       />
       <CardContent>
         <Typography variant="h4" color="text.secondary">
           {post?.title}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="subtitle1" color="text.secondary">
           {post?.text}
         </Typography>
       </CardContent>

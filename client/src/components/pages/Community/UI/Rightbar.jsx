@@ -20,7 +20,6 @@ import {
 } from '@mui/material';
 import { Home } from '@mui/icons-material';
 import { actionUserAsync } from '../../../../redux/actions/usersActions';
-import { fetchPhoto } from '../../../../redux/actions/photosActions';
 
 function Rightbar() {
   const dispatch = useDispatch();
@@ -40,10 +39,6 @@ function Rightbar() {
         setCheckSubscribe(res.data.state);
       });
   }, [modelId]);
-
-  useEffect(() => {
-    dispatch(fetchPhoto(modelId));
-  }, []);
 
   return (
     <Box flex={3} p={2} sx={{ display: { xs: 'none', sm: 'flex' }, justifyContent: 'flex-start' }}>
@@ -104,7 +99,7 @@ function Rightbar() {
         </Typography>
         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
           {articles && articles.map((article) => (
-            <>
+            <Box key={article?.id}>
               <ListItem alignItems="flex-start">
                 <ListItemAvatar>
                   <Avatar alt="Remy Sharp" src={article?.img} />
@@ -120,7 +115,7 @@ function Rightbar() {
                 />
               </ListItem>
               <Divider variant="inset" component="li" />
-            </>
+            </Box>
           ))}
         </List>
       </Box>

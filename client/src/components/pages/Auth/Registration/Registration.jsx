@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MinorCrashRoundedIcon from "@mui/icons-material/MinorCrashRounded";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { setAuth } from "../../../../redux/actions/authActions";
@@ -54,15 +54,22 @@ function Registration() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:3001/api/v1/user/", input)
+    axios.post("/api/v1/user/", input)
       .then((res) => {
         navigate('/');
         dispatch(setAuth(res.data));
       });
   };
 
+  const { mode } = useSelector((state) => state);
+  const darkTheme = createTheme({
+    palette: {
+      mode,
+    },
+  });
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={darkTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         {/* <img src="/Logo/Lexus.png" /> */}
@@ -167,7 +174,7 @@ function Registration() {
 
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/http://localhost:3001/login" variant="body2">
+                <Link href="/login" variant="body2">
                   Уже зарегистрирован? Войти
                 </Link>
               </Grid>

@@ -64,9 +64,10 @@ router.post('/:modelId', fileMiddleware.single('post-photo'), async (req, res) =
   const fixPath = req.file.path.substring(7);
   try {
     const newPost = await Post.create({ title, text, img: fixPath, car_model_id: modelId, user_id: user });
-    res.json(newPost);
+    const postWithUser = await Post.findOne({ where: { id: newPost.id }, include: { model: User } });
+    res.json(postWithUser);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 });
 
@@ -82,14 +83,18 @@ router.post('/favorite/:postId', async (req, res) => {
     res.sendStatus(401);
     return;
   }
-  const [favPost, created] = await Favorite_post.findOrCreate({
-    where: { post_id: postId, user_id: userId }, include: { model: User },
-  });
-  if (created) {
-    res.sendStatus(200);
-  } else {
-    favPost.destroy();
-    res.sendStatus(200);
+  try {
+    const [favPost, created] = await Favorite_post.findOrCreate({
+      where: { post_id: postId, user_id: userId }, include: { model: User },
+    });
+    if (created) {
+      res.sendStatus(200);
+    } else {
+      favPost.destroy();
+      res.sendStatus(200);
+    }
+  } catch (error) {
+    console.error(error);
   }
 });
 
@@ -97,14 +102,18 @@ router.post('/favorite/:postId', async (req, res) => {
 router.post('/like/:postId', async (req, res) => {
   const { postId } = req.params;
   const { userId } = req.session;
-  const [likePost, created] = await Like_post.findOrCreate({
-    where: { post_id: postId, user_id: userId },
-  });
-  if (created) {
-    res.sendStatus(200);
-  } else {
-    likePost.destroy();
-    res.sendStatus(200);
+  try {
+    const [likePost, created] = await Like_post.findOrCreate({
+      where: { post_id: postId, user_id: userId },
+    });
+    if (created) {
+      res.sendStatus(200);
+    } else {
+      likePost.destroy();
+      res.sendStatus(200);
+    }
+  } catch (error) {
+    console.error(error);
   }
 });
 
@@ -113,15 +122,24 @@ router.post('/comments/:postId', async (req, res) => {
   const { text } = req.body;
   const { postId } = req.params;
   const { userId } = req.session;
-  const newComment = await Comment.create({ post_id: postId, user_id: userId, text });
-  const commentInclude = await Comment.findOne({ where: { id: newComment.id }, include: { model: User } });
-  res.json(commentInclude);
+  try {
+    const newComment = await Comment.create({ post_id: postId, user_id: userId, text });
+    const commentInclude = await Comment.findOne({ where: { id: newComment.id }, include: { model: User } });
+    res.json(commentInclude);
+  } catch (error) {
+    console.error(error);
+  }
 });
+
 // End point возвращает все комментарии к открытому посту по id поста
 router.get('/comments/:postId', async (req, res) => {
   const { postId } = req.params;
-  const commentsByPost = await Comment.findAll({ where: { post_id: postId }, include: { model: User } });
-  res.json(commentsByPost);
+  try {
+    const commentsByPost = await Comment.findAll({ where: { post_id: postId }, include: { model: User } });
+    res.json(commentsByPost);
+  } catch (error) {
+    console.error(error);
+  }
 });
 
 module.exports = router;
