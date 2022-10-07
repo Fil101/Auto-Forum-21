@@ -119,7 +119,7 @@ function Login() {
             {error && <div style={{ color: 'red', background: 'white' }}>Password is incorrect</div>}
             <Grid container>
               <Grid item>
-                <Link href="/http://localhost:3001/registration" variant="body2">
+                <Link href="/registration" variant="body2">
                   Нет аккаунта? Зарегистрируйся
                 </Link>
               </Grid>

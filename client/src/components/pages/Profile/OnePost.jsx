@@ -48,7 +48,7 @@ export default function OnePost({ post, isFavorite, setPost }) {
       <CardMedia
         component="img"
         height="150vh"
-        image={`http://localhost:3001/${post?.img}`}
+        image={`${process.env.REACT_APP_BASEURL}/${post?.img}`}
         alt="Post Photo"
       />
       <CardContent>

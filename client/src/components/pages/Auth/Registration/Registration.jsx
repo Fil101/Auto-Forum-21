@@ -54,7 +54,7 @@ function Registration() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:3001/api/v1/user/", input)
+    axios.post("/api/v1/user/", input)
       .then((res) => {
         navigate('/');
         dispatch(setAuth(res.data));
@@ -174,7 +174,7 @@ function Registration() {
 
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/http://localhost:3001/login" variant="body2">
+                <Link href="/login" variant="body2">
                   Уже зарегистрирован? Войти
                 </Link>
               </Grid>

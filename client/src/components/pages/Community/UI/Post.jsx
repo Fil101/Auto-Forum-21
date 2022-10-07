@@ -51,14 +51,14 @@ function Post({ post, addFavoritePost }) {
       <CardMedia
         component="img"
         height="500vh"
-        image={`http://localhost:3001/${post?.img}`}
+        image={`${process.env.REACT_APP_BASEURL}/${post?.img}`}
         alt="Post Photo"
       />
       <CardContent>
         <Typography variant="h4" color="text.secondary">
           {post?.title}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="subtitle1" color="text.secondary">
           {post?.text}
         </Typography>
       </CardContent>
