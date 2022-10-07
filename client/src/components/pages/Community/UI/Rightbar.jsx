@@ -99,7 +99,7 @@ function Rightbar() {
         </Typography>
         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
           {articles && articles.map((article) => (
-            <>
+            <Box key={article?.id}>
               <ListItem alignItems="flex-start">
                 <ListItemAvatar>
                   <Avatar alt="Remy Sharp" src={article?.img} />
@@ -115,7 +115,7 @@ function Rightbar() {
                 />
               </ListItem>
               <Divider variant="inset" component="li" />
-            </>
+            </Box>
           ))}
         </List>
       </Box>
