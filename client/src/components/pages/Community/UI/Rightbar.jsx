@@ -28,8 +28,6 @@ function Rightbar() {
   const articles = useSelector((state) => state.articles);
   const photos = useSelector((state) => state.photos);
 
-  console.log('это статьи', articles);
-
   const [checkSubscribe, setCheckSubscribe] = useState(false);
 
   useEffect(() => {

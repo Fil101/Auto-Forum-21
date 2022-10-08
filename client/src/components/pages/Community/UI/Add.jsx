@@ -45,7 +45,6 @@ function Add() {
   const [img, setImg] = useState(null);
   const [inputs, setInputs] = useState({ title: '', text: '' });
   const { auth } = useSelector((state) => state);
-  console.log('это авторизация', auth);
   const { modelId } = useParams();
   const dispatch = useDispatch();
 

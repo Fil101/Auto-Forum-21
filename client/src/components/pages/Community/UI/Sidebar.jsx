@@ -62,7 +62,7 @@ function Sidebar() {
   }, [modelId]);
 
   return (
-    <Box flex={3} p={2} sx={{ display: { xs: 'none', sm: 'flex' }, justifyContent: 'flex-end' }}>
+    <Box flex={3} p={2} sx={{ display: { xs: 'none', sm: 'flex' }, justifyContent: 'flex-end', overflow: 'scroll' }}>
       <Box position="fixed" sx={{ zIndex: 'tooltip' }}>
         <List>
           <ListItem disablePadding>

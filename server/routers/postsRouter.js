@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable camelcase */
+const { request } = require('express');
 const express = require('express');
 const { Sequelize } = require('sequelize');
 const { Op } = require('sequelize');
@@ -53,7 +54,9 @@ router.post('/search/:modelId', async (req, res) => {
       'User.id',
     ],
   });
-  res.json(postsWithCommentsCount.map((el, ind) => ({ ...JSON.parse(JSON.stringify(el)), ...JSON.parse(JSON.stringify(likes[ind])) })));
+  const arrayNew = postsWithCommentsCount.map((el, ind) => ({ ...JSON.parse(JSON.stringify(el)), ...JSON.parse(JSON.stringify(likes[ind])) }));
+  const reverseArr = arrayNew.reverse();
+  res.json(reverseArr);
 });
 
 // Добавляет пост с мультером
@@ -117,6 +120,41 @@ router.post('/like/:postId', async (req, res) => {
   }
 });
 
+// проверяет лайк к посту
+router.get('/checklike/:postId', async (req, res) => {
+  const { postId } = req.params;
+  const { userId } = req.session;
+  try {
+    const checkLikePost = await Like_post.findOne({
+      where: { post_id: postId, user_id: userId },
+    });
+    if (checkLikePost) {
+      res.json({ status: true });
+    } else {
+      res.json({ status: false });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// проверяет избранное
+router.get('/checkfavorite/:postId', async (req, res) => {
+  const { postId } = req.params;
+  const { userId } = req.session;
+  try {
+    const checkFavoritePost = await Favorite_post.findOne({
+      where: { post_id: postId, user_id: userId },
+    });
+    if (checkFavoritePost) {
+      res.json({ status: true });
+    } else {
+      res.json({ status: false });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
 // Добавляем комментарии к посту
 router.post('/comments/:postId', async (req, res) => {
   const { text } = req.body;
