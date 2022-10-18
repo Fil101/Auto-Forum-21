@@ -29,10 +29,11 @@ import { setMode } from "../../../redux/actions/modeThemeActions";
 
 function Profile() {
   const [tabNum, setTabNum] = useState(0);
-  const { about, tg, name, email } = useSelector((state) => state.auth);
+  const { about, tg, name, email, img } = useSelector((state) => state.auth);
   const [info, setInfo] = useState(about);
   const [tgInfo, setTgInfo] = useState(tg);
   const [newName, setNewName] = useState(name);
+  const [imgInfo, setImgInfo] = useState(null);
   const [isEdit, setIsEdit] = useState(false);
   const [community, setCommunity] = useState([]);
   const [post, setPost] = useState([]);
@@ -85,17 +86,16 @@ function Profile() {
   };
 
   // для загрузки фото
-  const [input, setInput] = useState({ avatar: null });
-  const photoHandler = (e) => {
-    setInput((prev) => ({ ...prev, [e.target.name]: e.target.files[0] }));
-    e.preventDefault();
-    const data = new FormData();
-    data.append("avatar", input.avatar);
+  // const photoHandler = (e) => {
+  //   setInput((prev) => ({ ...prev, [e.target.name]: e.target.files[0] }));
+  //   e.preventDefault();
+  //   const data = new FormData();
+  //   data.append("avatar", input.avatar);
 
-    axios.post("/api/v1/avatar", data).then((res) => {
-      // navigate('/');
-    });
-  };
+  //   axios.post("/api/v1/avatar", data).then((res) => {
+  //     // navigate('/');
+  //   });
+  // };
   //  setMode={dispatch(setMode)} mode={mode}
   return (
     <ThemeProvider theme={darkTheme}>
@@ -134,7 +134,7 @@ function Profile() {
             >
               <Avatar
                 alt="photo"
-                src="/avatars/elDar.jpg"
+                src={img}
                 sx={{ width: 56, height: 56 }}
               />
               <label className="form-label" htmlFor="avatar">
@@ -142,7 +142,7 @@ function Profile() {
               </label>
               <input
                 name="avatar"
-                onChange={photoHandler}
+                onChange={e => setImgInfo(e.target.files[0])}
                 type="file"
                 className="form-control"
                 id="avatar"
