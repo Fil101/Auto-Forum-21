@@ -28,8 +28,6 @@ function Rightbar() {
   const articles = useSelector((state) => state.articles);
   const photos = useSelector((state) => state.photos);
 
-  console.log('это статьи', articles);
-
   const [checkSubscribe, setCheckSubscribe] = useState(false);
 
   useEffect(() => {
@@ -59,6 +57,7 @@ function Rightbar() {
         <AvatarGroup max={7}>
           {users && users.map((user) => (
             <Avatar
+              sx={{ width: 40, height: 40 }}
               key={user.id}
               alt={user?.User?.name}
               src={user?.User?.img}
@@ -99,7 +98,7 @@ function Rightbar() {
         </Typography>
         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
           {articles && articles.map((article) => (
-            <>
+            <Box key={article?.id}>
               <ListItem alignItems="flex-start">
                 <ListItemAvatar>
                   <Avatar alt="Remy Sharp" src={article?.img} />
@@ -115,7 +114,7 @@ function Rightbar() {
                 />
               </ListItem>
               <Divider variant="inset" component="li" />
-            </>
+            </Box>
           ))}
         </List>
       </Box>

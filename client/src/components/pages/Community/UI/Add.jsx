@@ -45,7 +45,6 @@ function Add() {
   const [img, setImg] = useState(null);
   const [inputs, setInputs] = useState({ title: '', text: '' });
   const { auth } = useSelector((state) => state);
-  console.log(auth);
   const { modelId } = useParams();
   const dispatch = useDispatch();
 
@@ -126,7 +125,7 @@ function Add() {
               aria-label="outlined primary button group"
             >
               <Button
-                type="submit"
+                // type="submit"
                 onClick={() => {
                   dispatch(addPostAsync(modelId, inputs, img));
                   setOpen(false);

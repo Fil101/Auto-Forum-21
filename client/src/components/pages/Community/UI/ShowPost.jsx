@@ -84,7 +84,7 @@ function ShowPost({ post }) {
           <CardMedia
             component="img"
             height="500vh"
-            image={`http://localhost:3001/${post?.img}`}
+            image={`${process.env.REACT_APP_BASEURL}/${post?.img}`}
             alt="Post Photo"
           />
           <CardContent>

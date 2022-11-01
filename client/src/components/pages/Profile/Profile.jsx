@@ -26,10 +26,11 @@ import OnePost from "./OnePost";
 import OneCommunity from "./OneCommunity";
 import Sidebar from "../Community/UI/Sidebar";
 import { setMode } from "../../../redux/actions/modeThemeActions";
+import './style.css';
 
 function Profile() {
   const [tabNum, setTabNum] = useState(0);
-  const { about, tg, name, email } = useSelector((state) => state.auth);
+  const { about, tg, name, email, img } = useSelector((state) => state.auth);
   const [info, setInfo] = useState(about);
   const [tgInfo, setTgInfo] = useState(tg);
   const [newName, setNewName] = useState(name);
@@ -91,201 +92,208 @@ function Profile() {
     e.preventDefault();
     const data = new FormData();
     data.append("avatar", input.avatar);
-
     axios.post("/api/v1/avatar", data).then((res) => {
       // navigate('/');
     });
   };
-  //  setMode={dispatch(setMode)} mode={mode}
+
   return (
     <ThemeProvider theme={darkTheme}>
       <Box bgcolor="background.default" color="text.primary" sx={{ zIndex: 'tooltip', minHeight: '100vh' }}>
-        <Stack direction="row" spacing={2} justifyContent="space-between">
-          <Sidebar />
-          <Box
+
+        <Box>
+
+          <Stack direction="row" spacing={2} justifyContent="space-between">
+            <Sidebar flex={3} />
+            <Box
+              flex={6}
             // position="fixed"
-            bgcolor="background.default"
-            color="text.primary"
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              margin: "10px",
-              border: "1px solid",
-              padding: "10px",
-              width: "60%",
-              justifyContent: "space-around",
-              // backgroundColor: "#f5f5f5",
-              // "&:hover": {
-              //   backgroundColor: "primary.ligth",
-              //   opacity: [0.9, 0.8, 0.7],
-              // },
-            }}
-          >
-            <Box
               bgcolor="background.default"
               color="text.primary"
               sx={{
                 display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                alignContent: "stretch",
-                alignItems: "center",
+                flexDirection: "row",
+                margin: "10px",
+                // border: "1px solid",
+                padding: "10px",
+                width: "60%",
+                justifyContent: "space-around",
               }}
             >
-              <Avatar
-                alt="photo"
-                src="/avatars/elDar.jpg"
-                sx={{ width: 56, height: 56 }}
-              />
-              <label className="form-label" htmlFor="avatar">
-                Фото
-              </label>
-              <input
-                name="avatar"
-                onChange={photoHandler}
-                type="file"
-                className="form-control"
-                id="avatar"
-              />
-              <Button variant="contained">Добавить фото</Button>
-            </Box>
-            <Box
-              bgcolor="background.default"
-              color="text.primary"
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                alignContent: "stretch",
-                alignItems: "center",
-              }}
-            >
-              {isEdit ? (
-                <Box
-                  bgcolor="background.default"
-                  color="text.primary"
-                  sx={{
+              <Box
+                bgcolor="background.default"
+                color="text.primary"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  alignContent: "stretch",
+                  alignItems: "center",
+                }}
+              >
+                <Avatar
+                  alt="photo"
+                  src={img}
+                  sx={{ width: 200, height: 200 }}
+                />
+                {/* <input
+                // fullWidth
+                // variant="outlined"
+                  name="avatar"
+                  onChange={photoHandler}
+                  type="file"
+                  className="form-control"
+                  id="avatar"
+                /> */}
+                {/* <div className="input__wrapper">
+                  <input name="file" type="file" id="input__file" className="input input__file" multiple />
+                  <label htmlFor="input__file" className="input__file-button">
+                    <span className="input__file-icon-wrapper"><img className="input__file-icon" src="./img/add.svg" alt="Выбрать файл" width="25" /></span>
+                    <span className="input__file-button-text">ВЫБЕРИТЕ ФАИЛ</span>
+                  </label>
+                </div> */}
+                <Button variant="contained">Добавить фото</Button>
+              </Box>
+              <Box
+                bgcolor="background.default"
+                color="text.primary"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  alignContent: "stretch",
+                  alignItems: "center",
+                }}
+              >
+                {isEdit ? (
+                  <Box
+                    bgcolor="background.default"
+                    color="text.primary"
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      width: "100%",
+                    }}
+                  >
+                    <TextField
+                      id="outlined-name"
+                      disabled={!isEdit}
+                      sx={{ margin: "5px" }}
+                      label="имя"
+                    // value={name}
+                      value={newName}
+                      onChange={(e) => setNewName(e.target.value)}
+                    />
+                    <TextField
+                      id="outlined-name"
+                      disabled
+                      sx={{ margin: "5px" }}
+                      label="email"
+                      value={email}
+                    />
+                    <TextField
+                      id="outlined-name"
+                      disabled={!isEdit}
+                      sx={{ margin: "5px" }}
+                      label="телеграмм"
+                      value={tgInfo}
+                      onChange={(e) => setTgInfo(e.target.value)}
+                    />
+                    <TextField
+                      id="outlined-name"
+                      sx={{ margin: "5px" }}
+                      disabled={!isEdit}
+                      label="о себе"
+                      value={info}
+                      onChange={(e) => setInfo(e.target.value)}
+                    />
+                  </Box>
+                ) : (
+                  <Box sx={{
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
                     width: "100%",
                   }}
-                >
-                  <TextField
-                    id="outlined-name"
-                    disabled={!isEdit}
-                    sx={{ margin: "5px" }}
-                    label="имя"
-                    // value={name}
-                    value={newName}
-                    onChange={(e) => setNewName(e.target.value)}
-                  />
-                  <TextField
-                    id="outlined-name"
-                    disabled
-                    sx={{ margin: "5px" }}
-                    label="email"
-                    value={email}
-                  />
-                  <TextField
-                    id="outlined-name"
-                    disabled={!isEdit}
-                    sx={{ margin: "5px" }}
-                    label="телеграмм"
-                    value={tgInfo}
-                    onChange={(e) => setTgInfo(e.target.value)}
-                  />
-                  <TextField
-                    id="outlined-name"
-                    sx={{ margin: "5px" }}
-                    disabled={!isEdit}
-                    label="о себе"
-                    value={info}
-                    onChange={(e) => setInfo(e.target.value)}
-                  />
-                </Box>
-              ) : (
-                <Box sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  width: "100%",
-                }}
-                >
-                  <TextField
-                    id="outlined-name"
-                    disabled
-                    sx={{ margin: "5px" }}
-                    label="имя"
-                    value={name}
-                  />
-                  <TextField
-                    id="outlined-name"
-                    disabled
-                    sx={{ margin: "5px" }}
-                    label="email"
-                    value={email}
-                  />
-                  <TextField
-                    id="outlined-name"
-                    disabled
-                    sx={{ margin: "5px" }}
-                    label="телеграмм"
-                    value={tg}
-                  />
-                  <TextField
-                    id="outlined-name"
-                    sx={{ margin: "5px" }}
-                    disabled
-                    label="о себе"
-                    value={about}
-                  />
-                </Box>
-              )}
-              {isEdit ? (
-                <Button
-                  onClick={infoInputHandler}
-                  variant="contained"
-                  name="about"
-                  required
-                  fullWidth
-                  id="about"
-                  label="about"
-                >
-                  Сохранить
-                </Button>
-              ) : (
-                <Button
-                  onClick={infoHandler}
-                  variant="contained"
-                  name="about"
-                  required
-                  fullWidth
-                  id="about"
-                  label="about"
-                >
-                  Редактировать
-                </Button>
-              )}
+                  >
+                    <TextField
+                      id="outlined-name"
+                      disabled
+                      sx={{ margin: "5px" }}
+                      label="имя"
+                      value={name}
+                    />
+                    <TextField
+                      id="outlined-name"
+                      disabled
+                      sx={{ margin: "5px" }}
+                      label="email"
+                      value={email}
+                    />
+                    <TextField
+                      id="outlined-name"
+                      disabled
+                      sx={{ margin: "5px" }}
+                      label="телеграмм"
+                      value={tg}
+                    />
+                    <TextField
+                      id="outlined-name"
+                      sx={{ margin: "5px" }}
+                      disabled
+                      label="о себе"
+                      value={about}
+                    />
+                  </Box>
+                )}
+                {isEdit ? (
+                  <Button
+                    onClick={infoInputHandler}
+                    variant="contained"
+                    name="about"
+                    required
+                    fullWidth
+                    id="about"
+                    label="about"
+                  >
+                    Сохранить
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={infoHandler}
+                    variant="contained"
+                    name="about"
+                    required
+                    fullWidth
+                    id="about"
+                    label="about"
+                  >
+                    Редактировать
+                  </Button>
+                )}
+              </Box>
             </Box>
-          </Box>
-          <Box flex={1} p={2} sx={{ display: { xs: 'none', sm: 'block' } }}>{' '}</Box>
-        </Stack>
-        <Stack direction="row" spacing={2} justifyContent="space-between">
-          <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
-            <Tabs value={tabNum} onChange={handleChange} centered>
-              <Tab label="Мои сообщества" />
-              <Tab label="Мои посты" />
-              <Tab label="Избранное 🤍" />
-            </Tabs>
-          </Box>
-        </Stack>
-        {/* <Stack position="fixed"> */}
+            <Box flex={3} p={2} sx={{ display: { xs: 'none', sm: 'block' } }}>{' '}</Box>
+          </Stack>
+
+          <Stack direction="row" spacing={2} justifyContent="space-between">
+            <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
+              <Tabs value={tabNum} onChange={handleChange} centered>
+                <Tab label="Мои сообщества" />
+                <Tab label="Мои посты" />
+                <Tab label="Избранное 🤍" />
+              </Tabs>
+            </Box>
+          </Stack>
+        </Box>
+        {/* <Box sx={{ overflowY: 'scroll' }}> */}
         <Stack direction="row" spacing={2} justifyContent="center">
+          <Box flex={3} p={2} sx={{ display: { xs: 'none', sm: 'block' } }}>{' '}</Box>
           <Box
+            flex={6}
             bgcolor="background.default"
             color="text.primary"
-            // position="fixed"
             sx={{
               display: "flex",
               // flexDirection: "row",
@@ -293,8 +301,11 @@ function Profile() {
               justifyContent: "center",
               alignContent: "stretch",
               alignItems: "center",
-              // width: "80%",
+              width: "60%",
               zIndex: 'modal',
+              margin: "10px",
+              // border: "1px solid",
+              padding: "10px",
             }}
           >
             {resultPostOrCommunity ? (
@@ -302,19 +313,12 @@ function Profile() {
             ) : (
               post?.map((el) => <OnePost post={el} key={el.id} isFavorite={tabNum === 2} setPost={setPost} />)
             )}
+
           </Box>
+          <Box flex={3} p={2} sx={{ display: { xs: 'none', sm: 'block' } }}>{' '}</Box>
         </Stack>
-        {/* </Stack> */}
-        <Box
-          bgcolor="background.default"
-          color="text.primary"
-          flex={1}
-          p={2}
-          sx={{ display: { xs: 'none', sm: 'block' } }}
-        >
-          {' '}
-          {' '}
-        </Box>
+
+        {/* </Box> */}
       </Box>
     </ThemeProvider>
   );
