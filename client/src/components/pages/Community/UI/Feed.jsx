@@ -13,7 +13,6 @@ function Feed() {
 
   const { modelId } = useParams();
   const [currModel, setCurrModel] = useState({}); // стейт хранит одну текущую модель
-  console.log('это посты ->>>>>>', posts);
 
   // получаем текущую модель
   useEffect(() => {

@@ -13,8 +13,6 @@ function PhotoAlbum() {
   const dispatch = useDispatch();
   const { modelId } = useParams();
 
-  console.log(photos);
-
   useEffect(() => {
     if (photos.length === 0) dispatch(fetchPhoto(modelId));
   }, []);

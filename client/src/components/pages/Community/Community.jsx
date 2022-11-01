@@ -27,11 +27,6 @@ function Community() {
   const dispatch = useDispatch();
   const { posts, users } = useSelector((state) => state);
 
-  // получаем все посты сообщества:
-  // useEffect(() => {
-  //   dispatch(fetchPostsAsync(modelId));
-  // }, [modelId]);
-
   // получаем всех подписчиков сообщества:
   useEffect(() => {
     dispatch(fetchUsersAsync(modelId));
@@ -46,10 +41,6 @@ function Community() {
   useEffect(() => {
     dispatch(fetchPhoto(modelId));
   }, [modelId]);
-
-  useEffect(() => {
-    console.log('dksjfksajbvgkhbvglaekhrbvgaerkbv hi bi');
-  }, [mode]);
 
   //  setMode={dispatch(setMode)} mode={mode}
   return (

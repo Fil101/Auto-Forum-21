@@ -11,7 +11,6 @@ export default function Find() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('мы в юзе эффекте');
     dispatch(fetchPosts(modelId, input));
   }, [input, modelId]);
 

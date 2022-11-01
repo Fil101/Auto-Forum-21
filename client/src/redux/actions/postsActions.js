@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
-import { SET_POSTS, ADD_POST, ADD_POST_COUNTER, FETCH_POSTS, ADD_POST_COUNTER_LIKE } from '../types';
+import { SET_POSTS, ADD_POST, ADD_POST_COUNTER, FETCH_POSTS, INCREMET_POST_COUNTER_LIKE, DECREMENT_POST_COUNTER_LIKE } from '../types';
 
 export const setPosts = (payload) => ({
   type: SET_POSTS,
@@ -23,8 +23,13 @@ export const addPostCounter = (postId) => ({
   payload: postId,
 });
 
-export const addPostCounterLike = (postId) => ({
-  type: ADD_POST_COUNTER_LIKE,
+export const incrementPostCounterLike = (postId) => ({
+  type: INCREMET_POST_COUNTER_LIKE,
+  payload: postId,
+});
+
+export const decrementPostCounterLike = (postId) => ({
+  type: DECREMENT_POST_COUNTER_LIKE,
   payload: postId,
 });
 

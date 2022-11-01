@@ -33,7 +33,7 @@ export default function OnePost({ post, isFavorite, setPost }) {
 
   return (
     <Card
-      sx={{ width: '40vh', height: '55vh', margin: '1%', overflow: "scroll" }}
+      sx={{ width: '40%', height: '40vh', margin: '1%', overflow: "scroll" }}
     >
       <CardHeader
         avatar={(
